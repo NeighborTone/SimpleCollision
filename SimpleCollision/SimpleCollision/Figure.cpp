@@ -46,9 +46,9 @@ int Box::GetColorFromCode(int _c)
 	case 4: color = GetColor(255, 0, 255);	 break;	//4は紫
 	case 5: color = GetColor(0, 255, 255);	 break;	//5は水色
 	case 6: color = GetColor(255, 255, 0); 	 break;	//6は黄色
-	case 7: color = GetColor(255, 145, 185); break;	//7はピンク
-	case 8: color = GetColor(100, 50, 255);  break;	//8は明るい青
-	case 9: color = GetColor(50, 255, 100);  break;	//9は明るい緑
+	case 7: color = GetColor(255, 145, 185); break;	//7は桃色
+	case 8: color = GetColor(100, 50, 255);  break;	//8は青紫
+	case 9: color = GetColor(50, 255, 100);  break;	//9は翠色
 	}
 	return color;
 }

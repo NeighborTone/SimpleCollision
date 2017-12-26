@@ -1,5 +1,18 @@
 #pragma once
 #include "DxLib.h"
+enum ColorData
+{
+	White   = 0,
+	Red     = 1,
+	Green   = 2,
+	Blue    = 3,
+	Purple  = 4,
+	Cyan    = 5,
+	Yellow  = 6,
+	Pink    = 7,
+	Violet  = 8,
+	Emerald = 9,
+};
 class POS
 {
 public:

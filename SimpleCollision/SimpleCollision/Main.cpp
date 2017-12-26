@@ -30,11 +30,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		box[i].SetBoxColor(i);
 	}
 
-	Box Bar(100, 100, 100, 100,1,1);
-	Circle ball(600, 300, 20, 3);
-	Circle ball2(200, 300, 20, 2);
+	Box Bar(100, 100, 100, 100,1,Red);
+	Circle ball(600, 300, 20, Blue);
+	Circle ball2(200, 300, 20, Green);
 	POS t1(600,100), t2(500,300), t3(700,300);
-	Triangle tri(t1,t2,t3,7);
+	Triangle tri(t1,t2,t3,Pink);
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
 		Updata_Key();
