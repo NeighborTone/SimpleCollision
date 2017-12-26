@@ -18,7 +18,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//ウィンドウモード変更と初期化と裏画面設定
 	ChangeWindowMode(TRUE), DxLib_Init(), SetDrawScreen(DX_SCREEN_BACK);
 
-	const int X_size = 15;
+	const int X_size = 10;
 	Box box[X_size];
 	for (int i = 0; i < X_size; ++i)
 	{
@@ -27,7 +27,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		box[i].w = 50;
 		box[i].h = 50;
 		box[i].life = 1;
-		//box[i].color = 2;
+		box[i].SetBoxColor(i);
 	}
 
 	Box Bar(100, 100, 100, 100,1,1);
@@ -73,10 +73,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		if (ball.CircleCollision(ball, ball2) == false)
 		{
 			ball2.My_DrawCircle(ball2, ball2.color, true);
-		}
-		if (ball.CircleAndBoxCollision(ball, Bar) == true)
-		{
-			
 		}
 		Bar.My_DrawBox(Bar, Bar.color, true);
 		ball.My_DrawCircle(ball, ball.color,true);
