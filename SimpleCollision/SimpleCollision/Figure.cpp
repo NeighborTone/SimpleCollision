@@ -47,7 +47,7 @@ int Line::GetColorFromCode(int _c)
 	return color;
 }
 
-void Line::SetBoxColor(int _c)
+void Line::SetLineColor(int _c)
 {
 	color = GetColorFromCode(_c);
 }
@@ -64,7 +64,7 @@ Box::Box()
 	y = 0,
 	w = 0,
 	h = 0,
-	life = 0, 
+	life = 1, 
 	color = (GetColor(255, 255, 255));
 }
 
@@ -188,7 +188,7 @@ int Triangle::GetColorFromCode(int _c)
 	return color;
 }
 
-void Triangle::SetCircleColor(int _c)
+void Triangle::SetTriangleColor(int _c)
 {
 	color = GetColorFromCode(_c);
 }

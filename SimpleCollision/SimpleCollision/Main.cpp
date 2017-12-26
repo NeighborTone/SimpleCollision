@@ -2,8 +2,10 @@
 #include "Input.h"
 #include "Figure.h"
 #include "Collision.h"
-
-const int
+//=====================================
+//===ìÆçÏämîFóp=========================
+//=====================================
+constexpr int
 SCREEN_WIDIH = 1280,
 SCREEN_HEIGHT = 720;
 
