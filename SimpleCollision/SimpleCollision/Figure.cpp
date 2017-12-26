@@ -87,6 +87,28 @@ Circle::Circle(float _x, float _y, float _r, int _c)
 
 	}
 }
+bool Circle::CircleCollision(const Circle& c1, const Circle& c2)
+{
+	if (((c1.x - c2.x) *(c1.x - c2.x)) + ((c1.y - c2.y) * (c1.y - c2.y)) <= (c1.r + c2.r) * (c1.r + c2.r))
+	{
+		return true;
+	}
+	return false;
+}
+bool Circle::CircleAndBoxCollision(const Circle& c, const Box& r)
+{
+	/*if ((b.x - c.x)       * (b.x - c.x)        + (b.y - c.y)       * (b.y - c.y)       < c.r * c.r ||
+		(b.x + b.w - c.x) * (b.x + b.w - c.x)  + (b.y - c.y)       * (b.y - c.y)       < c.r * c.r ||
+		(b.x - c.x)       * (b.x - c.x) + (b.y + b.h - c.y)        * (b.y + b.h - c.y) < c.r * c.r ||
+		(b.x + b.w - c.x) * (b.x + b.w - c.x)  + (b.y + b.h - c.y) * (b.y + b.h - c.y) < c.r * c.r)*/
+	if(c.x + c.r < r.x       ||
+	   c.y + c.r < r.y       ||
+	   r.x + r.w < c.x - c.r ||
+	   r.y + r.h < c.y - c.r)
+	return false;
+	else
+	return true;
+}
 void Circle::My_DrawCircle(Circle& b, int& c, bool f)
 {
 	c = color;

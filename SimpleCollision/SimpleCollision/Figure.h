@@ -30,26 +30,8 @@ public:
 	float x, y;
 	int color;
 	Circle();
-	Circle(float, float, float, int);			//初期化(x,y,r,color)
-	void My_DrawCircle(Circle&, int&, bool);	//座標と半径と塗りつぶし(画像を使う場合は不要なメソッド)
+	Circle(float, float, float, int);						//初期化(x,y,r,color)
+	bool CircleCollision(const Circle&, const Circle&);		//円と円のあたり判定
+	bool CircleAndBoxCollision(const Circle&, const Box&);	//円と矩形
+	void My_DrawCircle(Circle&, int&, bool);				//座標と半径と塗りつぶし(画像を使う場合は不要なメソッド)
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

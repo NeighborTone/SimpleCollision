@@ -18,7 +18,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//ウィンドウモード変更と初期化と裏画面設定
 	ChangeWindowMode(TRUE), DxLib_Init(), SetDrawScreen(DX_SCREEN_BACK);
 
-	const int X_size = 10;
+	const int X_size = 15;
 	Box box[X_size];
 	for (int i = 0; i < X_size; ++i)
 	{
@@ -26,13 +26,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		box[i].y = 50;
 		box[i].w = 50;
 		box[i].h = 50;
-		box[i].life = 100;
-		box[i].color = 2;
+		box[i].life = 1;
+		//box[i].color = 2;
 	}
 
 	Box Bar(100, 100, 100, 100,1,1);
 	Circle ball(600, 300, 20, 3);
-
+	Circle ball2(200, 300, 20, 2);
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
 		Updata_Key();
@@ -43,25 +43,24 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		}
 		if (Key(KEY_INPUT_RIGHT) >= 1)
 		{
-			Bar.x += 5;
+			ball.x += 5;
 		}
 		if (Key(KEY_INPUT_LEFT) >= 1)
 		{
-			Bar.x -= 5;
+			ball.x -= 5;
 		}
 		if (Key(KEY_INPUT_UP) >= 1)
 		{
-			Bar.y -= 5;
+			ball.y -= 5;
 		}
 		if (Key(KEY_INPUT_DOWN) >= 1)
 		{
-			Bar.y += 5;
+			ball.y += 5;
 		}
 
-		Bar.My_DrawBox(Bar,Bar.color, true);
 		for (int i = 0; i < X_size; ++i)
 		{
-			if (Bar.BoxCollision(box[i], Bar) == true)
+			if (ball.CircleAndBoxCollision(ball,box[i]) == true)
 			{
 				box[i].life -= 1;
 			}
@@ -71,9 +70,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			}
 			
 		}
+		if (ball.CircleCollision(ball, ball2) == false)
+		{
+			ball2.My_DrawCircle(ball2, ball2.color, true);
+		}
+		if (ball.CircleAndBoxCollision(ball, Bar) == true)
+		{
+			
+		}
+		Bar.My_DrawBox(Bar, Bar.color, true);
 		ball.My_DrawCircle(ball, ball.color,true);
 	}
-
+	
 	DxLib_End();
 	return 0;
 }
