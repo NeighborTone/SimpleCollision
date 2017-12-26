@@ -1,11 +1,11 @@
 #include "Collision.h"
 
-bool CircleAndBoxCollision(const Circle& c, const Box& r)
+bool CircleAndBoxCollision(const Circle& c, const Box& b)
 {
-	if (c.x + c.r <= r.x ||
-		c.y + c.r <= r.y ||
-		r.x + r.w <= c.x - c.r ||
-		r.y + r.h <= c.y - c.r)
+	if (c.x + c.r <= b.x ||
+		c.y + c.r <= b.y ||
+		b.x + b.w <= c.x - c.r ||
+		b.y + b.h <= c.y - c.r)
 		return false;
 	else
 		return true;
@@ -31,3 +31,4 @@ bool CircleCollision(const Circle& c1, const Circle& c2)
 	}
 	return false;
 }
+

@@ -4,8 +4,8 @@
 #include "Collision.h"
 
 const int
-SCREEN_WIDIH = 960,
-SCREEN_HEIGHT = 540;
+SCREEN_WIDIH = 1280,
+SCREEN_HEIGHT = 720;
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -31,8 +31,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	}
 
 	Box Bar(100, 100, 100, 100,1,Red);
-	Circle ball(600, 300, 20, Blue);
-	Circle ball2(200, 300, 20, Green);
+	Circle ball(600, 400, 20, Blue);
+	Circle ball2(200, 300, 30, Green);
 	POS t1(600,100), t2(500,300), t3(700,300);
 	Triangle tri(t1,t2,t3,Pink);
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)

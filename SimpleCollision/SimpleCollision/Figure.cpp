@@ -104,10 +104,10 @@ void Circle::SetCircleColor(int _c)
 	color = GetColorFromCode(_c);
 }
 
-void Circle::My_DrawCircle(Circle& b, int& c, bool f)
+void Circle::My_DrawCircle(Circle& c, int& _c, bool f)
 {
-	c = color;
-	DrawCircleAA(b.x, b.y, b.r,32, c, f);
+	_c = color;
+	DrawCircleAA(c.x, c.y, c.r,32, _c, f);
 }
 //====================================================================================
 //ŽOŠpŒ`===============================================================================
