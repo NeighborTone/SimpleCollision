@@ -57,3 +57,38 @@ bool BoxAndSlopeCollision(const Box& b, const Line& l)
 	else
 		return false;
 }
+
+bool LineCollision(const Line& l1, const Line& l2)
+{
+	{
+		const float baseX = l2.p2.x - l2.p1.x;
+		const float baseY = l2.p2.y - l2.p1.y;
+		const float sub1X = l1.p1.x - l2.p1.x;
+		const float sub1Y = l1.p1.y - l2.p1.y;
+		const float sub2X = l1.p2.x - l2.p1.x;
+		const float sub2Y = l1.p2.y - l2.p1.y;
+
+		const float bs1 = baseX * sub1Y - baseY * sub1X;
+		const float bs2 = baseX * sub2Y - baseY * sub2X;
+		const float re = bs1 * bs2;
+		if (re > 0) {
+			return false;
+		}
+	}
+	{
+		const float baseX = l1.p2.x - l1.p1.x;
+		const float baseY = l1.p2.y - l1.p1.y;
+		const float sub1X = l2.p1.x - l1.p1.x;
+		const float sub1Y = l2.p1.y - l1.p1.y;
+		const float sub2X = l2.p2.x - l1.p1.x;
+		const float sub2Y = l2.p2.y - l1.p1.y;
+
+		const float bs1 = baseX * sub1Y - baseY * sub1X;
+		const float bs2 = baseX * sub2Y - baseY * sub2X;
+		const float re = bs1 * bs2;
+		if (re > 0) {
+			return false;
+		}
+	}
+	return true;
+}

@@ -29,10 +29,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		box[i].life = 1;
 		box[i].SetBoxColor(i);
 	}
-	POS p1(0,600), p2(1280,600);
+	POS p1(0, 600), p2(1280, 600);
 	POS p3(0, 600), p4(1280, 400);
+	POS p5(0, 500), p6(1280, 500);
+	POS p7(float(SCREEN_WIDIH / 2), 0), p8(static_cast<float>(SCREEN_WIDIH), static_cast<float>(SCREEN_HEIGHT));
 	Line line(p1, p2, Blue);
 	Line line2(p3, p4,Red);
+	Line line3(p5, p6, Cyan);
+	Line line4(p7, p8, Yellow);
 	Box Bar(100, 100, 100, 100,1,Red);
 	Circle ball(600, 400, 20, Blue);
 	Circle ball2(200, 300, 30, Green);
@@ -78,6 +82,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		{
 			Bar.y += 5;
 		}
+		if (Key(KEY_INPUT_B) >= 1)
+		{
+			line3.p2.y -= 10;
+		}
+		if (Key(KEY_INPUT_V) >= 1)
+		{
+			line3.p2.y += 10;
+		}
 		for (int i = 0; i < X_size; ++i)
 		{
 			if (CircleAndBoxCollision(ball,box[i]) == true || BoxCollision(Bar,box[i]) == true)
@@ -105,6 +117,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Bar.My_DrawBox(Bar, Bar.color, true);
 		ball.My_DrawCircle(ball, ball.color,true);
 		tri.My_DrawTriangle(tri, tri.color, true);
+
+		if (LineCollision(line3, line4) == false)
+		{
+			
+			line4.My_DrawLine(line4, line4.color);
+		}
+		
+		line3.My_DrawLine(line3, line3.color);
+		
 	}
 	
 	DxLib_End();

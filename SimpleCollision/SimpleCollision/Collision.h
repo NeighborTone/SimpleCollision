@@ -1,6 +1,7 @@
 #pragma once
 #include "Figure.h"
-
+ 
+bool LineCollision(const Line&, const Line&);						//ü•ª‚Æü•ª
 bool CircleAndSlopeCollision(const Circle&, const Line&);			//‰~‚Æü•ª(â“¹)
 bool BoxAndSlopeCollision(const Box&, const Line&);					//‹éŒ`‚Æü•ª(â“¹)
 bool BoxCollision(const Box&, const Box&);							//‹éŒ`“¯m
