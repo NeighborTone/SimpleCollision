@@ -1,4 +1,5 @@
 #include "Figure.h"
+#include "DxLib.h"
 POS::POS(float _x = 0, float _y = 0)
 {
 	x = _x;
@@ -13,8 +14,16 @@ float POS::GetPos()
 {
 	return x, y;
 }
-
-Box::Box(int _x = 0, int _y = 0, int _w = 0, int _h = 0, int _l = 0,int _c = 0)
+Box::Box()
+{
+	x = 0,
+	y = 0,
+	w = 0,
+	h = 0,
+	life = 0, 
+	color = (GetColor(255, 255, 255));
+}
+Box::Box(int _x  ,int _y , int _w , int _h , int _l ,int _c )
 {
 	x = _x;
 	y = _y;
@@ -26,7 +35,13 @@ Box::Box(int _x = 0, int _y = 0, int _w = 0, int _h = 0, int _l = 0,int _c = 0)
 		case 1: color = GetColor(255, 0, 0); break;		//1は赤
 		case 2: color = GetColor(0, 255, 0); break;		//2は青
 		case 3: color = GetColor(0, 0, 255); break;		//3は緑
-		case 0: color = GetColor(255, 255, 255); break;	//デフォルトは白
+		case 4: color = GetColor(0, 0, 255); break;		//4は緑
+		case 5: color = GetColor(0, 0, 255); break;		//5は緑
+		case 6: color = GetColor(0, 0, 255); break;		//6は緑
+		case 7: color = GetColor(0, 0, 255); break;		//7は緑
+		case 8: color = GetColor(0, 0, 255); break;		//8は緑
+		case 9: color = GetColor(0, 0, 255); break;		//9は緑
+		case 0: color = GetColor(255, 255, 255); break;	//0は白
 		
 	}
 
@@ -51,6 +66,13 @@ void Box::My_DrawBox(Box& b, int& c, bool f)
 	DrawBox(b.x, b.y, b.x + b.w, b.y + b.h, c, f);
 }
 
+Circle::Circle()
+{
+	x = 0;
+	y = 0;
+	r = 0;
+	color = GetColor(255, 255, 255);
+}
 Circle::Circle(float _x, float _y, float _r, int _c)
 {
 	x = _x;
@@ -70,4 +92,3 @@ void Circle::My_DrawCircle(Circle& b, int& c, bool f)
 	c = color;
 	DrawCircleAA(b.x, b.y, b.r,32, c, f);
 }
-

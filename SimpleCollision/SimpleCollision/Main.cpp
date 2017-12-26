@@ -26,10 +26,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		box[i].y = 50;
 		box[i].w = 50;
 		box[i].h = 50;
-		box[i].life = 1;
+		box[i].life = 100;
+		box[i].color = 2;
 	}
+
 	Box Bar(100, 100, 100, 100,1,1);
-	
+	Circle ball(600, 300, 20, 3);
 
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
@@ -56,7 +58,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			Bar.y += 5;
 		}
 
-		Bar.My_DrawBox(Bar, Bar.color, true);
+		Bar.My_DrawBox(Bar,Bar.color, true);
 		for (int i = 0; i < X_size; ++i)
 		{
 			if (Bar.BoxCollision(box[i], Bar) == true)
@@ -65,11 +67,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			}
 			if (box[i].life > 0)
 			{
-				box[i].My_DrawBox(box[i], box[i].color, true);
+				box[i].My_DrawBox(box[i],box[i].color ,true);
 			}
 			
 		}
-		
+		ball.My_DrawCircle(ball, ball.color,true);
 	}
 
 	DxLib_End();
