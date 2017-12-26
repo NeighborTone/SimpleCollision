@@ -1,7 +1,7 @@
 #include "DxLib.h"
 #include "Input.h"
 #include "Figure.h"
-
+#include "Collision.h"
 
 const int
 SCREEN_WIDIH = 960,
@@ -57,10 +57,25 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		{
 			ball.y += 5;
 		}
-
+		if (Key(KEY_INPUT_D) >= 1)
+		{
+			Bar.x += 5;
+		}
+		if (Key(KEY_INPUT_A) >= 1)
+		{
+			Bar.x -= 5;
+		}
+		if (Key(KEY_INPUT_W) >= 1)
+		{
+			Bar.y -= 5;
+		}
+		if (Key(KEY_INPUT_S) >= 1)
+		{
+			Bar.y += 5;
+		}
 		for (int i = 0; i < X_size; ++i)
 		{
-			if (ball.CircleAndBoxCollision(ball,box[i]) == true)
+			if (CircleAndBoxCollision(ball,box[i]) == true || BoxCollision(Bar,box[i]) == true)
 			{
 				box[i].life -= 1;
 			}
@@ -70,7 +85,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			}
 			
 		}
-		if (ball.CircleCollision(ball, ball2) == false)
+		if (CircleCollision(ball, ball2) == false)
 		{
 			ball2.My_DrawCircle(ball2, ball2.color, true);
 		}

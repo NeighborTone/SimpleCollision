@@ -24,6 +24,17 @@ Box::Box()
 	life = 0, 
 	color = (GetColor(255, 255, 255));
 }
+
+Box::Box(int _x, int _y, int _w, int _h, int _l, int _c)
+{
+	x = _x;
+	y = _y;
+	w = _w;
+	h = _h;
+	life = _l;
+	color = GetColorFromCode(_c);
+}
+
 int Box::GetColorFromCode(int _c)
 {
 	switch (_c)
@@ -41,30 +52,10 @@ int Box::GetColorFromCode(int _c)
 	}
 	return color;
 }
+
 void Box::SetBoxColor(int _c)
 {
 	color = GetColorFromCode(_c);
-}
-Box::Box(int _x  ,int _y , int _w , int _h , int _l ,int _c )
-{
-	x = _x;
-	y = _y;
-	w = _w;
-	h = _h;
-	life = _l;
-	color = GetColorFromCode(_c);
-}
-
-bool Box::BoxCollision(const Box& b1, const Box& b2)
-{
-	if (b1.x < b2.x + b2.w &&
-		b2.x < b1.x + b1.w &&
-		b1.y < b2.y + b2.h &&
-		b2.y < b1.y + b1.h)
-	{
-		return true;
-	}
-	return false;
 }
 
 void Box::My_DrawBox(Box& b, int& c, bool f)
@@ -72,7 +63,7 @@ void Box::My_DrawBox(Box& b, int& c, bool f)
 	c = color;
 	DrawBox(b.x, b.y, b.x + b.w, b.y + b.h, c, f);
 }
-//====================================================================================
+//=====================================================================================
 //‰~===================================================================================
 Circle::Circle()
 {
@@ -81,6 +72,15 @@ Circle::Circle()
 	r = 0;
 	color = GetColor(255, 255, 255);
 }
+
+Circle::Circle(float _x, float _y, float _r, int _c)
+{
+	x = _x;
+	y = _y;
+	r = _r;
+	color = GetColorFromCode(_c);
+}
+
 int Circle::GetColorFromCode(int _c)
 {
 	switch (_c)
@@ -98,35 +98,12 @@ int Circle::GetColorFromCode(int _c)
 	}
 	return color;
 }
+
 void Circle::SetCircleColor(int _c)
 {
 	color = GetColorFromCode(_c);
 }
-Circle::Circle(float _x, float _y, float _r, int _c)
-{
-	x = _x;
-	y = _y;
-	r = _r;
-	color = GetColorFromCode(_c);
-}
-bool Circle::CircleCollision(const Circle& c1, const Circle& c2)
-{
-	if (((c1.x - c2.x) *(c1.x - c2.x)) + ((c1.y - c2.y) * (c1.y - c2.y)) <= (c1.r + c2.r) * (c1.r + c2.r))
-	{
-		return true;
-	}
-	return false;
-}
-bool Circle::CircleAndBoxCollision(const Circle& c, const Box& r)
-{
-	if(c.x + c.r <= r.x       ||
-	   c.y + c.r <= r.y       ||
-	   r.x + r.w <= c.x - c.r ||
-	   r.y + r.h <= c.y - c.r)
-	return false;
-	else
-	return true;
-}
+
 void Circle::My_DrawCircle(Circle& b, int& c, bool f)
 {
 	c = color;
