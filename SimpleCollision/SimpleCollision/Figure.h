@@ -35,3 +35,19 @@ public:
 	void SetCircleColor(int);								//作った色をセット(0~9)
 	void My_DrawCircle(Circle&, int&, bool);				//座標と半径と塗りつぶし(画像を使う場合は不要なメソッド)
 };
+
+class Triangle
+{
+private:
+	POS p1,
+		p2,
+		p3;
+	
+public:
+	int color;
+	Triangle();
+	Triangle(POS, POS, POS, int);
+	int  GetColorFromCode(int);
+	void SetCircleColor(int);
+	void My_DrawTriangle(Triangle&, int&, bool);
+};

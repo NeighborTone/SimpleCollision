@@ -110,3 +110,51 @@ void Circle::My_DrawCircle(Circle& b, int& c, bool f)
 	DrawCircleAA(b.x, b.y, b.r,32, c, f);
 }
 //====================================================================================
+//三角形===============================================================================
+Triangle::Triangle()
+{
+	p1 = float((0, 0));
+	p2 = float((0, 0));
+	p3 = float((0, 0));
+	color = (GetColor(255, 255, 255));
+}
+
+Triangle::Triangle(POS _p1, POS _p2, POS _p3, int _c)
+{
+	p1 = _p1;
+	p2 = _p2;
+	p3 = _p3;
+	color = GetColorFromCode(_c);
+}
+
+int Triangle::GetColorFromCode(int _c)
+{
+	switch (_c)
+	{
+	case 0: color = GetColor(255, 255, 255); break;	//0は白
+	case 1: color = GetColor(255, 0, 0);	 break;	//1は赤
+	case 2: color = GetColor(0, 255, 0);	 break;	//2は緑
+	case 3: color = GetColor(0, 0, 255);	 break;	//3は青
+	case 4: color = GetColor(255, 0, 255);	 break;	//4は紫
+	case 5: color = GetColor(0, 255, 255);	 break;	//5は水色
+	case 6: color = GetColor(255, 255, 0); 	 break;	//6は黄色
+	case 7: color = GetColor(255, 145, 185); break;	//7はピンク
+	case 8: color = GetColor(100, 50, 255);  break;	//8は明るい青
+	case 9: color = GetColor(50, 255, 100);  break;	//9は明るい緑
+	}
+	return color;
+}
+
+void Triangle::SetCircleColor(int _c)
+{
+	color = GetColorFromCode(_c);
+}
+
+void Triangle::My_DrawTriangle(Triangle& t, int& c, bool f)
+{
+	c = color;
+	DrawTriangleAA(t.p1.x, t.p1.y,
+				   t.p2.x, t.p2.y,
+				   t.p3.x, t.p3.y,
+				   c, f);
+}

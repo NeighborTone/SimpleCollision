@@ -33,6 +33,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Box Bar(100, 100, 100, 100,1,1);
 	Circle ball(600, 300, 20, 3);
 	Circle ball2(200, 300, 20, 2);
+	POS t1(600,100), t2(500,300), t3(700,300);
+	Triangle tri(t1,t2,t3,7);
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
 		Updata_Key();
@@ -91,6 +93,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		}
 		Bar.My_DrawBox(Bar, Bar.color, true);
 		ball.My_DrawCircle(ball, ball.color,true);
+		tri.My_DrawTriangle(tri, tri.color, true);
 	}
 	
 	DxLib_End();
