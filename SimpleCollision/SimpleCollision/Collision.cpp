@@ -32,3 +32,28 @@ bool CircleCollision(const Circle& c1, const Circle& c2)
 	return false;
 }
 
+bool CircleAndTriangleCollision(const Circle& c, const Triangle& t)
+{
+	//–¢ŽÀ‘•
+	return false;
+}
+
+bool CircleAndSlopeCollision(const Circle& c, const Line& l)
+{
+	if((c.x + c.r - l.p1.x) * (l.p2.y - l.p1.y) - (l.p2.x - l.p1.x) * (c.y + c.r - l.p1.y) <= 0)
+	{
+		return true;
+	}
+	else
+		return false;
+}
+
+bool BoxAndSlopeCollision(const Box& b, const Line& l)
+{
+	if ((b.x + b.w - l.p1.x) * (l.p2.y - l.p1.y) - (l.p2.x - l.p1.x) * (b.y + b.h - l.p1.y) <= 0)
+	{
+		return true;
+	}
+	else
+		return false;
+}

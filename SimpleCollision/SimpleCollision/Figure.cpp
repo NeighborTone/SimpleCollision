@@ -14,6 +14,49 @@ float POS::GetPos()
 {
 	return x, y;
 }
+//線分==================================================================================
+Line::Line()
+{
+	p1 = float((0, 0));
+	p2 = float((0, 0));
+	color = (GetColor(255, 255, 255));
+}
+
+Line::Line(POS _p1, POS _p2, int _c)
+{
+	p1 = _p1;
+	p2 = _p2;
+	color = GetColorFromCode(_c);
+}
+
+int Line::GetColorFromCode(int _c)
+{
+	switch (_c)
+	{
+	case 0: color = GetColor(255, 255, 255); break;	//0は白
+	case 1: color = GetColor(255, 0, 0);	 break;	//1は赤
+	case 2: color = GetColor(0, 255, 0);	 break;	//2は緑
+	case 3: color = GetColor(0, 0, 255);	 break;	//3は青
+	case 4: color = GetColor(255, 0, 255);	 break;	//4は紫
+	case 5: color = GetColor(0, 255, 255);	 break;	//5は水色
+	case 6: color = GetColor(255, 255, 0); 	 break;	//6は黄色
+	case 7: color = GetColor(255, 145, 185); break;	//7は桃色
+	case 8: color = GetColor(100, 50, 255);  break;	//8は青紫
+	case 9: color = GetColor(50, 255, 100);  break;	//9は翠色
+	}
+	return color;
+}
+
+void Line::SetBoxColor(int _c)
+{
+	color = GetColorFromCode(_c);
+}
+
+void Line::My_DrawLine(Line& l, int& _c)
+{
+	_c = color;
+	DrawLineAA(l.p1.x, l.p1.y, l.p2.x, l.p2.y, _c);
+}
 //矩形==================================================================================
 Box::Box()
 {

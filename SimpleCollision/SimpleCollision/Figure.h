@@ -21,8 +21,36 @@ public:
 	POS(float _x, float _y);
 	void SetPos(float _x, float _y);
 	float GetPos();
+	POS operator + (const POS& p) const
+	{
+		return POS({ x + p.x, y + p.y });
+	}
+	POS operator - (const POS& p) const
+	{
+		return POS({ x - p.x, y - p.y });
+	}
+	POS operator * (const POS& p) const
+	{
+		return POS({ x * p.x, y * p.y });
+	}
+	POS &operator += (const POS& p) 
+	{
+		x += p.x;
+		y += p.y;
+		return (*this);
+	}
 };
-
+class Line
+{
+public:
+	POS p1, p2;
+	int color;
+	Line();
+	Line(POS, POS, int);
+	int  GetColorFromCode(int);								
+	void SetBoxColor(int);									
+	void My_DrawLine(Line&, int&);
+};
 class Box
 {
 public:
@@ -51,12 +79,10 @@ public:
 
 class Triangle
 {
-private:
+public:
 	POS p1,
 		p2,
 		p3;
-	
-public:
 	int color;
 	Triangle();
 	Triangle(POS, POS, POS, int);

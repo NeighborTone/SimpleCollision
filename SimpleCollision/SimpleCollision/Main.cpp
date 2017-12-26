@@ -29,7 +29,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		box[i].life = 1;
 		box[i].SetBoxColor(i);
 	}
-
+	POS p1(0,600), p2(1280,600);
+	POS p3(0, 600), p4(1280, 400);
+	Line line(p1, p2, Blue);
+	Line line2(p3, p4,Red);
 	Box Bar(100, 100, 100, 100,1,Red);
 	Circle ball(600, 400, 20, Blue);
 	Circle ball2(200, 300, 30, Green);
@@ -90,6 +93,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		if (CircleCollision(ball, ball2) == false)
 		{
 			ball2.My_DrawCircle(ball2, ball2.color, true);
+		}
+		if (CircleAndSlopeCollision(ball, line) == false )
+		{
+			line.My_DrawLine(line, line.color);
+		}
+		if (BoxAndSlopeCollision(Bar, line2) == false)
+		{
+			line2.My_DrawLine(line2, line2.color);
 		}
 		Bar.My_DrawBox(Bar, Bar.color, true);
 		ball.My_DrawCircle(ball, ball.color,true);
