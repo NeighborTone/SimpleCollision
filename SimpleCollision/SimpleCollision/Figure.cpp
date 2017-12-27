@@ -1,5 +1,6 @@
 #include "Figure.h"
 #include "DxLib.h"
+
 POS::POS(float _x = 0, float _y = 0)
 {
 	x = _x;
@@ -64,7 +65,7 @@ Box::Box()
 	y = 0,
 	w = 0,
 	h = 0,
-	life = 1, 
+	life = 0, 
 	color = (GetColor(255, 255, 255));
 }
 
@@ -77,7 +78,22 @@ Box::Box(int _x, int _y, int _w, int _h, int _l, int _c)
 	life = _l;
 	color = GetColorFromCode(_c);
 }
-
+void Box::SetLife(int _l)
+{
+		life = _l;
+}
+void Box::Addlife(unsigned int _l)
+{
+	life += _l;
+}
+void Box::Damage(signed int _l)
+{
+	life -= _l;
+}
+int Box::GetLife()
+{
+	return life;
+}
 int Box::GetColorFromCode(int _c)
 {
 	switch (_c)
@@ -93,33 +109,38 @@ int Box::GetColorFromCode(int _c)
 	case 8: color = GetColor(100, 50, 255);  break;	//8‚ÍÂŽ‡
 	case 9: color = GetColor(50, 255, 100);  break;	//9‚Í‰F
 	}
-	return color;
+	return this->color;
 }
 
 void Box::SetBoxColor(int _c)
 {
-	color = GetColorFromCode(_c);
+	this->color = GetColorFromCode(_c);
 }
 
-void Box::My_DrawBox(Box& b, int& c, bool f)
+void Box::My_DrawBox(Box& b, bool f)
 {
-	c = color;
-	DrawBox(b.x, b.y, b.x + b.w, b.y + b.h, c, f);
+	DrawBox(b.x, b.y, b.x + b.w, b.y + b.h, this->color, f);
 }
 //=====================================================================================
 //‰~===================================================================================
 Circle::Circle()
 {
-	x = 0;
-	y = 0;
+	pos = float((0,0));
 	r = 0;
 	color = GetColor(255, 255, 255);
 }
 
 Circle::Circle(float _x, float _y, float _r, int _c)
 {
-	x = _x;
-	y = _y;
+	pos.x = _x;
+	pos.y = _y;
+	r = _r;
+	color = GetColorFromCode(_c);
+}
+
+Circle::Circle(POS _p, float _r, int _c)
+{
+	pos = _p;
 	r = _r;
 	color = GetColorFromCode(_c);
 }
@@ -147,10 +168,9 @@ void Circle::SetCircleColor(int _c)
 	color = GetColorFromCode(_c);
 }
 
-void Circle::My_DrawCircle(Circle& c, int& _c, bool f)
+void Circle::My_DrawCircle(Circle& c, bool f)
 {
-	_c = color;
-	DrawCircleAA(c.x, c.y, c.r,32, _c, f);
+	DrawCircleAA(c.pos.x, c.pos.y, c.r,32, this->color, f);
 }
 //====================================================================================
 //ŽOŠpŒ`===============================================================================
@@ -193,11 +213,10 @@ void Triangle::SetTriangleColor(int _c)
 	color = GetColorFromCode(_c);
 }
 
-void Triangle::My_DrawTriangle(Triangle& t, int& c, bool f)
+void Triangle::My_DrawTriangle(Triangle& t, bool f)
 {
-	c = color;
 	DrawTriangleAA(t.p1.x, t.p1.y,
 				   t.p2.x, t.p2.y,
 				   t.p3.x, t.p3.y,
-				   c, f);
+				   this->color, f);
 }

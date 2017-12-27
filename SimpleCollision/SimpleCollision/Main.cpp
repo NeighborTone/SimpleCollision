@@ -28,7 +28,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		box[i].y = 50;
 		box[i].w = 50;
 		box[i].h = 50;
-		box[i].life = 1;
+		box[i].SetLife(1);
 		box[i].SetBoxColor(i);
 	}
 	POS p1(0, 600), p2(1280, 600);
@@ -40,8 +40,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Line line3(p5, p6, Cyan);
 	Line line4(p7, p8, Yellow);
 	Box Bar(100, 100, 100, 100,1,Red);
-	Circle ball(600, 400, 20, Blue);
-	Circle ball2(200, 300, 30, Green);
+	POS cp(600, 400);
+	Circle ball(cp, 20, Blue);
+	Circle ball2(200,300, 30, Green);
 	POS t1(600,100), t2(500,300), t3(700,300);
 	Triangle tri(t1,t2,t3,Pink);
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
@@ -54,19 +55,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		}
 		if (Key(KEY_INPUT_RIGHT) >= 1)
 		{
-			ball.x += 5;
+			ball.pos.x += 5;
 		}
 		if (Key(KEY_INPUT_LEFT) >= 1)
 		{
-			ball.x -= 5;
+			ball.pos.x -= 5;
 		}
 		if (Key(KEY_INPUT_UP) >= 1)
 		{
-			ball.y -= 5;
+			ball.pos.y -= 5;
 		}
 		if (Key(KEY_INPUT_DOWN) >= 1)
 		{
-			ball.y += 5;
+			ball.pos.y += 5;
 		}
 		if (Key(KEY_INPUT_D) >= 1)
 		{
@@ -92,21 +93,28 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		{
 			line3.p2.y += 10;
 		}
+		if (Key(KEY_INPUT_RETURN) >= 1)
+		{
+			box[9].Addlife(1);
+		}
 		for (int i = 0; i < X_size; ++i)
 		{
+			if (box[i].GetLife() > 0)
+			{
+				box[i].My_DrawBox(box[i], true);
+			}
 			if (CircleAndBoxCollision(ball,box[i]) == true || BoxCollision(Bar,box[i]) == true)
 			{
-				box[i].life -= 1;
+				if (box[i].GetLife() < 0)
+				{
+					continue;
+				}
+				box[i].Damage(1);
 			}
-			if (box[i].life > 0)
-			{
-				box[i].My_DrawBox(box[i],box[i].color ,true);
-			}
-			
 		}
 		if (CircleCollision(ball, ball2) == false)
 		{
-			ball2.My_DrawCircle(ball2, ball2.color, true);
+			ball2.My_DrawCircle(ball2, true);
 		}
 		if (CircleAndSlopeCollision(ball, line) == false )
 		{
@@ -116,9 +124,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		{
 			line2.My_DrawLine(line2, line2.color);
 		}
-		Bar.My_DrawBox(Bar, Bar.color, true);
-		ball.My_DrawCircle(ball, ball.color,true);
-		tri.My_DrawTriangle(tri, tri.color, true);
+		Bar.My_DrawBox(Bar, true);
+		ball.My_DrawCircle(ball, true);
+		tri.My_DrawTriangle(tri, true);
 
 		if (LineCollision(line3, line4) == false)
 		{

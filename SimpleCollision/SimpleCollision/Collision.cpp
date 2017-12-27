@@ -2,10 +2,10 @@
 #include <math.h>
 bool CircleAndBoxCollision(const Circle& c, const Box& b)
 {
-	if (c.x + c.r <= b.x ||
-		c.y + c.r <= b.y ||
-		b.x + b.w <= c.x - c.r ||
-		b.y + b.h <= c.y - c.r)
+	if (c.pos.x + c.r <= b.x ||
+		c.pos.y + c.r <= b.y ||
+		b.x + b.w <= c.pos.x - c.r ||
+		b.y + b.h <= c.pos.y - c.r)
 		return false;
 	else
 		return true;
@@ -26,7 +26,7 @@ bool BoxCollision(const Box& b1, const Box& b2)
 
 bool CircleCollision(const Circle& c1, const Circle& c2)
 {
-	if (((c1.x - c2.x) *(c1.x - c2.x)) + ((c1.y - c2.y) * (c1.y - c2.y)) <= (c1.r + c2.r) * (c1.r + c2.r))
+	if (((c1.pos.x - c2.pos.x) *(c1.pos.x - c2.pos.x)) + ((c1.pos.y - c2.pos.y) * (c1.pos.y - c2.pos.y)) <= (c1.r + c2.r) * (c1.r + c2.r))
 	{
 		return true;
 	}
@@ -41,7 +41,7 @@ bool CircleAndTriangleCollision(const Circle& c, const Triangle& t)
 
 bool CircleAndSlopeCollision(const Circle& c, const Line& l)
 {
-	if((c.x + c.r - l.p1.x) * (l.p2.y - l.p1.y) - (l.p2.x - l.p1.x) * (c.y + c.r - l.p1.y) <= 0)
+	if((c.pos.x + c.r - l.p1.x) * (l.p2.y - l.p1.y) - (l.p2.x - l.p1.x) * (c.pos.y + c.r - l.p1.y) <= 0)
 	{
 		return true;
 	}
@@ -98,22 +98,13 @@ bool LineCollision(const Line& l1, const Line& l2)
 
 bool CirecleAndLineCollision(const Circle& c, const Line& l)
 {
-	if ((l.p2.x*(c.x - l.p1.x) + l.p2.y*(c.y - l.p1.y)) <= 0)
-	{
-		return  (c.r*c.r >= (c.x - l.p1.x)*(c.x - l.p1.x) + (c.y - l.p1.y)*(c.y - l.p1.y));	
-	}
-	else if (((-l.p2.x)*(c.x - (l.p1.x + l.p2.x)) + (-l.p2.y)*(c.y - (l.p1.y + l.p2.y))) <= 0)
-	{
-		return  (c.r*c.r >= (c.x - (l.p1.x + l.p2.x)*(c.x - (l.p1.x + l.p2.x)) + (c.y - (l.p1.y + l.p2.y))*(c.y - (l.p1.y + l.p2.y))));
-	}
-	else
-	{
-		float e = static_cast<float>(sqrt(l.p2.x*l.p2.x + l.p2.y*l.p2.y));
-		float c2 = (c.x - l.p1.x)*(c.x - l.p1.x) + (c.y - l.p1.y)*(c.y - l.p1.y);
-		float b = (c.x - l.p1.x)*(l.p2.x / e) + (c.y - l.p1.y)*(l.p2.y / e);
+	l.p1;//始点
+	l.p2;//終点
+	const POS S = l.p2 - l.p1;
+	const POS A = c.pos - l.p1;
+	
 
-		return (c.r*c.r >= c2 - b*b);
-	}
+
 	return false;
 }
 

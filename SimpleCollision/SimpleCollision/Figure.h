@@ -11,7 +11,6 @@
 @※描画はDxLibの機能に依存。画像を使う場合は不要なメソッド
 */
 
-
 //色データ
 enum ColorData
 {
@@ -30,7 +29,6 @@ enum ColorData
 class POS
 {
 public:
-
 	float x, y;
 	POS(float _x, float _y);
 	void SetPos(float _x, float _y);
@@ -54,6 +52,7 @@ public:
 		return (*this);
 	}
 };
+
 //線分を扱うクラス
 class Line
 {
@@ -69,40 +68,49 @@ public:
 //矩形を扱うクラス
 class Box
 {
-public:
-	int x, y, w, h;
+private:
 	int life;
 	int color;
+public:
+	int x, y, w, h;
 	Box();
 	Box(int, int, int, int,int, int);						//初期化(x,y,w,h,life,color)
+	void SetLife(int);										//体力をセット
+	void Addlife(unsigned int);								//体力を増やす
+	void Damage(signed int);								//体力を減らす
+	int  GetLife();											//体力を確認する
 	int  GetColorFromCode(int);								//色の情報を得る
 	void SetBoxColor(int);									//作った色をセット(0~9)
-	void My_DrawBox(Box&, int&, bool);						//インスタンスと色と塗りつぶし
+	void My_DrawBox(Box&,bool);								//インスタンスと塗りつぶし
 };
 //円を扱うクラス
 class Circle
 {
+private:
+	int color;
 public:
 	float r;
 	float x, y;
-	int color;
+	POS pos;
 	Circle();
-	Circle(float, float, float, int);						//初期化(x,y,r,color)
+	Circle(float, float, float, int);
+	Circle(POS, float, int);								//初期化
 	int  GetColorFromCode(int);								//色の情報を得る
 	void SetCircleColor(int);								//作った色をセット(0~9)
-	void My_DrawCircle(Circle&, int&, bool);				//インスタンスと色と塗りつぶし
+	void My_DrawCircle(Circle&, bool);						//インスタンスと塗りつぶし
 };
 //三角形を扱うクラス
 class Triangle
 {
+private:
+	int color;
 public:
 	POS p1,
 		p2,
 		p3;
-	int color;
 	Triangle();
 	Triangle(POS, POS, POS, int);						//3つの頂点と色を指定
 	int  GetColorFromCode(int);							//色の情報を得る
 	void SetTriangleColor(int);							//色をセットする(0~9)
-	void My_DrawTriangle(Triangle&, int&, bool);		//インスタンスと色と塗りつぶし
+	void My_DrawTriangle(Triangle&, bool);		        //インスタンスと塗りつぶし
 };
