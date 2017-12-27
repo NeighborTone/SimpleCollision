@@ -41,7 +41,9 @@ bool CircleAndTriangleCollision(const Circle& c, const Triangle& t)
 
 bool CircleAndSlopeCollision(const Circle& c, const Line& l)
 {
-	if((c.pos.x + c.r - l.p1.x) * (l.p2.y - l.p1.y) - (l.p2.x - l.p1.x) * (c.pos.y + c.r - l.p1.y) <= 0)
+	// 線分ベクトルと円中心へのベクトルの外積による判定
+	if((c.pos.x + c.r - l.p1.x) * (l.p2.y - l.p1.y) - (l.p2.x - l.p1.x) * (c.pos.y + c.r - l.p1.y) <= 0 &&
+		!(c.pos.x <= l.p1.x) && !(c.pos.x >= l.p2.x))
 	{
 		return true;
 	}
@@ -51,7 +53,8 @@ bool CircleAndSlopeCollision(const Circle& c, const Line& l)
 
 bool BoxAndSlopeCollision(const Box& b, const Line& l)
 {
-	if ((b.x + b.w - l.p1.x) * (l.p2.y - l.p1.y) - (l.p2.x - l.p1.x) * (b.y + b.h - l.p1.y) <= 0)
+	if ((b.x + b.w - l.p1.x) * (l.p2.y - l.p1.y) - (l.p2.x - l.p1.x) * (b.y + b.h - l.p1.y) <= 0 &&
+		!(b.x + b.w <= l.p1.x) && !(b.x >= l.p2.x))
 	{
 		return true;
 	}
@@ -96,15 +99,23 @@ bool LineCollision(const Line& l1, const Line& l2)
 	return true;
 }
 
+//ぬわあああああああああああああああああああああああああああああ
 bool CirecleAndLineCollision(const Circle& c, const Line& l)
 {
 	l.p1;//始点
 	l.p2;//終点
-	const POS S = l.p2 - l.p1;
-	const POS A = c.pos - l.p1;
-	
-
-
+	const POS P = l.p1;
+	const POS Q = l.p2;
+	const POS R = c.pos;
+	//始点と終点の判定
+	if ((l.p1.x - c.pos.x) * (l.p1.x - c.pos.x) + (l.p1.y - c.pos.y) * (l.p1.y - c.pos.y) <= c.r * c.r ||
+		(l.p2.x - c.pos.x) * (l.p2.x - c.pos.x) + (l.p2.y - c.pos.y) * (l.p2.y - c.pos.y) <= c.r * c.r)
+		return true;
+	//線分の判定
+	if (/*(c.pos.x + c.r - l.p1.x) * (l.p2.y - l.p1.y) - (l.p2.x - l.p1.x) * (c.pos.y + c.r - l.p1.y) <= 0 ||*/
+		(c.pos.x + c.r - l.p1.x) * (l.p2.y - l.p1.y) - (l.p2.x - l.p1.x) * (c.pos.y + c.r - l.p1.y) <= 0 &&
+		!(c.pos.x <= l.p1.x) && !(c.pos.x >= l.p2.x))
+		return true;
 	return false;
 }
 

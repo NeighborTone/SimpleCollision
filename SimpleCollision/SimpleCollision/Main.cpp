@@ -69,6 +69,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		{
 			ball.pos.y += 5;
 		}
+		if (Key(KEY_INPUT_SPACE) >= 1)
+		{
+			ball.pos.SetPos(0,0);
+		}
 		if (Key(KEY_INPUT_D) >= 1)
 		{
 			Bar.x += 5;
@@ -137,8 +141,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		{
 			line3.My_DrawLine(line3, line3.color);
 		}
-		
-		
+
+	
 	}
 	
 	DxLib_End();

@@ -6,15 +6,12 @@ POS::POS(float _x = 0, float _y = 0)
 	x = _x;
 	y = _y;
 }
-void POS::SetPos(float _x = 0, float _y = 0)
+void POS::SetPos(float _x, float _y)
 {
 	x = _x;
 	y = _y;
 }
-float POS::GetPos()
-{
-	return x, y;
-}
+
 //線分==================================================================================
 Line::Line()
 {
@@ -34,16 +31,17 @@ int Line::GetColorFromCode(int _c)
 {
 	switch (_c)
 	{
-	case 0: color = GetColor(255, 255, 255); break;	//0は白
-	case 1: color = GetColor(255, 0, 0);	 break;	//1は赤
-	case 2: color = GetColor(0, 255, 0);	 break;	//2は緑
-	case 3: color = GetColor(0, 0, 255);	 break;	//3は青
-	case 4: color = GetColor(255, 0, 255);	 break;	//4は紫
-	case 5: color = GetColor(0, 255, 255);	 break;	//5は水色
-	case 6: color = GetColor(255, 255, 0); 	 break;	//6は黄色
-	case 7: color = GetColor(255, 145, 185); break;	//7は桃色
-	case 8: color = GetColor(100, 50, 255);  break;	//8は青紫
-	case 9: color = GetColor(50, 255, 100);  break;	//9は翠色
+	case 0:  color = GetColor(255, 255, 255); break;	//0は白
+	case 1:  color = GetColor(255, 0, 0);	  break;	//1は赤
+	case 2:  color = GetColor(0, 255, 0);	  break;	//2は緑
+	case 3:  color = GetColor(0, 0, 255);	  break;	//3は青
+	case 4:  color = GetColor(255, 0, 255);	  break;	//4は紅紫色
+	case 5:  color = GetColor(0, 255, 255);	  break;	//5は水色
+	case 6:  color = GetColor(255, 255, 0);   break;	//6は黄色
+	case 7:  color = GetColor(255, 145, 185); break;	//7は桃色
+	case 8:  color = GetColor(100, 50, 255);  break;	//8は青紫
+	case 9:  color = GetColor(50, 255, 100);  break;	//9は翠色
+	case 10: color = GetColor(128, 128, 128); break;	//10は灰色
 	}
 	return color;
 }
@@ -78,6 +76,15 @@ Box::Box(int _x, int _y, int _w, int _h, int _l, int _c)
 	life = _l;
 	color = GetColorFromCode(_c);
 }
+void Box::SetBox(int _x, int _y, int _w, int _h , int _c, int _l)
+{
+	x = _x,
+	y = _y,
+	w = _w,
+	h = _h,
+	life = _l,
+	color = GetColorFromCode(_c);
+}
 void Box::SetLife(int _l)
 {
 		life = _l;
@@ -98,16 +105,17 @@ int Box::GetColorFromCode(int _c)
 {
 	switch (_c)
 	{
-	case 0: color = GetColor(255, 255, 255); break;	//0は白
-	case 1: color = GetColor(255, 0, 0);	 break;	//1は赤
-	case 2: color = GetColor(0, 255, 0);	 break;	//2は緑
-	case 3: color = GetColor(0, 0, 255);	 break;	//3は青
-	case 4: color = GetColor(255, 0, 255);	 break;	//4は紫
-	case 5: color = GetColor(0, 255, 255);	 break;	//5は水色
-	case 6: color = GetColor(255, 255, 0); 	 break;	//6は黄色
-	case 7: color = GetColor(255, 145, 185); break;	//7は桃色
-	case 8: color = GetColor(100, 50, 255);  break;	//8は青紫
-	case 9: color = GetColor(50, 255, 100);  break;	//9は翠色
+	case 0:  color = GetColor(255, 255, 255); break;	//0は白
+	case 1:  color = GetColor(255, 0, 0);	  break;	//1は赤
+	case 2:  color = GetColor(0, 255, 0);	  break;	//2は緑
+	case 3:  color = GetColor(0, 0, 255);	  break;	//3は青
+	case 4:  color = GetColor(255, 0, 255);	  break;	//4は紅紫色
+	case 5:  color = GetColor(0, 255, 255);	  break;	//5は水色
+	case 6:  color = GetColor(255, 255, 0);   break;	//6は黄色
+	case 7:  color = GetColor(255, 145, 185); break;	//7は桃色
+	case 8:  color = GetColor(100, 50, 255);  break;	//8は青紫
+	case 9:  color = GetColor(50, 255, 100);  break;	//9は翠色
+	case 10: color = GetColor(128, 128, 128); break;	//10は灰色
 	}
 	return this->color;
 }
@@ -144,21 +152,34 @@ Circle::Circle(POS _p, float _r, int _c)
 	r = _r;
 	color = GetColorFromCode(_c);
 }
-
+void Circle::SetCircle(float _x, float _y, float _r, int _c, int _l)
+{
+	pos.x = _x;
+	pos.y = _y;
+	r = _r;
+	color = GetColorFromCode(_c);
+}
+void Circle::SetCircle(POS _p, float _r, int _c, int _l)
+{
+	pos = _p;
+	r = _r;
+	color = GetColorFromCode(_c);
+}
 int Circle::GetColorFromCode(int _c)
 {
 	switch (_c)
 	{
-	case 0: color = GetColor(255, 255, 255); break;	//0は白
-	case 1: color = GetColor(255, 0, 0);	 break;	//1は赤
-	case 2: color = GetColor(0, 255, 0);	 break;	//2は緑
-	case 3: color = GetColor(0, 0, 255);	 break;	//3は青
-	case 4: color = GetColor(255, 0, 255);	 break;	//4は紫
-	case 5: color = GetColor(0, 255, 255);	 break;	//5は水色
-	case 6: color = GetColor(255, 255, 0); 	 break;	//6は黄色
-	case 7: color = GetColor(255, 145, 185); break;	//7はピンク
-	case 8: color = GetColor(100, 50, 255);  break;	//8は明るい青
-	case 9: color = GetColor(50, 255, 100);  break;	//9は明るい緑
+	case 0:  color = GetColor(255, 255, 255); break;	//0は白
+	case 1:  color = GetColor(255, 0, 0);	  break;	//1は赤
+	case 2:  color = GetColor(0, 255, 0);	  break;	//2は緑
+	case 3:  color = GetColor(0, 0, 255);	  break;	//3は青
+	case 4:  color = GetColor(255, 0, 255);	  break;	//4は紅紫色
+	case 5:  color = GetColor(0, 255, 255);	  break;	//5は水色
+	case 6:  color = GetColor(255, 255, 0);   break;	//6は黄色
+	case 7:  color = GetColor(255, 145, 185); break;	//7は桃色
+	case 8:  color = GetColor(100, 50, 255);  break;	//8は青紫
+	case 9:  color = GetColor(50, 255, 100);  break;	//9は翠色
+	case 10: color = GetColor(128, 128, 128); break;	//10は灰色
 	}
 	return color;
 }
@@ -194,16 +215,17 @@ int Triangle::GetColorFromCode(int _c)
 {
 	switch (_c)
 	{
-	case 0: color = GetColor(255, 255, 255); break;	//0は白
-	case 1: color = GetColor(255, 0, 0);	 break;	//1は赤
-	case 2: color = GetColor(0, 255, 0);	 break;	//2は緑
-	case 3: color = GetColor(0, 0, 255);	 break;	//3は青
-	case 4: color = GetColor(255, 0, 255);	 break;	//4は紫
-	case 5: color = GetColor(0, 255, 255);	 break;	//5は水色
-	case 6: color = GetColor(255, 255, 0); 	 break;	//6は黄色
-	case 7: color = GetColor(255, 145, 185); break;	//7はピンク
-	case 8: color = GetColor(100, 50, 255);  break;	//8は明るい青
-	case 9: color = GetColor(50, 255, 100);  break;	//9は明るい緑
+	case 0:  color = GetColor(255, 255, 255); break;	//0は白
+	case 1:  color = GetColor(255, 0, 0);	  break;	//1は赤
+	case 2:  color = GetColor(0, 255, 0);	  break;	//2は緑
+	case 3:  color = GetColor(0, 0, 255);	  break;	//3は青
+	case 4:  color = GetColor(255, 0, 255);	  break;	//4は紅紫色
+	case 5:  color = GetColor(0, 255, 255);	  break;	//5は水色
+	case 6:  color = GetColor(255, 255, 0);   break;	//6は黄色
+	case 7:  color = GetColor(255, 145, 185); break;	//7は桃色
+	case 8:  color = GetColor(100, 50, 255);  break;	//8は青紫
+	case 9:  color = GetColor(50, 255, 100);  break;	//9は翠色
+	case 10: color = GetColor(128, 128, 128); break;	//10は灰色
 	}
 	return color;
 }
