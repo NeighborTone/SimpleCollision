@@ -125,8 +125,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			
 			line4.My_DrawLine(line4, line4.color);
 		}
+		if (CirecleAndLineCollision(ball, line3) == false)
+		{
+			line3.My_DrawLine(line3, line3.color);
+		}
 		
-		line3.My_DrawLine(line3, line3.color);
 		
 	}
 	
