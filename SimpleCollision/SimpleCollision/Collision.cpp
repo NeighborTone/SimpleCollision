@@ -107,13 +107,12 @@ bool CirecleAndLineCollision(const Circle& c, const Line& l)
 	const POS P = l.p1;
 	const POS Q = l.p2;
 	const POS R = c.pos;
-	//始点と終点の判定
-	if ((l.p1.x - c.pos.x) * (l.p1.x - c.pos.x) + (l.p1.y - c.pos.y) * (l.p1.y - c.pos.y) <= c.r * c.r ||
-		(l.p2.x - c.pos.x) * (l.p2.x - c.pos.x) + (l.p2.y - c.pos.y) * (l.p2.y - c.pos.y) <= c.r * c.r)
-		return true;
+	////始点と終点の判定
+	//if ((l.p1.x - c.pos.x) * (l.p1.x - c.pos.x) + (l.p1.y - c.pos.y) * (l.p1.y - c.pos.y) <= c.r * c.r ||
+	//	(l.p2.x - c.pos.x) * (l.p2.x - c.pos.x) + (l.p2.y - c.pos.y) * (l.p2.y - c.pos.y) <= c.r * c.r)
+	//	return true;
 	//線分の判定
-	if (/*(c.pos.x + c.r - l.p1.x) * (l.p2.y - l.p1.y) - (l.p2.x - l.p1.x) * (c.pos.y + c.r - l.p1.y) <= 0 ||*/
-		(c.pos.x + c.r - l.p1.x) * (l.p2.y - l.p1.y) - (l.p2.x - l.p1.x) * (c.pos.y + c.r - l.p1.y) <= 0 &&
+	if ((c.pos.x + c.r - l.p1.x) * (l.p2.y - l.p1.y) - (l.p2.x - l.p1.x) * (c.pos.y + c.r - l.p1.y) <= 0 &&
 		!(c.pos.x <= l.p1.x) && !(c.pos.x >= l.p2.x))
 		return true;
 	return false;

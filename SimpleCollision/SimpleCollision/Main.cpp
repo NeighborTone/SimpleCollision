@@ -8,7 +8,50 @@
 constexpr int
 SCREEN_WIDIH = 1280,
 SCREEN_HEIGHT = 720;
-
+struct Obj
+{
+	Circle c;
+	float speed;
+	float dist;
+	float angle;
+	bool flag;
+};
+Obj cir[12];
+void Ini(Obj& c,float ang)
+{
+	c.angle = ang;
+	c.dist = 100.0f;
+	c.c.SetCircleColor(Cyan);
+	c.c.r = 10.f;
+	c.speed = 0;
+	c.flag = false;
+}
+void Up(Obj& c)
+{
+	c.angle += MATH::Radian(c.speed);
+	c.c.pos.SetPos(740.f + static_cast<float>(cos(c.angle) * c.dist), 245.f + static_cast<float>(sin(c.angle)*c.dist));
+	
+	if(c.flag == false)
+	{
+		c.speed += 0.05f;
+	}
+	if (c.speed >= 20.f)
+	{
+		c.flag = true;
+	}
+	if (c.flag == true)
+	{
+		c.speed -= 0.05f;
+	}
+	if (c.speed <= -20.f)
+	{
+		c.flag = false;
+	}
+}
+void Draw(Obj& c)
+{
+	c.c.My_DrawCircle(c.c,true);
+}
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	//ログ消し
@@ -20,6 +63,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//ウィンドウモード変更と初期化と裏画面設定
 	ChangeWindowMode(TRUE), DxLib_Init(), SetDrawScreen(DX_SCREEN_BACK);
 
+	
 	const int X_size = 10;
 	Box box[X_size];
 	for (int i = 0; i < X_size; ++i)
@@ -31,7 +75,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		box[i].SetLife(1);
 		box[i].SetBoxColor(i);
 	}
-	POS p1(0, 600), p2(1280, 600);
+	POS p1(0, 720), p2(1280, 400);
 	POS p3(0, 600), p4(1280, 400);
 	POS p5(0, 500), p6(1280, 500);
 	POS p7(float(SCREEN_WIDIH / 2), 0), p8(static_cast<float>(SCREEN_WIDIH), static_cast<float>(SCREEN_HEIGHT));
@@ -45,10 +89,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Circle ball2(200,300, 30, Green);
 	POS t1(600,100), t2(500,300), t3(700,300);
 	Triangle tri(t1,t2,t3,Pink);
+	for(int i = 0;i<12;++i)
+	Ini(cir[i],MATH::Radian(i*30.f));
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
 		Updata_Key();
-		
+		for (int i = 0;i < 12;++i)
+			Up(cir[i]);
 		if (Key(KEY_INPUT_ESCAPE) == 1)
 		{
 			break;
@@ -122,11 +169,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		}
 		if (CircleAndSlopeCollision(ball, line) == false )
 		{
-			line.My_DrawLine(line, line.color);
+			line.My_DrawLine(line);
 		}
 		if (BoxAndSlopeCollision(Bar, line2) == false)
 		{
-			line2.My_DrawLine(line2, line2.color);
+			line2.My_DrawLine(line2);
 		}
 		Bar.My_DrawBox(Bar, true);
 		ball.My_DrawCircle(ball, true);
@@ -135,14 +182,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		if (LineCollision(line3, line4) == false)
 		{
 			
-			line4.My_DrawLine(line4, line4.color);
+			line4.My_DrawLine(line4);
 		}
 		if (CirecleAndLineCollision(ball, line3) == false)
 		{
-			line3.My_DrawLine(line3, line3.color);
+			line3.My_DrawLine(line3);
 		}
-
-	
+		for (int i = 0;i < 12;++i)
+		{
+			if (CircleCollision(ball, cir[i].c) == false)
+			Draw(cir[i]);
+		}
+		DrawFormatString(0, 0, GetColor(255, 255, 255), "%f", cir[0].speed);
 	}
 	
 	DxLib_End();

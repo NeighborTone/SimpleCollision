@@ -1,5 +1,7 @@
 #pragma once
+#define _USE_MATH_DEFINES
 #include "DxLib.h"
+#include <math.h>
 //=====================================
 //====汎用的な2Dの図形を扱うクラス=======
 //===2017/12/26開始====================
@@ -10,7 +12,12 @@
 @色指定
 @※描画はDxLibの機能に依存。画像を使う場合は不要なメソッド
 */
+namespace MATH
+{
+	float Radian(const float degree);
+	float Gravity(const float bym);
 
+}
 //色データ
 enum ColorData
 {
@@ -63,14 +70,15 @@ public:
 //線分を扱うクラス
 class Line
 {
+private:
+	int color;
 public:
 	POS p1, p2;
-	int color;
 	explicit Line();
 	explicit Line(POS, POS, int);
 	int  GetColorFromCode(int);								
 	void SetLineColor(int);									
-	void My_DrawLine(Line&, int&);
+	void My_DrawLine(Line&);
 };
 //矩形を扱うクラス
 class Box

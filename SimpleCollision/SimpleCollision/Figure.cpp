@@ -1,6 +1,18 @@
 #include "Figure.h"
 #include "DxLib.h"
+namespace MATH
+{
+	float Radian(const float degree)
+	{
+		return degree * static_cast<float>(M_PI) / 180.f;
+	}
 
+	float Gravity(const float bym)
+	{
+		const float gra = 9.8f / 60 / 60;
+		return gra * bym;
+	}
+}
 POS::POS(float _x = 0, float _y = 0)
 {
 	x = _x;
@@ -51,10 +63,9 @@ void Line::SetLineColor(int _c)
 	color = GetColorFromCode(_c);
 }
 
-void Line::My_DrawLine(Line& l, int& _c)
+void Line::My_DrawLine(Line& l)
 {
-	_c = color;
-	DrawLineAA(l.p1.x, l.p1.y, l.p2.x, l.p2.y, _c);
+	DrawLineAA(l.p1.x, l.p1.y, l.p2.x, l.p2.y, this->color);
 }
 //‹éŒ`==================================================================================
 Box::Box()
