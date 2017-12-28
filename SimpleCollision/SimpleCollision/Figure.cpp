@@ -1,20 +1,6 @@
-#define _USE_MATH_DEFINES
 #include "Figure.h"
-#include <math.h>
 #include "DxLib.h"
-namespace MATH
-{
-	float Radian(const float degree)
-	{
-		return degree * static_cast<float>(M_PI) / 180.f;
-	}
 
-	float Gravity(const float bym)
-	{
-		const float gra = 9.8f / 60 / 60;
-		return gra * bym;
-	}
-}
 POS::POS(float _x = 0, float _y = 0)
 {
 	x = _x;

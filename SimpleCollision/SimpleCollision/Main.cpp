@@ -4,6 +4,7 @@
 #include "Collision.h"
 #include <math.h>
 #include <array>
+using namespace MATH;
 //=====================================
 //===“®ìŠm”F—p=========================
 //=====================================

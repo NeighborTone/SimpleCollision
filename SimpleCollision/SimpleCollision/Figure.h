@@ -1,6 +1,4 @@
 #pragma once
-#include "DxLib.h"
-
 //=====================================
 //====汎用的な2Dの図形を扱うクラス=======
 //===2017/12/26開始====================
@@ -10,13 +8,9 @@
 @初期化
 @色指定
 @描画※DxLibの機能に依存。画像を使う場合は不要なメソッド
+ また、DxLibを使わないときはコメント化する
 */
-namespace MATH
-{
-	float Radian(const float degree);
-	float Gravity(const float bym);
 
-}
 //色データ
 enum ColorData
 {
