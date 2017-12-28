@@ -2,6 +2,8 @@
 #include "Input.h"
 #include "Figure.h"
 #include "Collision.h"
+#include <math.h>
+#include <array>
 //=====================================
 //===ìÆçÏämîFóp=========================
 //=====================================
@@ -16,7 +18,8 @@ struct Obj
 	float angle;
 	bool flag;
 };
-Obj cir[12];
+std::array<Obj,12>cir;
+
 void Ini(Obj& c,float ang)
 {
 	c.angle = ang;
@@ -25,6 +28,7 @@ void Ini(Obj& c,float ang)
 	c.c.r = 10.f;
 	c.speed = 0;
 	c.flag = false;
+	
 }
 void Up(Obj& c)
 {

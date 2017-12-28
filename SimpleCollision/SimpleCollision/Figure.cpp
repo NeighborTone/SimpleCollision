@@ -1,4 +1,6 @@
+#define _USE_MATH_DEFINES
 #include "Figure.h"
+#include <math.h>
 #include "DxLib.h"
 namespace MATH
 {
