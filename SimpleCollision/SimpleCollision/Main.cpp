@@ -4,6 +4,7 @@
 #include "Collision.h"
 #include <math.h>
 #include <array>
+
 using namespace MATH;
 //=====================================
 //===動作確認用=========================
@@ -11,6 +12,7 @@ using namespace MATH;
 constexpr int
 SCREEN_WIDIH = 1280,
 SCREEN_HEIGHT = 720;
+
 struct Obj
 {
 	Circle c;
@@ -67,7 +69,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	SetGraphMode(SCREEN_WIDIH, SCREEN_HEIGHT, 32);
 	//ウィンドウモード変更と初期化と裏画面設定
 	ChangeWindowMode(TRUE), DxLib_Init(), SetDrawScreen(DX_SCREEN_BACK);
-
+	int cnt(0);
 	
 	const int X_size = 10;
 	Box box[X_size];
@@ -96,6 +98,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Triangle tri(t1,t2,t3,Pink);
 	for(int i = 0;i<12;++i)
 	Ini(cir[i],MATH::Radian(i*30.f));
+
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
 		Updata_Key();
@@ -149,7 +152,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		{
 			line3.p2.y += 10;
 		}
-		if (Key(KEY_INPUT_RETURN) >= 1)
+		if (Key(KEY_INPUT_RETURN) == 1)
 		{
 			box[9].Addlife(1);
 		}

@@ -1,7 +1,7 @@
 #include "Figure.h"
 #include "DxLib.h"
 
-POS::POS(float _x = 0, float _y = 0)
+POS::POS(float _x, float _y)
 {
 	x = _x;
 	y = _y;
@@ -30,7 +30,7 @@ void Color::SetColor(int _c)
 	}
 }
 
-int Color::GetMyColor()
+const int Color::GetMyColor()
 {
 	return color;
 }
@@ -96,7 +96,7 @@ Box::Box(int _x, int _y, int _w, int _h, int _l, int _c)
 	life = _l;
 	color.SetColor(_c);
 }
-void Box::SetBox(int _x, int _y, int _w, int _h , int _c, int _l)
+void Box::SetBox(int _x, int _y, int _w, int _h , int _l, int _c)
 {
 	x = _x,
 	y = _y,
@@ -149,14 +149,14 @@ Circle::Circle(POS _p, float _r, int _c)
 	r = _r;
 	color.SetColor(_c);
 }
-void Circle::SetCircle(float _x, float _y, float _r, int _c, int _l)
+void Circle::SetCircle(float _x, float _y, float _r, int _c)
 {
 	pos.x = _x;
 	pos.y = _y;
 	r = _r;
 	color.SetColor(_c);
 }
-void Circle::SetCircle(POS _p, float _r, int _c, int _l)
+void Circle::SetCircle(POS _p, float _r, int _c)
 {
 	pos = _p;
 	r = _r;
