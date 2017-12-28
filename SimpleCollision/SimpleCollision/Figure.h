@@ -27,6 +27,16 @@ enum ColorData
 	Emerald = 9,
 	Gray    = 10,
 };
+//色クラス
+class Color
+{
+private:
+	int color;
+public:
+	int  GetMyColor();
+	void SetColor(int);
+
+};
 //座標を扱うクラス
 class POS
 {
@@ -64,18 +74,15 @@ public:
 //線分を扱うクラス
 class Line
 {
-private:
-	int color;
 public:
+	Color color;
 	POS p1,													//始点
 		p2;													//終点
 	explicit Line();										//コンストラクタ
 	explicit Line(float, float, float, float, int);			//コンストラクタ
 	explicit Line(POS, POS, int);							//コンストラクタ
 	void SetLine(float, float, float, float, int);			//初期化
-	void SetLine(POS,POS, int);								//初期化
-	int  GetColorFromCode(int);								
-	void SetLineColor(int);									
+	void SetLine(POS,POS, int);								//初期化													
 	void My_DrawLine(Line&);
 	~Line() {};
 };
@@ -84,8 +91,8 @@ class Box
 {
 private:
 	int life;
-	int color;
 public:
+	Color color;
 	int x, y, w, h;
 	explicit Box();												//コンストラクタ
 	explicit Box(int, int, int, int,int, int);					//コンストラクタ(x,y,w,h,life,color)
@@ -94,42 +101,34 @@ public:
 	void Addlife(unsigned int);									//体力を増やす
 	void Damage(signed int);									//体力を減らす
 	int  GetLife();												//体力を確認する
-	int  GetColorFromCode(int);									//色の情報を得る
-	void SetBoxColor(int);										//作った色をセット(0~9)
 	void My_DrawBox(Box&,bool);									//インスタンスと塗りつぶし
 	~Box() {};
 };
 //円を扱うクラス
 class Circle
 {
-private:
-	int color;
 public:
 	float r;													//半径
+	Color color;
 	POS pos;													//座標
 	explicit Circle();											//コンストラクタ
 	explicit Circle(float, float, float, int);					//コンストラクタ
 	explicit Circle(POS, float, int);							//コンストラクタ
 	void SetCircle(float,float,float,int _c = 0, int _l = 1);	//初期化(x,y,w,h,color,life) 
 	void SetCircle(POS, float, int _c = 0, int _l = 1);			//初期化(POS,r,color,life)
-	int  GetColorFromCode(int);									//色の情報を得る
-	void SetCircleColor(int);									//作った色をセット(0~9)
 	void My_DrawCircle(Circle&, bool);							//インスタンスと塗りつぶし
 	~Circle() {};
 };
 //三角形を扱うクラス(未完成)
 class Triangle
 {
-private:
-	int color;
 public:
+	Color color;
 	POS p1,
 		p2,
 		p3;
 	explicit Triangle();
 	explicit Triangle(POS, POS, POS, int);						//3つの頂点と色を指定
-	int  GetColorFromCode(int);									//色の情報を得る
-	void SetTriangleColor(int);									//色をセットする(0~9)
 	void My_DrawTriangle(Triangle&, bool);						//インスタンスと塗りつぶし
 	~Triangle() {};
 };

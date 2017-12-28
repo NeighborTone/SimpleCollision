@@ -25,7 +25,7 @@ void Ini(Obj& c,float ang)
 {
 	c.angle = ang;
 	c.dist = 100.0f;
-	c.c.SetCircleColor(Cyan);
+	c.c.color.SetColor(Cyan);
 	c.c.r = 10.f;
 	c.speed = 0;
 	c.flag = false;
@@ -78,7 +78,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		box[i].w = 50;
 		box[i].h = 50;
 		box[i].SetLife(1);
-		box[i].SetBoxColor(i);
+		box[i].color.SetColor(i);
 	}
 	POS p1(0, 720), p2(1280, 400);
 	POS p3(0, 600), p4(1280, 400);
@@ -189,6 +189,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			
 			line4.My_DrawLine(line4);
 		}
+
 		if (CirecleAndLineCollision(ball, line3) == false)
 		{
 			line3.My_DrawLine(line3);
