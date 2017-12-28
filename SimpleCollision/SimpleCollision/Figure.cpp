@@ -26,7 +26,28 @@ Line::Line(POS _p1, POS _p2, int _c)
 	p2 = _p2;
 	color = GetColorFromCode(_c);
 }
-
+Line::Line(float _p1x, float _p1y, float _p2x, float _p2y, int _c)
+{
+	p1.x = _p1x;
+	p1.y = _p1y;
+	p2.x = _p2x;
+	p2.y = _p2y;
+	color = GetColorFromCode(_c);
+}
+void Line::SetLine(POS _p1, POS _p2, int _c)
+{
+	p1 = _p1;
+	p2 = _p2;
+	color = GetColorFromCode(_c);
+}
+void Line::SetLine(float _p1x, float _p1y, float _p2x, float _p2y, int _c)
+{
+	p1.x = _p1x;
+	p1.y = _p1y;
+	p2.x = _p2x;
+	p2.y = _p2y;
+	color = GetColorFromCode(_c);
+}
 int Line::GetColorFromCode(int _c)
 {
 	switch (_c)

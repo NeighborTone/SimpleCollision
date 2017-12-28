@@ -199,8 +199,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			Draw(cir[i]);
 		}
 		DrawFormatString(0, 0, GetColor(255, 255, 255), "%f", cir[0].speed);
+
 	}
-	
+
 	DxLib_End();
 	return 0;
 }
