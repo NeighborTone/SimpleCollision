@@ -24,6 +24,7 @@ struct Obj
 };
 std::array<Obj,12>cir;
 Circle point;
+bool f = false;
 void Ini(Obj& c,float ang)
 {
 	c.angle = ang;
@@ -32,7 +33,7 @@ void Ini(Obj& c,float ang)
 	c.rota.r = 10.f;
 	c.speed = 0;
 	c.flag = false;
-	point.SetCircle(740.f, 245.f, 100.f, Pink);
+	point.SetCircle(740.f, 245.f, 10.f, Pink);
 }
 void Up(Obj& c)
 {
@@ -55,6 +56,24 @@ void Up(Obj& c)
 	{
 		c.flag = false;
 	}
+	
+	if (f == false)
+	{
+		point.r += 0.09f;
+	}
+	if (point.r >= 140.f)
+	{
+		f = true;
+	}
+	if (f == true)
+	{
+		point.r -= 0.09f;
+	}
+	if (point.r <= 10.f)
+	{
+		f = false;
+	}
+
 	if (Key(KEY_INPUT_UP) >= 1) { point.pos.y -= 0.5f; }
 	if (Key(KEY_INPUT_DOWN) >= 1) { point.pos.y += 0.5f; }
 	if (Key(KEY_INPUT_LEFT) >= 1) { point.pos.x -= 0.5f; }
@@ -151,9 +170,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			}
 			for (int j = 0; j < 12; ++j)
 			{
-				if (CircleAndBoxCollision(ball, box[i])		== true ||
-					BoxCollision(Bar, box[i])				== true ||
-					CircleAndBoxCollision(cir[j].rota, box[i]) == true	  )
+				if (CircleAndBoxCollision(ball, box[i])			== true ||
+					BoxCollision(Bar, box[i])					== true ||
+					CircleAndBoxCollision(cir[j].rota, box[i])  == true	||
+					CircleAndBoxCollision(point,box[i])         == true)
 				{
 					if (box[i].GetLife() < 0)
 					{
