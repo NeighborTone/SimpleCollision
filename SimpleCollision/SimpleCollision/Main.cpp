@@ -15,28 +15,29 @@ SCREEN_HEIGHT = 720;
 
 struct Obj
 {
-	Circle c;
+	Circle rota;
 	float speed;
 	float dist;
 	float angle;
 	bool flag;
+	POS pos;
 };
 std::array<Obj,12>cir;
-
+Circle point;
 void Ini(Obj& c,float ang)
 {
 	c.angle = ang;
 	c.dist = 100.0f;
-	c.c.color.SetColor(Cyan);
-	c.c.r = 10.f;
+	c.rota.color.SetColor(Cyan);
+	c.rota.r = 10.f;
 	c.speed = 0;
 	c.flag = false;
-	
+	point.SetCircle(740.f, 245.f, 100.f, Pink);
 }
 void Up(Obj& c)
 {
 	c.angle += MATH::Radian(c.speed);
-	c.c.pos.SetPos(740.f + static_cast<float>(cos(c.angle) * c.dist), 245.f + static_cast<float>(sin(c.angle)*c.dist));
+	c.rota.pos.SetPos(point.pos.x + static_cast<float>(cos(c.angle) * c.dist), point.pos.y + static_cast<float>(sin(c.angle)*c.dist));
 	
 	if(c.flag == false)
 	{
@@ -54,10 +55,15 @@ void Up(Obj& c)
 	{
 		c.flag = false;
 	}
+	if (Key(KEY_INPUT_UP) >= 1) { point.pos.y -= 0.5f; }
+	if (Key(KEY_INPUT_DOWN) >= 1) { point.pos.y += 0.5f; }
+	if (Key(KEY_INPUT_LEFT) >= 1) { point.pos.x -= 0.5f; }
+	if (Key(KEY_INPUT_RIGHT) >= 1) { point.pos.x += 0.5f; }
 }
 void Draw(Obj& c)
 {
-	c.c.My_DrawCircle(c.c,true);
+	point.My_DrawCircle(point, false);
+	c.rota.My_DrawCircle(c.rota,true);
 }
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -69,7 +75,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	SetGraphMode(SCREEN_WIDIH, SCREEN_HEIGHT, 32);
 	//ウィンドウモード変更と初期化と裏画面設定
 	ChangeWindowMode(TRUE), DxLib_Init(), SetDrawScreen(DX_SCREEN_BACK);
-	int cnt(0);
+
 	
 	const int X_size = 10;
 	Box box[X_size];
@@ -79,7 +85,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		box[i].y = 50;
 		box[i].w = 50;
 		box[i].h = 50;
-		box[i].SetLife(1);
+		box[i].SetLife(5);
 		box[i].color.SetColor(i);
 	}
 	POS p1(0, 720), p2(1280, 400);
@@ -98,7 +104,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Triangle tri(t1,t2,t3,Pink);
 	for(int i = 0;i<12;++i)
 	Ini(cir[i],MATH::Radian(i*30.f));
-
+	
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
 		Updata_Key();
@@ -107,26 +113,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		if (Key(KEY_INPUT_ESCAPE) == 1)
 		{
 			break;
-		}
-		if (Key(KEY_INPUT_RIGHT) >= 1)
-		{
-			ball.pos.x += 5;
-		}
-		if (Key(KEY_INPUT_LEFT) >= 1)
-		{
-			ball.pos.x -= 5;
-		}
-		if (Key(KEY_INPUT_UP) >= 1)
-		{
-			ball.pos.y -= 5;
-		}
-		if (Key(KEY_INPUT_DOWN) >= 1)
-		{
-			ball.pos.y += 5;
-		}
-		if (Key(KEY_INPUT_SPACE) >= 1)
-		{
-			ball.pos.SetPos(0,0);
 		}
 		if (Key(KEY_INPUT_D) >= 1)
 		{
@@ -154,7 +140,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		}
 		if (Key(KEY_INPUT_RETURN) == 1)
 		{
-			box[9].Addlife(1);
+			for (int i = 0; i < X_size; ++i)
+			box[i].Addlife(1);
 		}
 		for (int i = 0; i < X_size; ++i)
 		{
@@ -162,13 +149,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			{
 				box[i].My_DrawBox(box[i], true);
 			}
-			if (CircleAndBoxCollision(ball,box[i]) == true || BoxCollision(Bar,box[i]) == true)
+			for (int j = 0; j < 12; ++j)
 			{
-				if (box[i].GetLife() < 0)
+				if (CircleAndBoxCollision(ball, box[i])		== true ||
+					BoxCollision(Bar, box[i])				== true ||
+					CircleAndBoxCollision(cir[j].rota, box[i]) == true	  )
 				{
-					continue;
+					if (box[i].GetLife() < 0)
+					{
+						continue;
+					}
+					box[i].Damage(1);
 				}
-				box[i].Damage(1);
 			}
 		}
 		if (CircleCollision(ball, ball2) == false)
@@ -199,7 +191,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		}
 		for (int i = 0;i < 12;++i)
 		{
-			if (CircleCollision(ball, cir[i].c) == false)
+			if (CircleCollision(ball, cir[i].rota) == false)
 			Draw(cir[i]);
 		}
 		DrawFormatString(0, 0, GetColor(255, 255, 255), "%f", cir[0].speed);
