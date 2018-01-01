@@ -56,6 +56,12 @@ Line::Line(float _p1x, float _p1y, float _p2x, float _p2y, int _c)
 	p2.y = _p2y;
 	color.SetColor(_c);
 }
+Line::Line(const Line& l)
+{
+	p1 = l.p1;
+	p2 = l.p2;
+	color = l.color;
+}
 void Line::SetLine(POS _p1, POS _p2, int _c)
 {
 	p1 = _p1;
@@ -70,8 +76,6 @@ void Line::SetLine(float _p1x, float _p1y, float _p2x, float _p2y, int _c)
 	p2.y = _p2y;
 	color.SetColor(_c);
 }
-
-
 void Line::My_DrawLine(Line& l)
 {
 	DrawLineAA(l.p1.x, l.p1.y, l.p2.x, l.p2.y, this->color.GetMyColor());
@@ -95,6 +99,15 @@ Box::Box(int _x, int _y, int _w, int _h, int _l, int _c)
 	h = _h;
 	life = _l;
 	color.SetColor(_c);
+}
+Box::Box(const Box& b)
+{
+	x = b.x;
+	y = b.y;
+	w = b.w;
+	h = b.h;
+	life = b.life;
+	color = b.color;
 }
 void Box::SetBox(int _x, int _y, int _w, int _h , int _l, int _c)
 {
@@ -148,6 +161,12 @@ Circle::Circle(POS _p, float _r, int _c)
 	pos = _p;
 	r = _r;
 	color.SetColor(_c);
+}
+Circle::Circle(const Circle& c)
+{
+	pos = c.pos;
+	r = c.r;
+	color = c.color;
 }
 void Circle::SetCircle(float _x, float _y, float _r, int _c)
 {

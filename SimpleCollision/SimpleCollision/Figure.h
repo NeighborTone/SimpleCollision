@@ -82,6 +82,7 @@ public:
 	explicit Line();															//コンストラクタ
 	explicit Line(float p1x, float p1y, float p2x, float p2y, int = White);		//コンストラクタ
 	explicit Line(POS p1, POS p2, int = 0);										//コンストラクタ
+	explicit Line(const Line& l);												//コピーコンストラクタ
 	void SetLine(float p1x, float p1y, float p2x, float p2y, int = White);		//初期化
 	void SetLine(POS p1,POS p2, int = 0);										//初期化													
 	void My_DrawLine(Line&);
@@ -97,6 +98,7 @@ public:
 	int x, y, w, h;
 	explicit Box();																//コンストラクタ
 	explicit Box(int x, int y, int w, int h,int = 0, int = White);				//コンストラクタ
+	explicit Box(const Box& b);													//コピーコンストラクタ
 	void SetBox(int x,int y,int w,int h,int = 0,int = White);					//初期化 
 	void SetLife(int life);														//体力をセット
 	void Addlife(unsigned int life);											//体力を増やす
@@ -115,6 +117,7 @@ public:
 	explicit Circle();															//コンストラクタ
 	explicit Circle(float x, float y, float r, int = White);					//コンストラクタ
 	explicit Circle(POS pos, float r, int = White);								//コンストラクタ
+	explicit Circle(const Circle& c);											//コピーコンストラクタ
 	void SetCircle(float x,float y,float r,int = White);						//初期化
 	void SetCircle(POS pos, float r, int = White);								//初期化
 	void My_DrawCircle(Circle&, bool);											//インスタンスと塗りつぶし
