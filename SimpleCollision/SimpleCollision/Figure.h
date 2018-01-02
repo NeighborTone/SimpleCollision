@@ -92,7 +92,7 @@ public:
 class Box
 {
 private:
-	unsigned int life;															//‚±‚ÌBox‚É‚Í‘Ì—Í‚ÌŠT”O‚ª‚ ‚é‚¼II
+	int life;															//‚±‚ÌBox‚É‚Í‘Ì—Í‚ÌŠT”O‚ª‚ ‚é‚¼II
 public:
 	Color color;
 	int x, y, w, h;
