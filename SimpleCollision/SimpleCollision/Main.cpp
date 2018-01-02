@@ -116,6 +116,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Line line3(p5, p6, Cyan);
 	Line line4(p7, p8, Yellow);
 	Box Bar(100, 100, 100, 100,1,Red);
+	Box Bar2(Bar);
+	Bar2.color.SetColor(Green);
+	Bar2 * 1.2f;
 	POS cp(600, 400);
 	Circle ball(cp, 20, Blue);
 	Circle ball2(200,300, 30, Green);
@@ -195,8 +198,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		{
 			line2.My_DrawLine(line2);
 		}
-		Bar.My_DrawBox(Bar, true);
-		ball.My_DrawCircle(ball, true);
+		
 		tri.My_DrawTriangle(tri, true);
 
 		if (LineCollision(line3, line4) == false)
@@ -216,8 +218,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		}
 		DrawFormatString(0, 0, GetColor(255, 255, 255), "%.5f", cir[0].speed);
 		DrawFormatString(0, 15, GetColor(255, 255, 255), "%.5f", point.r);
+		Bar2.My_DrawBox(Bar2, true);
+		Bar.My_DrawBox(Bar, true);
+		ball.My_DrawCircle(ball, true);
 	}
-
+	
 	DxLib_End();
 	return 0;
 }

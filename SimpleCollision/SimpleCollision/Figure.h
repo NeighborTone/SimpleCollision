@@ -45,30 +45,9 @@ public:
 	float x, y;
 	POS(float _x = 0, float _y = 0);
 	void SetPos(float _x, float _y);
-	POS operator + (const POS& p) const
-	{
-		return POS({ x + p.x, y + p.y });
-	}
-	POS operator - (const POS& p) const
-	{
-		return POS({ x - p.x, y - p.y });
-	}
-	POS operator * (const POS& p) const
-	{
-		return POS({ x * p.x, y * p.y });
-	}
-	POS &operator += (const POS& p) 
-	{
-		x += p.x;
-		y += p.y;
-		return (*this);
-	}
-	POS &operator -= (const POS& p)
-	{
-		x -= p.x;
-		y -= p.y;
-		return (*this);
-	}
+	POS operator + (const POS& p)   const { return POS({ x + p.x, y + p.y });   }
+	POS operator - (const POS& p)   const { return POS({ x - p.x, y - p.y });   }
+	POS operator * (const POS& p)   const { return POS({ x * p.x, y * p.y });   }
 	~POS() {};
 };
 
@@ -94,8 +73,8 @@ class Box
 private:
 	int life;																	//このBoxには体力の概念があるぞ！！
 public:
-	Color color;
-	float x, y, w, h;
+	Color color;																//色
+	float x, y, w, h;															//座標と大きさ
 	explicit Box();																//コンストラクタ
 	explicit Box(float x, float y, float w, float h, int l = 0, int = White);	//コンストラクタ
 	explicit Box(const Box& b);													//コピーコンストラクタ
@@ -103,9 +82,9 @@ public:
 	void SetLife(int _l) { life = _l;};											//体力をセット
 	void Addlife(unsigned int _l) {life += _l;};								//体力を増やす
 	void Damage(signed int damege) {life -= damege;};							//体力を減らす
-
 	int  GetLife() const {return life;};										//体力を確認する
 	void My_DrawBox(Box&,bool);													//インスタンスと塗りつぶし
+	Box &operator * (const float& f) { w *= f; h *= f; return (*this); }		//サイズをf倍にする
 	~Box() {};
 };
 //円を扱うクラス
@@ -113,7 +92,7 @@ class Circle
 {
 public:
 	float     r;																//半径
-	Color color;
+	Color color;																//色
 	POS     pos;																//座標
 	explicit Circle();															//コンストラクタ
 	explicit Circle(float x, float y, float r, int = White);					//コンストラクタ
@@ -122,6 +101,7 @@ public:
 	void SetCircle(float x,float y,float r,int = White);						//初期化
 	void SetCircle(POS pos, float r, int = White);								//初期化
 	void My_DrawCircle(Circle&, bool);											//インスタンスと塗りつぶし
+	Circle &operator * (const float& f) { r *= f; return (*this); }				//サイズをf倍にする
 	~Circle() {};
 };
 //三角形を扱うクラス(未完成)

@@ -115,7 +115,7 @@ void Box::SetBox(float _x, float _y, float _w, float _h , int _l, int _c)
 }
 void Box::My_DrawBox(Box& _b, bool _f)
 {
-	DrawBox(_b.x, _b.y, _b.x + _b.w, _b.y + _b.h, this->color.GetMyColor(), _f);
+	DrawBoxAA(_b.x, _b.y, _b.x + _b.w, _b.y + _b.h, this->color.GetMyColor(), _f);
 }
 //=====================================================================================
 //‰~===================================================================================
