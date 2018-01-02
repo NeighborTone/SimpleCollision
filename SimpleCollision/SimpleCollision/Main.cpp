@@ -100,7 +100,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Box box[X_size];
 	for (int i = 0; i < X_size; ++i)
 	{
-		box[i].x = 50 * i;
+		box[i].x = 50 * float(i);
 		box[i].y = 50;
 		box[i].w = 50;
 		box[i].h = 50;
@@ -214,8 +214,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			if (CircleCollision(ball, cir[i].rota) == false)
 			Draw(cir[i]);
 		}
-		DrawFormatString(0, 0, GetColor(255, 255, 255), "%f", cir[0].speed);
-		
+		DrawFormatString(0, 0, GetColor(255, 255, 255), "%.5f", cir[0].speed);
+		DrawFormatString(0, 15, GetColor(255, 255, 255), "%.5f", point.r);
 	}
 
 	DxLib_End();

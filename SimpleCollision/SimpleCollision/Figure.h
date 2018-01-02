@@ -92,14 +92,14 @@ public:
 class Box
 {
 private:
-	int life;															//このBoxには体力の概念があるぞ！！
+	int life;																	//このBoxには体力の概念があるぞ！！
 public:
 	Color color;
-	int x, y, w, h;
+	float x, y, w, h;
 	explicit Box();																//コンストラクタ
-	explicit Box(int x, int y, int w, int h, int l = 0, int = White);			//コンストラクタ
+	explicit Box(float x, float y, float w, float h, int l = 0, int = White);	//コンストラクタ
 	explicit Box(const Box& b);													//コピーコンストラクタ
-	void SetBox(int x,int y,int w,int h, int l = 0,int = White);				//初期化 
+	void SetBox(float x, float y, float w, float h, int l = 0,int = White);		//初期化 
 	void SetLife(int _l) { life = _l;};											//体力をセット
 	void Addlife(unsigned int _l) {life += _l;};								//体力を増やす
 	void Damage(signed int damege) {life -= damege;};							//体力を減らす

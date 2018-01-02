@@ -86,7 +86,7 @@ Box::Box()
 	color.SetColor((GetColor(255, 255, 255)));
 }
 
-Box::Box(int _x, int _y, int _w, int _h, int _l, int _c)
+Box::Box(float _x, float _y, float _w, float _h, int _l, int _c)
 {
 	x = _x;
 	y = _y;
@@ -104,7 +104,7 @@ Box::Box(const Box& _b)
 	life = _b.life;
 	color = _b.color;
 }
-void Box::SetBox(int _x, int _y, int _w, int _h , int _l, int _c)
+void Box::SetBox(float _x, float _y, float _w, float _h , int _l, int _c)
 {
 	x = _x,
 	y = _y,
