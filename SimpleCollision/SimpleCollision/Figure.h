@@ -34,7 +34,7 @@ private:
 	int color;
 public:
 	Color() {};
-	const int  GetMyColor();
+	int  GetMyColor() const { return color; };
 	void SetColor(int color);
 	~Color() {};
 };
@@ -92,18 +92,19 @@ public:
 class Box
 {
 private:
-	int life;																	//このBoxには体力の概念があるぞ！！
+	unsigned int life;															//このBoxには体力の概念があるぞ！！
 public:
 	Color color;
 	int x, y, w, h;
 	explicit Box();																//コンストラクタ
-	explicit Box(int x, int y, int w, int h,int = 0, int = White);				//コンストラクタ
+	explicit Box(int x, int y, int w, int h, int l = 0, int = White);			//コンストラクタ
 	explicit Box(const Box& b);													//コピーコンストラクタ
-	void SetBox(int x,int y,int w,int h,int = 0,int = White);					//初期化 
-	void SetLife(int life);														//体力をセット
-	void Addlife(unsigned int life);											//体力を増やす
-	void Damage(signed int damege);												//体力を減らす
-	int  GetLife();																//体力を確認する
+	void SetBox(int x,int y,int w,int h, int l = 0,int = White);				//初期化 
+	void SetLife(int _l) { life = _l;};											//体力をセット
+	void Addlife(unsigned int _l) {life += _l;};								//体力を増やす
+	void Damage(signed int damege) {life -= damege;};							//体力を減らす
+
+	int  GetLife() const {return life;};										//体力を確認する
 	void My_DrawBox(Box&,bool);													//インスタンスと塗りつぶし
 	~Box() {};
 };

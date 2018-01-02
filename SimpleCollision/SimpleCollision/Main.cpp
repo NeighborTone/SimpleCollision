@@ -175,7 +175,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 					CircleAndBoxCollision(cir[j].rota, box[i])  == true	||
 					CircleAndBoxCollision(point,box[i])         == true)
 				{
-					if (box[i].GetLife() < 0)
+					if (box[i].GetLife() <= 0)
 					{
 						continue;
 					}

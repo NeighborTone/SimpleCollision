@@ -29,11 +29,6 @@ void Color::SetColor(int _c)
 	case 10: color = GetColor(128, 128, 128); break;	//10‚ÍŠDF
 	}
 }
-
-const int Color::GetMyColor()
-{
-	return color;
-}
 //ü•ª==================================================================================
 Line::Line()
 {
@@ -118,23 +113,6 @@ void Box::SetBox(int _x, int _y, int _w, int _h , int _l, int _c)
 	life = _l,
 	color.SetColor(_c);
 }
-void Box::SetLife(int _l)
-{
-		life = _l;
-}
-void Box::Addlife(unsigned int _l)
-{
-	life += _l;
-}
-void Box::Damage(signed int _l)
-{
-	life -= _l;
-}
-int Box::GetLife()
-{
-	return life;
-}
-
 void Box::My_DrawBox(Box& b, bool f)
 {
 	DrawBox(b.x, b.y, b.x + b.w, b.y + b.h, this->color.GetMyColor(), f);
