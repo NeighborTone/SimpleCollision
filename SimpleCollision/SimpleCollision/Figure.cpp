@@ -51,11 +51,11 @@ Line::Line(float _p1x, float _p1y, float _p2x, float _p2y, int _c)
 	p2.y = _p2y;
 	color.SetColor(_c);
 }
-Line::Line(const Line& l)
+Line::Line(const Line& _l)
 {
-	p1 = l.p1;
-	p2 = l.p2;
-	color = l.color;
+	p1 = _l.p1;
+	p2 = _l.p2;
+	color = _l.color;
 }
 void Line::SetLine(POS _p1, POS _p2, int _c)
 {
@@ -71,9 +71,9 @@ void Line::SetLine(float _p1x, float _p1y, float _p2x, float _p2y, int _c)
 	p2.y = _p2y;
 	color.SetColor(_c);
 }
-void Line::My_DrawLine(Line& l)
+void Line::My_DrawLine(Line& _l)
 {
-	DrawLineAA(l.p1.x, l.p1.y, l.p2.x, l.p2.y, this->color.GetMyColor());
+	DrawLineAA(_l.p1.x, _l.p1.y, _l.p2.x, _l.p2.y, this->color.GetMyColor());
 }
 //‹éŒ`==================================================================================
 Box::Box()
@@ -95,14 +95,14 @@ Box::Box(int _x, int _y, int _w, int _h, int _l, int _c)
 	life = _l;
 	color.SetColor(_c);
 }
-Box::Box(const Box& b)
+Box::Box(const Box& _b)
 {
-	x = b.x;
-	y = b.y;
-	w = b.w;
-	h = b.h;
-	life = b.life;
-	color = b.color;
+	x = _b.x;
+	y = _b.y;
+	w = _b.w;
+	h = _b.h;
+	life = _b.life;
+	color = _b.color;
 }
 void Box::SetBox(int _x, int _y, int _w, int _h , int _l, int _c)
 {
@@ -113,9 +113,9 @@ void Box::SetBox(int _x, int _y, int _w, int _h , int _l, int _c)
 	life = _l,
 	color.SetColor(_c);
 }
-void Box::My_DrawBox(Box& b, bool f)
+void Box::My_DrawBox(Box& _b, bool _f)
 {
-	DrawBox(b.x, b.y, b.x + b.w, b.y + b.h, this->color.GetMyColor(), f);
+	DrawBox(_b.x, _b.y, _b.x + _b.w, _b.y + _b.h, this->color.GetMyColor(), _f);
 }
 //=====================================================================================
 //‰~===================================================================================
@@ -140,11 +140,11 @@ Circle::Circle(POS _p, float _r, int _c)
 	r = _r;
 	color.SetColor(_c);
 }
-Circle::Circle(const Circle& c)
+Circle::Circle(const Circle& _c)
 {
-	pos = c.pos;
-	r = c.r;
-	color = c.color;
+	pos = _c.pos;
+	r = _c.r;
+	color = _c.color;
 }
 void Circle::SetCircle(float _x, float _y, float _r, int _c)
 {
@@ -160,9 +160,9 @@ void Circle::SetCircle(POS _p, float _r, int _c)
 	color.SetColor(_c);
 }
 
-void Circle::My_DrawCircle(Circle& c, bool f)
+void Circle::My_DrawCircle(Circle& _c, bool _f)
 {
-	DrawCircleAA(c.pos.x, c.pos.y, c.r,32, this->color.GetMyColor(), f);
+	DrawCircleAA(_c.pos.x, _c.pos.y, _c.r,32, this->color.GetMyColor(), _f);
 }
 //====================================================================================
 //ŽOŠpŒ`===============================================================================
@@ -182,10 +182,10 @@ Triangle::Triangle(POS _p1, POS _p2, POS _p3, int _c)
 	color.SetColor(_c);
 }
 
-void Triangle::My_DrawTriangle(Triangle& t, bool f)
+void Triangle::My_DrawTriangle(Triangle& _t, bool _f)
 {
-	DrawTriangleAA(t.p1.x, t.p1.y,
-				   t.p2.x, t.p2.y,
-				   t.p3.x, t.p3.y,
-				   this->color.GetMyColor(), f);
+	DrawTriangleAA(_t.p1.x, _t.p1.y,
+				   _t.p2.x, _t.p2.y,
+				   _t.p3.x, _t.p3.y,
+				   this->color.GetMyColor(), _f);
 }
