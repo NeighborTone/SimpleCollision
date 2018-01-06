@@ -2,6 +2,7 @@
 #include "Input.h"
 #include "Figure.h"
 #include "Collision.h"
+#include "My_DxSound.h"
 #include <math.h>
 #include <array>
 
@@ -95,7 +96,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//ウィンドウモード変更と初期化と裏画面設定
 	ChangeWindowMode(TRUE), DxLib_Init(), SetDrawScreen(DX_SCREEN_BACK);
 
-	
+	Sound sound;
+	sound.SetBGM("./深緑の舞.mp3");
+	sound.SetBGM("./Broken machine.wav");
 	const int X_size = 10;
 	Box box[X_size];
 	for (int i = 0; i < X_size; ++i)
@@ -129,9 +132,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
+		if (Key(KEY_INPUT_Z) > 0)sound.Volume += 1;
+		sound.ChangeBGMVolume(1, sound.Volume);
+		sound.MultiPlayBGM_Loop();
 		Updata_Key();
 		for (int i = 0;i < 12;++i)
 			Up(cir[i]);
+
 		if (Key(KEY_INPUT_ESCAPE) == 1)
 		{
 			break;

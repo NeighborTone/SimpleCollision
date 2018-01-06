@@ -45,9 +45,9 @@ public:
 	float x, y;
 	POS(float _x = 0, float _y = 0);
 	void SetPos(float _x, float _y);
-	POS operator + (const POS& p)   const { return POS({ x + p.x, y + p.y });   }
-	POS operator - (const POS& p)   const { return POS({ x - p.x, y - p.y });   }
-	POS operator * (const POS& p)   const { return POS({ x * p.x, y * p.y });   }
+	POS operator + (const POS& p)   const { return POS({ x + p.x, y + p.y }); }
+	POS operator - (const POS& p)   const { return POS({ x - p.x, y - p.y }); }
+	POS operator * (const POS& p)   const { return POS({ x * p.x, y * p.y }); }
 	~POS() {};
 };
 
