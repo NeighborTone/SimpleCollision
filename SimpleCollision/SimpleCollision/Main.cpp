@@ -97,8 +97,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	ChangeWindowMode(TRUE), DxLib_Init(), SetDrawScreen(DX_SCREEN_BACK);
 
 	Sound sound;
-	sound.SetBGM("./ê[óŒÇÃïë.mp3");
-	sound.SetBGM("./Broken machine.wav");
+	sound.SetBGM("./óVãY_drone.ogg");
+	sound.SetBGM("./óVãY_Detection.ogg");
+	sound.SetBGM("./óVãY_Chase.ogg");
 	const int X_size = 10;
 	Box box[X_size];
 	for (int i = 0; i < X_size; ++i)
@@ -129,11 +130,29 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Triangle tri(t1,t2,t3,Pink);
 	for(int i = 0;i<12;++i)
 	Ini(cir[i],MATH::Radian(i*30.f));
-	
+	int v = 0;
+	int v2 = 0;
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
-		if (Key(KEY_INPUT_Z) > 0)sound.Volume += 1;
-		sound.ChangeBGMVolume(1, sound.Volume);
+		DrawFormatString(0, 300, GetColor(255, 255, 255), "íTím%d   í«ê’%d", v, v2);
+		if (Key(KEY_INPUT_Z) > 0 && v < 100) 
+		{
+			v += 1;
+		}
+		if (Key(KEY_INPUT_X) > 0 && v2 < 100)
+		{
+			v2 += 1;
+		}
+		if (Key(KEY_INPUT_C) > 0 && v > 0)
+		{
+			v -= 1;
+		}
+		if (Key(KEY_INPUT_SPACE) > 0 && v2 > 0)
+		{
+			v2 -= 1;
+		}
+		sound.ChangeBGMVolume(1, v);
+		sound.ChangeBGMVolume(2, v2);
 		sound.MultiPlayBGM_Loop();
 		Updata_Key();
 		for (int i = 0;i < 12;++i)

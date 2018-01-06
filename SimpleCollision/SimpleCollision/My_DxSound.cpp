@@ -17,13 +17,13 @@ void Sound::DeleteSE()
 	}
 }
 
-void Sound::SetBGM(const TCHAR *FileName)
+void Sound::SetBGM(const char *FileName)
 {
 	flag = false;
 	BGM.push_back(LoadSoundMem(FileName));
 }
 
-void Sound::SetSE(const TCHAR *FileName)
+void Sound::SetSE(const char *FileName)
 {
 	SE.push_back(LoadSoundMem(FileName));
 }
