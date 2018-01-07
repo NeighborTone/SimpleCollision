@@ -28,21 +28,26 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	struct Obj
 	{
-		Circle c;
+		Circle center;
+		Circle rota;
 		Move move;
 	};
-	Obj my;
-	Obj you;
-	my.c.SetCircle(100.f,100.f,50.f,White);
-	you.c.SetCircle(300, 100, 50, Pink);
-	you.move.SetRota(150, 5);
+	Obj me;
+	Circle enemy(500, 500, 40, Blue);
+	me.center.SetCircle(100.f,100.f,50.f,White);
+	me.rota.SetCircle(300, 100, 50, Pink);
+	me.move.SetRota(150, 5);
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
-		my.move.InputArrow8(my.c.pos, 5);
-		you.move.Rotation(my.c.pos, you.c.pos);
-		my.c.My_DrawCircle();
-		you.c.My_DrawCircle();
-		DrawFormatString(0, 0, GetColor(255, 255, 255), "x:%.3f\ny:%.3f", you.c.pos.x, you.c.pos.y);
+		me.move.InputArrow8(me.center.pos, 5);
+		me.move.Rotation(me.center.pos, me.rota.pos);
+		me.center.My_DrawCircle();
+		me.rota.My_DrawCircle();
+		if (CircleCollision(me.rota, enemy) == false)
+		{
+			enemy.My_DrawCircle();
+		}
+		DrawFormatString(0, 0, GetColor(255, 255, 255), "x:%.3f\ny:%.3f", me.rota.pos.x, me.rota.pos.y);
 	}
 	
 	DxLib_End();
