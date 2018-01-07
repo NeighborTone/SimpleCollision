@@ -64,7 +64,7 @@ public:
 	explicit Line(const Line& l);												//コピーコンストラクタ
 	void SetLine(float p1x, float p1y, float p2x, float p2y, int = White);		//初期化
 	void SetLine(POS p1,POS p2, int = 0);										//初期化													
-	void My_DrawLine(Line&);
+	void My_DrawLine();															//描画
 	~Line() {};
 };
 //矩形を扱うクラス
@@ -83,7 +83,7 @@ public:
 	void Addlife(unsigned int _l) {life += _l;};								//体力を増やす
 	void Damage(signed int damege) {life -= damege;};							//体力を減らす
 	int  GetLife() const {return life;};										//体力を確認する
-	void My_DrawBox(Box&,bool);													//インスタンスと塗りつぶし
+	void My_DrawBox(bool = true);												//描画、デフオルトで塗りつぶし
 	Box &operator * (const float& f) { w *= f; h *= f; return (*this); }		//サイズをf倍にする
 	~Box() {};
 };
@@ -100,7 +100,7 @@ public:
 	explicit Circle(const Circle& c);											//コピーコンストラクタ
 	void SetCircle(float x,float y,float r,int = White);						//初期化
 	void SetCircle(POS pos, float r, int = White);								//初期化
-	void My_DrawCircle(Circle&, bool);											//インスタンスと塗りつぶし
+	void My_DrawCircle(bool = true);											//描画、デフオルトで塗りつぶし
 	Circle &operator * (const float& f) { r *= f; return (*this); }				//サイズをf倍にする
 	~Circle() {};
 };
@@ -114,6 +114,6 @@ public:
 		     p3;
 	explicit Triangle();
 	explicit Triangle(POS p1, POS p2, POS p3, int = White);						//3つの頂点と色を指定
-	void My_DrawTriangle(Triangle&, bool);										//インスタンスと塗りつぶし
+	void My_DrawTriangle(bool = true);										    //描画、デフオルトで塗りつぶし
 	~Triangle() {};
 };
