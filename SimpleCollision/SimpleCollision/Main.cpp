@@ -35,7 +35,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Obj you;
 	my.c.SetCircle(100.f,100.f,50.f,White);
 	you.c.SetCircle(300, 100, 50, Pink);
-	you.move.SetRota(45, 100, 5);
+	you.move.SetRota(150, 5);
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
 		my.move.InputArrow8(my.c.pos, 5);

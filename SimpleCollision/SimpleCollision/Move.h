@@ -12,6 +12,6 @@ private:
 public:
 	void InputArrow8(float &x, float &y, float speed);
 	void InputArrow8(POS& p, float speed);
-	void SetRota(float ang, float d, float s);
-	void Rotation(const POS p1, POS &p2);		//1,中心点.2,回したい物体の座標.3,距離.4,速度
+	void SetRota(float dist,float speed);
+	void Rotation(const POS p1, POS &p2);		//1,中心点.2,回したい物体の座標.
 };

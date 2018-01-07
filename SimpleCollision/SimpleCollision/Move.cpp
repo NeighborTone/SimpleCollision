@@ -179,15 +179,15 @@ void Move::InputArrow8(POS &p, float speed)
 		break;
 	}
 }
-void Move::SetRota(float ang, float d, float s)
+void Move::SetRota(float d, float s)
 {
-	speed = s;
-	angle = float(M_PI) / 180.0f * speed;
+	angle = 1;
 	dist = d;
+	speed = s;
 	
 }
 void Move::Rotation(const POS p1, POS &p2)
 {
-	angle += 0.01f;
+	angle += float(M_PI) / 180.0f * speed;
 	p2.SetPos(p1.x + static_cast<float>(cos(angle) * dist), p1.y + static_cast<float>(sin(angle) * dist));
 }
