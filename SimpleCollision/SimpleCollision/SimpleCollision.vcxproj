@@ -123,10 +123,12 @@
     <ClCompile Include="Figure.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Move.cpp" />
     <ClCompile Include="My_DxSound.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="Move.h" />
     <ClInclude Include="My_DxSound.h" />
     <ClInclude Include="Figure.h" />
     <ClInclude Include="Input.h" />

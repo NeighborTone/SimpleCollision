@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include "Input.h"
 #include "Figure.h"
+#include "Move.h"
 #include "Collision.h"
 #include "My_DxSound.h"
 #include <math.h>
@@ -22,6 +23,7 @@ struct Obj
 	float angle;
 	bool flag;
 	POS pos;
+	
 };
 std::array<Obj,12>cir;
 Circle point;
@@ -75,10 +77,11 @@ void Up(Obj& c)
 		f = false;
 	}
 
-	if (Key(KEY_INPUT_UP) >= 1) { point.pos.y -= 0.5f; }
+	/*if (Key(KEY_INPUT_UP) >= 1) { point.pos.y -= 0.5f; }
 	if (Key(KEY_INPUT_DOWN) >= 1) { point.pos.y += 0.5f; }
 	if (Key(KEY_INPUT_LEFT) >= 1) { point.pos.x -= 0.5f; }
-	if (Key(KEY_INPUT_RIGHT) >= 1) { point.pos.x += 0.5f; }
+	if (Key(KEY_INPUT_RIGHT) >= 1) { point.pos.x += 0.5f; }*/
+
 }
 void Draw(Obj& c)
 {
@@ -128,12 +131,23 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Circle ball2(200,300, 30, Green);
 	POS t1(600,100), t2(500,300), t3(700,300);
 	Triangle tri(t1,t2,t3,Pink);
+	struct My
+	{
+		Circle c;
+		Move move;
+	};
+	My my;
+	my.c.SetCircle(200, 200, 10, 100);
+	
 	for(int i = 0;i<12;++i)
 	Ini(cir[i],MATH::Radian(i*30.f));
 	int v = 0;
 	int v2 = 0;
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
+		//Updata_Key();
+		my.move.InputMove(my.c.pos,5);
+		my.c.My_DrawCircle(my.c, true);
 		DrawFormatString(0, 300, GetColor(255, 255, 255), "’T’m%d   ’ÇÕ%d", v, v2);
 		if (Key(KEY_INPUT_Z) > 0 && v < 100) 
 		{
@@ -154,11 +168,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		sound.ChangeBGMVolume(1, v);
 		sound.ChangeBGMVolume(2, v2);
 		sound.MultiPlayBGM_Loop();
-		Updata_Key();
+		
 		for (int i = 0;i < 12;++i)
 			Up(cir[i]);
 
-		if (Key(KEY_INPUT_ESCAPE) == 1)
+		if (Key(KEY_INPUT_ESCAPE) >= 1)
 		{
 			break;
 		}
