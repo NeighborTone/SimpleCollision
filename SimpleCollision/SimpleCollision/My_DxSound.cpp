@@ -6,6 +6,7 @@ void Sound::DeleteBGM()
 	{
 		DeleteSoundMem(BGM[i]);
 	}
+	std::vector<int>(BGM).swap(BGM);
 	flag = false;
 }
 
@@ -15,6 +16,7 @@ void Sound::DeleteSE()
 	{
 		DeleteSoundMem(SE[i]);
 	}
+	std::vector<int>(SE).swap(SE);		//swapãZñ@Ç…ÇÊÇÈÉÅÉÇÉääJï˙
 }
 
 void Sound::SetBGM(const char *FileName)
@@ -67,8 +69,20 @@ void Sound::MultiPlayBGM_Loop()
 	
 }
 
-void Sound::PlaySE(int SE_ID,int gain)
+void Sound::PlaySE(int SE_ID, bool _flag ,int gain)
 {
+
 	ChangeVolumeSoundMem(255 * gain / 100, SE[SE_ID]);
-	PlaySoundMem(SE[SE_ID], DX_PLAYTYPE_BACK);
+	if (_flag == true)
+	{
+		if (CheckSoundMem(SE[SE_ID]) == 0)
+		{
+			PlaySoundMem(SE[SE_ID], DX_PLAYTYPE_BACK);
+		}
+	}
+	else
+	{
+		PlaySoundMem(SE[SE_ID], DX_PLAYTYPE_BACK);
+	}
+	
 }

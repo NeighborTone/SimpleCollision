@@ -59,51 +59,51 @@ class Line
 {
 public:
 	Color color;
-	POS		 p1,																//始点
-		  		 p2;															//終点
-	explicit Line();															//コンストラクタ
+	POS		 p1,																					//始点
+		  		 p2;																					//終点
+	explicit Line();																				//コンストラクタ
 	explicit Line(float p1x, float p1y, float p2x, float p2y, int = White);		//コンストラクタ
-	explicit Line(POS p1, POS p2, int = 0);										//コンストラクタ
-	explicit Line(const Line& l);												//コピーコンストラクタ
+	explicit Line(POS p1, POS p2, int = 0);													//コンストラクタ
+	explicit Line(const Line& l);																//コピーコンストラクタ
 	void SetLine(float p1x, float p1y, float p2x, float p2y, int = White);		//初期化
-	void SetLine(POS p1,POS p2, int = 0);										//初期化													
-	void My_DrawLine();															//描画
+	void SetLine(POS p1,POS p2, int = 0);													//初期化													
+	void My_DrawLine();																			//描画
 	~Line() {};
 };
 //矩形を扱うクラス
 class Box
 {
 private:
-	int life;																	//このBoxには体力の概念があるぞ！！
+	int life;																							//このBoxには体力の概念があるぞ！！
 public:
-	Color color;																//色
-	float x, y, w, h;															//座標と大きさ
-	explicit Box();																//コンストラクタ
-	explicit Box(float x, float y, float w, float h, int l = 0, int = White);	//コンストラクタ
-	explicit Box(const Box& b);													//コピーコンストラクタ
+	Color color;																					//色
+	float x, y, w, h;																				//座標と大きさ
+	explicit Box();																				//コンストラクタ
+	explicit Box(float x, float y, float w, float h, int l = 0, int = White);		//コンストラクタ
+	explicit Box(const Box& b);																//コピーコンストラクタ
 	void SetBox(float x, float y, float w, float h, int l = 0,int = White);		//初期化 
-	void SetLife(int _l) { life = _l;};											//体力をセット
-	void Addlife(unsigned int _l) {life += _l;};								//体力を増やす
-	void Damage(signed int damege) {life -= damege;};							//体力を減らす
-	int  GetLife() const {return life;};										//体力を確認する
-	void My_DrawBox(bool = true);												//描画、デフオルトで塗りつぶし
-	Box &operator * (const float& f) { w *= f; h *= f; return (*this); }		//サイズをf倍にする
+	void SetLife(int _l) { life = _l;};														//体力をセット
+	void Addlife(unsigned int _l) {life += _l;};											//体力を増やす
+	void Damage(signed int damege) {life -= damege;};									//体力を減らす
+	int  GetLife() const {return life;};													//体力を確認する
+	void My_DrawBox(bool = true);															//描画、デフオルトで塗りつぶし
+	Box &operator * (const float& f) { w *= f; h *= f; return (*this); }			//サイズをf倍にする
 	~Box() {};
 };
 //円を扱うクラス
 class Circle
 {
 public:
-	float     r;																//半径
-	Color color;																//色
-	POS     pos;																//座標
-	explicit Circle();															//コンストラクタ
-	explicit Circle(float x, float y, float r, int = White);					//コンストラクタ
-	explicit Circle(POS pos, float r, int = White);								//コンストラクタ
-	explicit Circle(const Circle& c);											//コピーコンストラクタ
-	void SetCircle(float x,float y,float r,int = White);						//初期化
-	void SetCircle(POS pos, float r, int = White);								//初期化
-	void My_DrawCircle(bool = true);											//描画、デフオルトで塗りつぶし
+	float     r;																						//半径
+	Color color;																					//色
+	POS     pos;																						//座標
+	explicit Circle();																			//コンストラクタ
+	explicit Circle(float x, float y, float r, int = White);							//コンストラクタ
+	explicit Circle(POS pos, float r, int = White);										//コンストラクタ
+	explicit Circle(const Circle& c);														//コピーコンストラクタ
+	void SetCircle(float x,float y,float r,int = White);								//初期化
+	void SetCircle(POS pos, float r, int = White);										//初期化
+	void My_DrawCircle(bool = true);														//描画、デフオルトで塗りつぶし
 	Circle &operator * (const float& f) { r *= f; return (*this); }				//サイズをf倍にする
 	~Circle() {};
 };
@@ -112,11 +112,11 @@ class Triangle
 {
 public:
 	Color color;	
-	POS		 p1,																//3つの頂点
-		     p2,
-		     p3;
+	POS		 p1,																					//3つの頂点
+		         p2,
+		         p3;
 	explicit Triangle();
-	explicit Triangle(POS p1, POS p2, POS p3, int = White);						//3つの頂点と色を指定
-	void My_DrawTriangle(bool = true);										    //描画、デフオルトで塗りつぶし
+	explicit Triangle(POS p1, POS p2, POS p3, int = White);							//3つの頂点と色を指定
+	void My_DrawTriangle(bool = true);														//描画、デフオルトで塗りつぶし
 	~Triangle() {};
 };

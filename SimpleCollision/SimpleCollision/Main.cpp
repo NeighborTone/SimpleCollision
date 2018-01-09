@@ -25,7 +25,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	SetGraphMode(SCREEN_WIDIH, SCREEN_HEIGHT, 32);
 	//ウィンドウモード変更と初期化と裏画面設定
 	ChangeWindowMode(TRUE), DxLib_Init(), SetDrawScreen(DX_SCREEN_BACK);
-
+	Sound sound;
+	sound.SetBGM("./遊戯_drone.ogg");
+	sound.SetSE("./slashing01.ogg");
+	sound.SetSE("./slashing02.ogg");
+	sound.SetSE("ぼよよんソフト.ogg");
 	struct Obj
 	{
 		Circle center;
@@ -45,9 +49,25 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		me.center.My_DrawCircle();
 		me.rota.My_DrawCircle();
 	
+		if (Key(KEY_INPUT_Z) == 1)
+		{
+			sound.PlaySE(0);
+		}
+		if (Key(KEY_INPUT_X) >= 1)
+		{
+			sound.PlaySE(2,true);
+		}
+		if (Key(KEY_INPUT_V) == 1)
+		{
+			sound.DeleteSE();
+		}
 		if (CircleCollision(me.rota, enemy) == false)
 		{
 			enemy.My_DrawCircle();
+		}
+		if (CircleCollision(me.rota, enemy) == true)
+		{
+			sound.PlaySE(1,true);
 		}
 		if(MATH::CirecleAndLineCollision(me.center,line) == false)
 		line.My_DrawLine();

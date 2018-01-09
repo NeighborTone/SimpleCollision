@@ -19,7 +19,10 @@ void Move::InputArrow8(float &x, float &y,float speed)
 
 	};
 	Updata_Key();
-	if (CheckHitKeyAll() == non)	//“ü—Í‚ª‚È‚¢‚Æ‚«‚ÍˆÚ“®‚µ‚È‚¢
+	if (CheckHitKey(KEY_INPUT_UP)     ==  0 ||
+		 CheckHitKey(KEY_INPUT_DOWN)  ==  0 ||
+		 CheckHitKey(KEY_INPUT_LEFT)  ==  0 ||
+		 CheckHitKey(KEY_INPUT_RIGHT) ==  0)
 	{
 		dir = non;
 	}
@@ -108,7 +111,10 @@ void Move::InputArrow8(POS &p, float speed)
 
 	};
 	Updata_Key();
-	if (CheckHitKeyAll() == non)	//“ü—Í‚ª‚È‚¢‚Æ‚«‚ÍˆÚ“®‚µ‚È‚¢
+	if (CheckHitKey(KEY_INPUT_UP)    == 0 ||
+		CheckHitKey(KEY_INPUT_DOWN)  == 0 ||
+		CheckHitKey(KEY_INPUT_LEFT)  == 0 ||
+		CheckHitKey(KEY_INPUT_RIGHT) == 0)
 	{
 		dir = non;
 	}
