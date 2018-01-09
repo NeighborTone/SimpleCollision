@@ -38,6 +38,7 @@ public:
 	void SetColor(int color);
 	~Color() {};
 };
+
 //座標を扱うクラス
 class POS
 {
@@ -49,6 +50,8 @@ public:
 	POS operator - (const POS& p)   const { return POS({ x - p.x, y - p.y }); }
 	POS operator * (const POS& p)   const { return POS({ x * p.x, y * p.y }); }
 	~POS() {};
+
+
 };
 
 //線分を扱うクラス
@@ -57,7 +60,7 @@ class Line
 public:
 	Color color;
 	POS		 p1,																//始点
-		  	 p2;															    //終点
+		  		 p2;															//終点
 	explicit Line();															//コンストラクタ
 	explicit Line(float p1x, float p1y, float p2x, float p2y, int = White);		//コンストラクタ
 	explicit Line(POS p1, POS p2, int = 0);										//コンストラクタ
