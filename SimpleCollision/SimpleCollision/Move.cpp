@@ -179,9 +179,9 @@ void Move::InputArrow8(POS &p, float speed)
 		break;
 	}
 }
-void Move::SetRota(float d, float s)
+void Move::SetRota(float d, float s, float ang)
 {
-	angle = 1;
+	angle = ang;
 	dist = d;
 	speed = s;
 	
