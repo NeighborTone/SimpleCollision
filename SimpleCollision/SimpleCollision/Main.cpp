@@ -34,6 +34,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	};
 	Obj me;
 	Circle enemy(500, 500, 40, Blue);
+	Line line(0, 720, 1280, 200, Cyan);
 	me.center.SetCircle(100.f,100.f,50.f,White);
 	me.rota.SetCircle(300, 100, 50, Pink);
 	me.move.SetRota(150, 5);
@@ -43,10 +44,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		me.move.Rotation(me.center.pos, me.rota.pos);
 		me.center.My_DrawCircle();
 		me.rota.My_DrawCircle();
+	
 		if (CircleCollision(me.rota, enemy) == false)
 		{
 			enemy.My_DrawCircle();
 		}
+		if(MATH::CirecleAndLineCollision(me.center,line) == false)
+		line.My_DrawLine();
 		DrawFormatString(0, 0, GetColor(255, 255, 255), "x:%.3f\ny:%.3f", me.rota.pos.x, me.rota.pos.y);
 	}
 	

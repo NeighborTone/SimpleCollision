@@ -2,7 +2,20 @@
 #include <math.h>
 namespace MATH
 {
+	float dot(POS v1, POS v2) {		  //ベクトルの内積を返す
+		return v1.x * v2.x + v1.y * v2.y;
+	}
 
+	float cross(POS v1, POS v2) {			//ベクトルの外積を返す
+		return v1.x * v2.y - v2.x * v1.y;
+	}
+	float length(POS v) {  					//ベクトルの長さを返す
+		return static_cast<float>(sqrt(v.x * v.x + v.y * v.y));
+	}
+	POS normalize(POS v) {					//ベクトルの正規化
+		POS temp = { v.x / length(v),v.y / length(v) };
+		return temp;
+	}
 	float Radian(const float degree)
 	{
 		return degree * static_cast<float>(M_PI) / 180.f;
@@ -113,25 +126,41 @@ namespace MATH
 		return true;
 	}
 
-	//ぬわあああああああああああああああああああああああああああああ
+
 	bool CirecleAndLineCollision(const Circle& c, const Line& l)
 	{
-		l.p1;//始点
-		l.p2;//終点
-		const POS P = l.p1;
-		const POS Q = l.p2;
-		const POS R = c.pos;
-		////始点と終点の判定
-		//if ((l.p1.x - c.pos.x) * (l.p1.x - c.pos.x) + (l.p1.y - c.pos.y) * (l.p1.y - c.pos.y) <= c.r * c.r ||
-		//	(l.p2.x - c.pos.x) * (l.p2.x - c.pos.x) + (l.p2.y - c.pos.y) * (l.p2.y - c.pos.y) <= c.r * c.r)
-		//	return true;
-		//線分の判定
-		if ((c.pos.x + c.r - l.p1.x) * (l.p2.y - l.p1.y) - (l.p2.x - l.p1.x) * (c.pos.y + c.r - l.p1.y) <= 0 &&
-			!(c.pos.x <= l.p1.x) && !(c.pos.x >= l.p2.x))
-			return true;
+		POS A = { c.pos.x - l.p1.x,c.pos.y - l.p1.y };	//線分の始点から円の中心点までのベクトルA
+		POS B = { l.p2.x - l.p1.x,l.p2.y - l.p1.y };			//線分の始点から線分の終点までのベクトルB
+		POS C = { c.pos.x - l.p2.x,c.pos.y - l.p2.y };	//線分の終点から円の中心点までのベクトルC
+
+		//円の中心が線分の中（端点の間）に入っている
+		if (dot(A, B)*dot(B, C) <= 0) {
+			//線分のベクトル（ベクトルB）を単位ベクトルに変換
+			POS temp = normalize(B);
+			//円の中心と線分の距離を外積を使って計算
+			float dist = cross(A, temp);
+			if (dist < 0) { dist *= -1; }
+			//半径との比較
+			if (dist <= c.r)
+			{
+				return true;
+			}
+		}
+		else {
+			//端点との距離をそれぞれ計算
+			length(A);
+			length(B);
+			if (length(A) <= c.r || length(B) <= c.r)
+			{
+				return true;
+			}
+			
+		}
+		//const float D = C * A / C;
+
 		return false;
 	}
-
+	
 
 	//BOOL CollisionLC(Line L, Circle C) {
 	//	// 円と線分の当たり判定関数
