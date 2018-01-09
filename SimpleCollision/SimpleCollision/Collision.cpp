@@ -144,6 +144,7 @@ namespace MATH
 			POS temp = Normalize(B);
 			//円の中心と線分の距離を外積を使って計算
 			float dist = Cross2D(A, temp);
+			//外積がマイナス値だったら符号を変える
 			if (dist < 0) { dist *= -1; }
 			//半径との比較
 			if (dist <= c.r)
@@ -154,8 +155,6 @@ namespace MATH
 		else 
 		{
 			//端点との距離をそれぞれ計算
-			Length(A);
-			Length(B);
 			if (Length(A) <= c.r || Length(B) <= c.r)
 			{
 				return true;
