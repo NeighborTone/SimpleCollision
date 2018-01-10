@@ -1,6 +1,6 @@
 #pragma once
 #define _USE_MATH_DEFINES
-#include "Figure.h"
+#include "../Figure/Figure.h"
 
 namespace MATH
 {

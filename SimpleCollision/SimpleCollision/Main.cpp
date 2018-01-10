@@ -1,9 +1,9 @@
 #include "DxLib.h"
-#include "Input.h"
-#include "Figure.h"
-#include "Move.h"
-#include "Collision.h"
-#include "My_DxSound.h"
+#include "../Input/Input.h"
+#include "../Figure/Figure.h"
+#include "../Move/Move.h"
+#include "../Collision/Collision.h"
+#include "../MyDxSound/My_DxSound.h"
 #include <math.h>
 #include <array>
 
@@ -34,21 +34,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		float fall;
 	};
 	Sound sound;
-	sound.SetSE("slashing01.ogg");
-	sound.SetSE("slashing01.ogg");
-	sound.SetSE("slashing01.ogg");
-	sound.SetSE("slashing01.ogg");
-	sound.SetSE("slashing01.ogg");
+	sound.SetSE("./resource/Sound/slashing01.ogg");
 	Obj me;
+	me.hit.color.SetRBG();
+	me.hit.color.SetDelta();
 	me.jump = -10;
 	me.fall = 0;
-	me.hit.SetBox(50, 50, 100, 100, 1, Cyan);
-	me.foot.SetBox(me.hit.x, me.hit.y + me.hit.w, me.hit.w, 1);
+	me.hit.SetBox(50, 50, 100, 100, 1, Rainbow);
+	
 	Box box(0,500,1280,120,1,Pink);
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
-		me.move.InputArrow8(me.hit.x,me.hit.y,5);
-		if (MATH::BoxCollision(me.hit, box) == true || MATH::BoxCollision(me.hit, box) == true && MATH::BoxCollision(me.foot, box) == true)
+		me.foot.SetBox(me.hit.x, me.hit.y + me.hit.w, me.hit.w, Cyan);
+		me.move.InputArrowLR(me.hit.x,5);
+		if (MATH::BoxCollision(me.foot, box) == true)
 		{
 			me.fall = 0.0f;
 		}
@@ -56,10 +55,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		{
 			me.fall += MATH::Gravity(32) * 3;	
 		}
-		if (Key(KEY_INPUT_Z) == 1) {
-			if (MATH::BoxCollision(me.hit,box) == true || MATH::BoxCollision(me.hit, box) == true) {
+		if (Key(KEY_INPUT_Z) == 1) 
+		{
+			sound.PlaySE(0);
+			if (MATH::BoxCollision(me.foot, box) == true)
+			{
 				me.fall = me.jump;
-				sound.PlaySE(0);
+			
 			}
 		}
 		if (Key(KEY_INPUT_X) == 1)
@@ -68,8 +70,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		}
 		sound.PrintID();
 		me.hit.y += me.fall;
+		me.hit.color.SetColor(11);
 		me.hit.My_DrawBox();
+		me.foot.My_DrawBox();
 		box.My_DrawBox();
+		DrawFormatString(0, 0, GetColor(255, 255, 255), "x:%.3f,y%.3f,w:%.3f,h:%.3f", me.hit.x, me.hit.y, me.hit.w, me.hit.h);
+		DrawFormatString(0, 15, GetColor(255, 255, 255), "x:%.3f,y%.3f,w:%.3f,h:%.3f", me.foot.x, me.foot.y, me.foot.w, me.foot.h);
 	}
 
 	DxLib_End();

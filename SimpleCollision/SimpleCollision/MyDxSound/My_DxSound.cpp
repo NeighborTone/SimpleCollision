@@ -6,9 +6,7 @@ void Sound::DeleteBGM()
 	{
 		DeleteSoundMem(BGM[i]);
 	}
-	{
-		std::vector<int>().swap(BGM);
-	}
+	BGM.clear();
 	flag = false;
 }
 
@@ -20,10 +18,7 @@ void Sound::DeleteSE()
 
 	}
 	SE.clear();
-	{
-		SE.shrink_to_fit();
-		//std::vector<int>().swap(SE);		//swap技法によるメモリ開放
-	}
+	//std::vector<int>().swap(SE);		//swap技法によるメモリ開放,(古いやり方)
 }
 
 void Sound::SetBGM(const char *FileName)

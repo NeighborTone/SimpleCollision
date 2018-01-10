@@ -1,8 +1,8 @@
 #pragma once
 #include "DxLib.h"
 #include <vector>
-#include<map>
-#include<string>
+#include <map>
+#include <string>
 //DxLibのサウンドを改造したクラス。IDはロードした順に0から振られる。
 class Sound
 {

@@ -1,25 +1,13 @@
 #define _USE_MATH_DEFINES
 #include "Move.h"
 #include "DxLib.h"
-#include "Collision.h"
-#include "Input.h"
+#include "../Collision/Collision.h"
+#include "../Input/Input.h"
 #include <math.h>
 
 void Move::InputArrow8(float &x, float &y,float speed)
 {
-	enum
-	{
-		non,
-		up,
-		down,
-		left,
-		right,
-		up_right,
-		up_left,
-		down_right,
-		down_left,
-
-	};
+	
 	Updata_Key();
 	if (CheckHitKey(KEY_INPUT_UP)     ==  0 ||
 		 CheckHitKey(KEY_INPUT_DOWN)  ==  0 ||
@@ -99,19 +87,6 @@ void Move::InputArrow8(float &x, float &y,float speed)
 
 void Move::InputArrow8(POS &p, float speed)
 {
-	enum
-	{
-		non,
-		up,
-		down,
-		left,
-		right,
-		up_right,
-		up_left,
-		down_right,
-		down_left,
-
-	};
 	Updata_Key();
 	if (CheckHitKey(KEY_INPUT_UP)    == 0 ||
 		CheckHitKey(KEY_INPUT_DOWN)  == 0 ||
@@ -187,6 +162,33 @@ void Move::InputArrow8(POS &p, float speed)
 		break;
 	}
 }
+
+void Move::InputArrowLR(float &x, float speed)
+{
+	Updata_Key();
+	if (Key(KEY_INPUT_LEFT) >= 1)
+	{
+		x -= speed;
+	}
+	if (Key(KEY_INPUT_RIGHT) >= 1)
+	{
+		x += speed;
+	}
+}
+
+void InputArrowLR(POS& p, float speed)
+{
+	Updata_Key();
+	if (Key(KEY_INPUT_LEFT) >= 1)
+	{
+		p.x -= speed;
+	}
+	if (Key(KEY_INPUT_RIGHT) >= 1)
+	{
+		p.x += speed;
+	}
+}
+
 void Move::SetRota(float d, float s, float ang)
 {
 	angle = ang;

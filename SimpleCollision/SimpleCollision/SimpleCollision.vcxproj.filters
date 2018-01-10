@@ -1,54 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{98507207-cc21-4754-9214-45fcbc7b3912}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    <Filter Include="Figure">
+      <UniqueIdentifier>{1d47976d-d8af-43cf-9307-e47160eade26}</UniqueIdentifier>
     </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Input">
+      <UniqueIdentifier>{44cfa34b-f672-4417-a702-63aad625ff02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Move">
+      <UniqueIdentifier>{4a61f8f1-ca9d-4b1e-8608-25b613f06eaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MyDxSound">
+      <UniqueIdentifier>{9722dcf0-228c-498d-9c78-cc49499466a9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Collision\Collision.cpp">
+      <Filter>Collision</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Figure\Figure.cpp">
+      <Filter>Figure</Filter>
     </ClCompile>
-    <ClCompile Include="Figure.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Input\Input.cpp">
+      <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Move\Move.cpp">
+      <Filter>Move</Filter>
     </ClCompile>
-    <ClCompile Include="My_DxSound.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="MyDxSound\My_DxSound.cpp">
+      <Filter>MyDxSound</Filter>
     </ClCompile>
-    <ClCompile Include="Move.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Input.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Collision\Collision.h">
+      <Filter>Collision</Filter>
     </ClInclude>
-    <ClInclude Include="Figure.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Figure\Figure.h">
+      <Filter>Figure</Filter>
     </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Input\Input.h">
+      <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="My_DxSound.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Move\Move.h">
+      <Filter>Move</Filter>
     </ClInclude>
-    <ClInclude Include="Move.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="MyDxSound\My_DxSound.h">
+      <Filter>MyDxSound</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
