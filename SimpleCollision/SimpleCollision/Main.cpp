@@ -29,7 +29,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	sound.SetBGM("./—V‹Y_drone.ogg");
 	sound.SetSE("./slashing01.ogg");
 	sound.SetSE("./slashing02.ogg");
-	sound.SetSE("‚Ú‚æ‚æ‚ñƒ\ƒtƒg.ogg");
+	sound.SetSE("./slashing01.ogg");
 	struct Obj
 	{
 		Circle center;
@@ -44,6 +44,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	me.move.SetRota(150, 5);
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
+		sound.SinglePlayBGM_Loop();
 		me.move.InputArrow8(me.center.pos, 5);
 		me.move.Rotation(me.center.pos, me.rota.pos);
 		me.center.My_DrawCircle();
@@ -72,6 +73,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		if(MATH::CirecleAndLineCollision(me.center,line) == false)
 		line.My_DrawLine();
 		DrawFormatString(0, 0, GetColor(255, 255, 255), "x:%.3f\ny:%.3f", me.rota.pos.x, me.rota.pos.y);
+		sound.PrintID();
 	}
 	
 	DxLib_End();

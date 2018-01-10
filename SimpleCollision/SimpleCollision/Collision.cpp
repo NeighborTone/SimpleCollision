@@ -158,10 +158,8 @@ namespace MATH
 			if (Length(A) <= c.r || Length(B) <= c.r)
 			{
 				return true;
-			}
-			
+			}	
 		}
-
 		return false;
 	}
 

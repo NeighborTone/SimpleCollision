@@ -21,5 +21,5 @@ public:
 	void PlaySE(int SE_ID, bool flag = false, int gain = 100);		//第一引数に格納されたSEのIDを指定し再生、第二引数に重複して効果音を鳴らすかどうかの指定、第三引数に音量を指定できる(0~100)デフォルトは100%
 	void DeleteBGM();																//格納したBGMを解放し、フラグを再セットする
 	void DeleteSE();																//格納したSEを解放
-
+	void PrintID();
 };

@@ -14,4 +14,5 @@ public:
 	void InputArrow8(POS& p, float speed);
 	void SetRota(float dist,float speed, float ang = 1);
 	void Rotation(const POS p1, POS &p2);		//1,’†S“_.2,‰ñ‚µ‚½‚¢•¨‘Ì‚ÌÀ•W.
+	
 };

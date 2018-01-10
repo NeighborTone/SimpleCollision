@@ -6,7 +6,9 @@ void Sound::DeleteBGM()
 	{
 		DeleteSoundMem(BGM[i]);
 	}
-	std::vector<int>(BGM).swap(BGM);
+	{
+		std::vector<int>().swap(BGM);
+	}
 	flag = false;
 }
 
@@ -16,7 +18,9 @@ void Sound::DeleteSE()
 	{
 		DeleteSoundMem(SE[i]);
 	}
-	std::vector<int>(SE).swap(SE);		//swap技法によるメモリ開放
+	{
+		std::vector<int>().swap(SE);		//swap技法によるメモリ開放
+	}
 }
 
 void Sound::SetBGM(const char *FileName)
@@ -32,6 +36,8 @@ void Sound::SetSE(const char *FileName)
 
 void Sound::SinglePlayBGM_Back(int gain)
 {
+	if (BGM.empty())
+		return;
 	if (flag == false)
 	{
 		ChangeVolumeSoundMem(255 * gain / 100, BGM[0]);
@@ -43,6 +49,8 @@ void Sound::SinglePlayBGM_Back(int gain)
 
 void Sound::SinglePlayBGM_Loop(int gain)
 {
+	if (BGM.empty())
+		return;
 	if (flag == false)
 	{
 		ChangeVolumeSoundMem(255 * gain / 100, BGM[0]);
@@ -58,6 +66,8 @@ void Sound::ChangeBGMVolume(int BGM_ID, int gain)
 
 void Sound::MultiPlayBGM_Loop()
 {
+	if (BGM.empty())
+		return;
 	if (flag == false)
 	{
 		for (unsigned int i = 0; i < BGM.size(); ++i)
@@ -71,7 +81,8 @@ void Sound::MultiPlayBGM_Loop()
 
 void Sound::PlaySE(int SE_ID, bool _flag ,int gain)
 {
-
+	if (SE.empty())
+		return;
 	ChangeVolumeSoundMem(255 * gain / 100, SE[SE_ID]);
 	if (_flag == true)
 	{
@@ -84,5 +95,9 @@ void Sound::PlaySE(int SE_ID, bool _flag ,int gain)
 	{
 		PlaySoundMem(SE[SE_ID], DX_PLAYTYPE_BACK);
 	}
-	
+}
+void Sound::PrintID()
+{
+	DrawFormatString(0, 100, GetColor(255, 255, 255), "%d", SE.size());
+	DrawFormatString(0, 115, GetColor(255, 255, 255), "%d", BGM.size());
 }
