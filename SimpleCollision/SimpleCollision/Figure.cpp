@@ -39,9 +39,9 @@ void Color::SetColor(int _c)
 	case 9:  color = GetColor(50, 255, 100);  break;	//9ÇÕêâêF
 	case 10: color = GetColor(128, 128, 128); break;	//10ÇÕäDêF
 	case 11: 
-		if (r == 50 || r == 200) rDelta = -rDelta;
-		if (b == 50 || b == 200) bDelta = -bDelta;
-		if (g == 50 || g == 200) gDelta = -gDelta;
+		if (r <= 50 || r >= 200) rDelta = -rDelta;
+		if (b <= 50 || b >= 200) bDelta = -bDelta;
+		if (g <= 50 || g >= 200) gDelta = -gDelta;
 		r += rDelta;
 		g += gDelta;
 		b += bDelta;

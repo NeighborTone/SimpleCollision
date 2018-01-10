@@ -37,7 +37,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Line line(0, 720, 1280, 200, Cyan);
 	me.center.SetCircle(100.f,100.f,50.f,White);
 	me.rota.color.SetRBG(200,150,100);
-	me.rota.color.SetDelta(1,1,1);
+	me.rota.color.SetDelta(1,2,1);
 	me.rota.SetCircle(300, 100, 50, Pink);
 	me.move.SetRota(150, 5);
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
