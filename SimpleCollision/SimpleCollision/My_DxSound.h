@@ -1,6 +1,8 @@
 #pragma once
 #include "DxLib.h"
 #include <vector>
+#include<map>
+#include<string>
 //DxLibのサウンドを改造したクラス。IDはロードした順に0から振られる。
 class Sound
 {
@@ -8,6 +10,7 @@ private:
 	bool flag;																		//BGM再生フラグ
 	std::vector<int>BGM;															//BGMデータ格納用
 	std::vector<int>SE;															//SEデータ格納用
+	std::map<std::string, int> m_se;
 public:
 	int Volume;																		//音量用（あんまり意味ないけど...）
 	Sound() { Volume = 0; };														//コンストラクタ

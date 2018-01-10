@@ -1,6 +1,8 @@
 #define _USE_MATH_DEFINES
 #include "Move.h"
 #include "DxLib.h"
+#include "Collision.h"
+#include "Input.h"
 #include <math.h>
 
 void Move::InputArrow8(float &x, float &y,float speed)
@@ -197,3 +199,4 @@ void Move::Rotation(const POS p1, POS &p2)
 	angle += float(M_PI) / 180.0f * speed;
 	p2.SetPos(p1.x + static_cast<float>(cos(angle) * dist), p1.y + static_cast<float>(sin(angle) * dist));
 }
+

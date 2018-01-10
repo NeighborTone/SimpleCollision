@@ -17,9 +17,12 @@ void Sound::DeleteSE()
 	for (unsigned int i = 0; i < SE.size(); ++i)
 	{
 		DeleteSoundMem(SE[i]);
+
 	}
+	SE.clear();
 	{
-		std::vector<int>().swap(SE);		//swap技法によるメモリ開放
+		SE.shrink_to_fit();
+		//std::vector<int>().swap(SE);		//swap技法によるメモリ開放
 	}
 }
 

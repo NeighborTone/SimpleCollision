@@ -37,10 +37,12 @@ private:
 	int color;
 public:
 	Color() { };
-	void SetRBG(int r = 200, int g = 150, int b = 100);
-	void SetDelta(int r = 1, int g = 1, int b = 1);
-	int  GetMyColor() const { return color; };
-	void SetColor(int color);
+	//レインボー用===================================
+	void SetRBG(int r = 200, int g = 150, int b = 100);	//RGB値を指定
+	void SetDelta(int r = 1, int g = 1, int b = 1);			//色の変化量
+	//===========================================
+	int  GetMyColor() const { return color; };					//カラーコードを返す
+	void SetColor(int color);											//引数にカラーコードを指定
 	void Print()
 	{
 		DrawFormatString(0, 300, GetColor(255, 255, 255), "%d  %d  %d", r, g, b);

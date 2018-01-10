@@ -25,58 +25,51 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	SetGraphMode(SCREEN_WIDIH, SCREEN_HEIGHT, 32);
 	//ウィンドウモード変更と初期化と裏画面設定
 	ChangeWindowMode(TRUE), DxLib_Init(), SetDrawScreen(DX_SCREEN_BACK);
-	Sound sound;
-	sound.SetBGM("./遊戯_drone.ogg");
-	sound.SetSE("./slashing01.ogg");
-	sound.SetSE("./slashing02.ogg");
-	sound.SetSE("./slashing01.ogg");
 	struct Obj
 	{
-		Circle center;
-		Circle rota;
+		Box hit;
+		Box foot;
 		Move move;
+		float jump;
+		float fall;
 	};
+	Sound sound;
+	sound.SetSE("slashing01.ogg");
+	sound.SetSE("slashing01.ogg");
+	sound.SetSE("slashing01.ogg");
+	sound.SetSE("slashing01.ogg");
+	sound.SetSE("slashing01.ogg");
 	Obj me;
-	Circle enemy(500, 500, 40, Blue);
-	Line line(0, 720, 1280, 200, Cyan);
-	me.center.SetCircle(100.f,100.f,50.f,White);
-	me.rota.color.SetRBG(200,150,100);
-	me.rota.color.SetDelta(1,2,1);
-	me.rota.SetCircle(300, 100, 50, Pink);
-	me.move.SetRota(150, 5);
+	me.jump = -10;
+	me.fall = 0;
+	me.hit.SetBox(50, 50, 100, 100, 1, Cyan);
+	me.foot.SetBox(me.hit.x, me.hit.y + me.hit.w, me.hit.w, 1);
+	Box box(0,500,1280,120,1,Pink);
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
-		sound.SinglePlayBGM_Loop();
-		me.move.InputArrow8(me.center.pos, 5);
-		me.move.Rotation(me.center.pos, me.rota.pos);
-		me.center.My_DrawCircle();
-		me.rota.My_DrawCircle();
-		if (Key(KEY_INPUT_Z) == 1)
+		me.move.InputArrow8(me.hit.x,me.hit.y,5);
+		if (MATH::BoxCollision(me.hit, box) == true || MATH::BoxCollision(me.hit, box) == true && MATH::BoxCollision(me.foot, box) == true)
 		{
-			sound.PlaySE(0);
+			me.fall = 0.0f;
 		}
-		if (Key(KEY_INPUT_X) >= 1)
+		else
 		{
-			sound.PlaySE(2,true);
+			me.fall += MATH::Gravity(32) * 3;	
 		}
-		if (Key(KEY_INPUT_V) == 1)
+		if (Key(KEY_INPUT_Z) == 1) {
+			if (MATH::BoxCollision(me.hit,box) == true || MATH::BoxCollision(me.hit, box) == true) {
+				me.fall = me.jump;
+				sound.PlaySE(0);
+			}
+		}
+		if (Key(KEY_INPUT_X) == 1)
 		{
 			sound.DeleteSE();
 		}
-		if (CircleCollision(me.rota, enemy) == false)
-		{
-			enemy.My_DrawCircle();
-		}
-		me.rota.color.SetColor(Rainbow);
-		me.rota.color.Print();
-		if (CircleCollision(me.rota, enemy) == true)
-		{
-			sound.PlaySE(1,true);
-		}
-		if(MATH::CirecleAndLineCollision(me.center,line) == false)
-		line.My_DrawLine();
-		DrawFormatString(0, 0, GetColor(255, 255, 255), "x:%.3f\ny:%.3f", me.rota.pos.x, me.rota.pos.y);
 		sound.PrintID();
+		me.hit.y += me.fall;
+		me.hit.My_DrawBox();
+		box.My_DrawBox();
 	}
 
 	DxLib_End();
