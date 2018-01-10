@@ -11,7 +11,18 @@ void POS::SetPos(float _x, float _y)
 	x = _x;
 	y = _y;
 }
-
+void Color::SetRBG(int r, int g, int b)
+{
+	this->r = r;
+	this->g = g;
+	this->b = b;
+}
+void Color::SetDelta(int r, int g, int b)
+{
+	this->rDelta = r;
+	this->bDelta = b;
+	this->gDelta = g;
+}
 void Color::SetColor(int _c)
 {
 	switch (_c)
@@ -27,8 +38,18 @@ void Color::SetColor(int _c)
 	case 8:  color = GetColor(100, 50, 255);  break;	//8‚ÍÂ‡
 	case 9:  color = GetColor(50, 255, 100);  break;	//9‚Í‰F
 	case 10: color = GetColor(128, 128, 128); break;	//10‚ÍŠDF
+	case 11: 
+		if (r == 50 || r == 200) rDelta = -rDelta;
+		if (b == 50 || b == 200) bDelta = -bDelta;
+		if (g == 50 || g == 200) gDelta = -gDelta;
+		r += rDelta;
+		g += gDelta;
+		b += bDelta;
+		color = GetColor(r, g, b); 
+		break;	//11‚Í“øF
 	}
 }
+
 //ü•ª==================================================================================
 Line::Line()
 {

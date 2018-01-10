@@ -11,31 +11,40 @@
  また、DxLibを使わないときはコメント化する(あとで依存しないのを作る)
 ※矩形のみ座標管理にPOS型を使わない（一番使われそうな図形なので、アクセスを楽にする）
 */
-
+#include "DxLib.h"
 //色データ
 enum ColorData
 {
-	White   = 0,
-	Red     = 1,
-	Green   = 2,
-	Blue    = 3,
+	White = 0,
+	Red = 1,
+	Green = 2,
+	Blue = 3,
 	Magenta = 4,
-	Cyan    = 5,
-	Yellow  = 6,
-	Pink    = 7,
-	Violet  = 8,
+	Cyan = 5,
+	Yellow = 6,
+	Pink = 7,
+	Violet = 8,
 	Emerald = 9,
-	Gray    = 10,
+	Gray = 10,
+	Rainbow = 11,
 };
 //色クラス
 class Color
 {
 private:
+	int r, g, b;
+	int rDelta, gDelta, bDelta;
 	int color;
 public:
-	Color() {};
+	Color() { };
+	void SetRBG(int r = 200, int g = 150, int b = 100);
+	void SetDelta(int r = 1, int g = 1, int b = 1);
 	int  GetMyColor() const { return color; };
 	void SetColor(int color);
+	void Print()
+	{
+		DrawFormatString(0, 300, GetColor(255, 255, 255), "%d  %d  %d", r, g, b);
+	}
 	~Color() {};
 };
 
