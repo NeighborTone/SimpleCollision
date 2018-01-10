@@ -25,7 +25,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	SetGraphMode(SCREEN_WIDIH, SCREEN_HEIGHT, 32);
 	//ウィンドウモード変更と初期化と裏画面設定
 	ChangeWindowMode(TRUE), DxLib_Init(), SetDrawScreen(DX_SCREEN_BACK);
-
+	Sound sound;
+	sound.SetBGM("./遊戯_drone.ogg");
+	sound.SetSE("./slashing01.ogg");
+	sound.SetSE("./slashing02.ogg");
+	sound.SetSE("./slashing01.ogg");
 	struct Obj
 	{
 		Circle center;
@@ -42,19 +46,37 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	me.move.SetRota(150, 5);
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
+		sound.SinglePlayBGM_Loop();
 		me.move.InputArrow8(me.center.pos, 5);
 		me.move.Rotation(me.center.pos, me.rota.pos);
 		me.center.My_DrawCircle();
 		me.rota.My_DrawCircle();
+		if (Key(KEY_INPUT_Z) == 1)
+		{
+			sound.PlaySE(0);
+		}
+		if (Key(KEY_INPUT_X) >= 1)
+		{
+			sound.PlaySE(2,true);
+		}
+		if (Key(KEY_INPUT_V) == 1)
+		{
+			sound.DeleteSE();
+		}
 		if (CircleCollision(me.rota, enemy) == false)
 		{
 			enemy.My_DrawCircle();
 		}
 		me.rota.color.SetColor(Rainbow);
+		me.rota.color.Print();
+		if (CircleCollision(me.rota, enemy) == true)
+		{
+			sound.PlaySE(1,true);
+		}
 		if(MATH::CirecleAndLineCollision(me.center,line) == false)
 		line.My_DrawLine();
 		DrawFormatString(0, 0, GetColor(255, 255, 255), "x:%.3f\ny:%.3f", me.rota.pos.x, me.rota.pos.y);
-		me.rota.color.Print();
+		sound.PrintID();
 	}
 
 	DxLib_End();
