@@ -134,7 +134,7 @@ namespace MATH
 	bool CirecleAndLineCollision(const Circle& c, const Line& l)
 	{
 		POS A = { c.pos.x - l.p1.x,c.pos.y - l.p1.y };	//線分の始点から円の中心点までのベクトルA
-		POS B = { l.p2.x - l.p1.x,l.p2.y - l.p1.y };		//線分の始点から線分の終点までのベクトルB
+		POS B = { l.p2.x - l.p1.x,l.p2.y - l.p1.y };			//線分の始点から線分の終点までのベクトルB
 		POS C = { c.pos.x - l.p2.x,c.pos.y - l.p2.y };	//線分の終点から円の中心点までのベクトルC
 
 		//円の中心が線分の中（端点の間）に入っている
@@ -158,10 +158,8 @@ namespace MATH
 			if (Length(A) <= c.r || Length(B) <= c.r)
 			{
 				return true;
-			}
-			
+			}	
 		}
-
 		return false;
 	}
 
