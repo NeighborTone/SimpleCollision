@@ -35,6 +35,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	};
 	Sound sound;
 	sound.SetSE("./resource/Sound/slashing01.ogg");
+	sound.SetSE("./resource/Sound/slashing02.ogg");
 	Obj me;
 	me.hit.color.SetRBG();
 	me.hit.color.SetDelta();
@@ -57,7 +58,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		}
 		if (Key(KEY_INPUT_Z) == 1) 
 		{
-			sound.PlaySE(0);
+			sound.PlaySE(1);
 			if (MATH::BoxCollision(me.foot, box) == true)
 			{
 				me.fall = me.jump;
