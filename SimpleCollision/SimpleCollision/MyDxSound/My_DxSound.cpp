@@ -94,7 +94,7 @@ void Sound::PlaySE(int SE_ID, bool _flag ,int gain)
 		PlaySoundMem(SE[SE_ID], DX_PLAYTYPE_BACK);
 	}
 }
-void Sound::PrintID()
+void Sound::PrintID()		//デバッグ用
 {
 	DrawFormatString(0, 100, GetColor(255, 255, 255), "%d", SE.size());
 	DrawFormatString(0, 115, GetColor(255, 255, 255), "%d", BGM.size());
