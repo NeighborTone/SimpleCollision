@@ -16,6 +16,9 @@
     <Filter Include="MyDxSound">
       <UniqueIdentifier>{9722dcf0-228c-498d-9c78-cc49499466a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Easing">
+      <UniqueIdentifier>{7327e72f-6a23-4d5b-8733-508a4ff221a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Collision\Collision.cpp">
@@ -50,6 +53,9 @@
     </ClInclude>
     <ClInclude Include="MyDxSound\My_DxSound.h">
       <Filter>MyDxSound</Filter>
+    </ClInclude>
+    <ClInclude Include="Easing\easing.hpp">
+      <Filter>Easing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
