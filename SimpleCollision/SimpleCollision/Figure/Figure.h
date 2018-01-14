@@ -127,7 +127,10 @@ public:
 		         p2,
 		         p3;
 	explicit Triangle();
+	explicit Triangle(float p1x, float p1y, float p2x, float p2y, float p3x, float p3y, int = White);
 	explicit Triangle(POS p1, POS p2, POS p3, int = White);							//3つの頂点と色を指定
+	void SetTriangle(float p1x, float p1y, float p2x, float p2y, float p3x, float p3y, int = White);
+	void SetTriangle(POS p1, POS p2, POS p3, int = White);
 	void My_DrawTriangle(bool = true);														//描画、デフオルトで塗りつぶし
 	~Triangle() {};
 };

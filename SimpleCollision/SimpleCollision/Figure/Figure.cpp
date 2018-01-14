@@ -214,6 +214,28 @@ Triangle::Triangle(POS _p1, POS _p2, POS _p3, int _c)
 	color.SetColor(_c);
 }
 
+Triangle::Triangle(float p1x, float p1y, float p2x, float p2y, float p3x, float p3y, int _c)
+{
+	p1.SetPos(p1x, p1y);
+	p2.SetPos(p2x, p2y);
+	p3.SetPos(p3x, p3y);
+	color.SetColor(_c);
+}
+
+void Triangle::SetTriangle(POS _p1, POS _p2, POS _p3, int _c)
+{
+	p1 = _p1;
+	p2 = _p2;
+	p3 = _p3;
+	color.SetColor(_c);
+}
+void Triangle::SetTriangle(float p1x, float p1y, float p2x, float p2y, float p3x, float p3y, int _c)
+{
+	p1.SetPos(p1x, p1y);
+	p2.SetPos(p2x, p2y);
+	p3.SetPos(p3x, p3y);
+	color.SetColor(_c);
+}
 void Triangle::My_DrawTriangle(bool _f)
 {
 	DrawTriangleAA(p1.x, p1.y,

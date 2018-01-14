@@ -20,6 +20,13 @@ namespace MATH
 		POS temp = { v.x / Length(v),v.y / Length(v) };
 		return temp;
 	}
+	POS Sub_vector(const POS& v1, const POS& v2)
+	{
+		POS ret;
+		ret.x = v1.x - v2.x;
+		ret.y = v1.y - v2.y;
+		return ret;
+	}
 	float Radian(const float degree)
 	{
 		return degree * static_cast<float>(M_PI) / 180.f;
@@ -61,12 +68,6 @@ namespace MATH
 		{
 			return true;
 		}
-		return false;
-	}
-
-	bool CircleAndTriangleCollision(const Circle& c, const Triangle& t)
-	{
-		//未実装
 		return false;
 	}
 
@@ -130,6 +131,45 @@ namespace MATH
 		return true;
 	}
 
+	bool CircleAndTriangleCollision(const Circle& c, const Triangle& t)
+	{
+		//三角形を線分で判定
+		Line T_R(t.p1.x, t.p1.y, t.p2.x, t.p2.y);		//上から右下
+		Line T_L(t.p1.x, t.p1.y, t.p3.x, t.p3.y);		//上から左下
+		Line L_R(t.p2.x, t.p2.y, t.p3.x, t.p3.y);		//底辺
+
+		if (CirecleAndLineCollision(c, T_R))
+		{
+			return true;
+		}
+		if (CirecleAndLineCollision(c, T_L))
+		{
+			return true;
+		}
+		if (CirecleAndLineCollision(c, L_R))
+		{
+			return true;
+		}
+
+		//内側にあるか外積で判定
+		POS AB = Sub_vector(t.p3,t.p2);
+		POS BP = Sub_vector(c.pos,t.p3);
+		POS BC = Sub_vector(t.p1,t.p3);
+		POS CP = Sub_vector(c.pos,t.p1);
+		POS CA = Sub_vector(t.p2,t.p1);
+		POS AP = Sub_vector(c.pos,t.p2);
+
+		float c1 = Cross2D(AB, BP);
+		float c2 = Cross2D(BC,CP);
+		float c3 = Cross2D(CA, AP);
+
+		if ((c1 >= 0 && c2 > 0 && c3 > 0) || (c1 < 0 && c2 < 0 && c3 < 0))
+		{
+			return true;
+		}
+
+		return false;
+	}
 
 	bool CirecleAndLineCollision(const Circle& c, const Line& l)
 	{
@@ -187,6 +227,10 @@ namespace MATH
 		{
 			return true;
 		}
+
+		
+
+
 		return false;
 	}
 }
