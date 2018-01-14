@@ -28,24 +28,23 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	struct Obj
 	{
-		Triangle t;
+		Box hit;
+		Box foot;
 		Move move;
 	};
-	Line line(100, 400, 400, 200, Green);
 	Obj me;
+	me.hit.SetBox(100, 0100, 100, 100, 1,Cyan);
+	me.foot.SetBox(me.hit.x, me.hit.y + 100, me.hit.w, 1, 1, Green);
+	Box box(0, 500, 1280, 500,1, Red);
 	Collision col;
-
-	me.t.SetTriangle(100, 0, 0, 100, 200, 100, Cyan);
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
-		me.move.InputArrow8(me.t.p1, 5);
-		me.move.InputArrow8(me.t.p2, 5);
-		me.move.InputArrow8(me.t.p3, 5);
-		me.t.My_DrawTriangle();
-		if (!col.TriangleAndLine(me.t, line))
-		{
-			line.My_DrawLine();
-		}
+		me.foot.SetBox(me.hit.x, me.hit.y + 100, me.hit.w, 3, 1, Green);
+		me.move.InputArrowLR(me.hit.x,5);
+		me.move.Jump(me.hit.y, -10, col.Box(me.foot, box));
+		me.hit.My_DrawBox();
+		me.foot.My_DrawBox();
+		box.My_DrawBox();
 
 	}
 
