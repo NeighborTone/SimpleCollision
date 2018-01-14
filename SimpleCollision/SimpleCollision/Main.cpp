@@ -81,8 +81,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		me.foot.My_DrawBox();
 		box.My_DrawBox();
 
-		if(MATH::CircleAndBoxCollision(ball,me.hit) == false)
-		ball.pos.y = e.QuadInOut(e.Time(19), 0, 470 - 0,19);
+		if (MATH::CircleAndBoxCollision(ball, me.hit) == false)
+		ball.pos.y = e.bounce.Out(e.Time(14), 0, 470, 14);
 		if(MATH::CirecleAndLineCollision(ball,line) == false)
 		line.My_DrawLine();
 		if (MATH::CirecleAndLineCollision(ball, line2) == false)
