@@ -1,28 +1,36 @@
+#define _USE_MATH_DEFINES
 #include "Collision.h"
 #include <math.h>
 namespace MATH
 {
-	float Dot2D(POS v1, POS v2)
+	float Dot2D(Vec v1, Vec v2)
 	{
 		return v1.x * v2.x + v1.y * v2.y;
 	}
 
-	float Cross2D(POS v1, POS v2)
+	float Cross2D(Vec v1, Vec v2)
 	{
 		return v1.x * v2.y - v2.x * v1.y;
 	}
-	float Length(POS v)
+	float Length(Vec v)
 	{
 		return static_cast<float>(sqrt(v.x * v.x + v.y * v.y));
 	}
-	POS Normalize(POS v)
+	Vec Normalize(Vec v)
 	{
-		POS temp = { v.x / Length(v),v.y / Length(v) };
+		Vec temp = { v.x / Length(v),v.y / Length(v) };
 		return temp;
 	}
-	POS Sub_vector(const POS& v1, const POS& v2)
+	Vec Add_Vector(const Vec& v1, const Vec& v2)
 	{
-		POS ret;
+		Vec ret;
+		ret.x = v1.x + v2.x;
+		ret.y = v1.y + v2.y;
+		return ret;
+	}
+	Vec Sub_Vector(const Vec& v1, const Vec& v2)
+	{
+		Vec ret;
 		ret.x = v1.x - v2.x;
 		ret.y = v1.y - v2.y;
 		return ret;
@@ -152,12 +160,12 @@ bool Collision::CircleAndTriangle(const C& c, const T& t)
 	}
 
 	//内側にあるか外積で判定
-	POS AB = MATH::Sub_vector(t.p3,t.p2);
-	POS BP = MATH::Sub_vector(c.pos,t.p3);
-	POS BC = MATH::Sub_vector(t.p1,t.p3);
-	POS CP = MATH::Sub_vector(c.pos,t.p1);
-	POS CA = MATH::Sub_vector(t.p2,t.p1);
-	POS AP = MATH::Sub_vector(c.pos,t.p2);
+	Vec AB = MATH::Sub_Vector(t.p3,t.p2);
+	Vec BP = MATH::Sub_Vector(c.pos,t.p3);
+	Vec BC = MATH::Sub_Vector(t.p1,t.p3);
+	Vec CP = MATH::Sub_Vector(c.pos,t.p1);
+	Vec CA = MATH::Sub_Vector(t.p2,t.p1);
+	Vec AP = MATH::Sub_Vector(c.pos,t.p2);
 
 	float c1 = MATH::Cross2D(AB, BP);
 	float c2 = MATH::Cross2D(BC,CP);
@@ -175,15 +183,15 @@ bool Collision::CircleAndTriangle(const C& c, const T& t)
 
 bool Collision::CirecleAndLine(const C& c, const L& l)
 {
-	POS A = { c.pos.x - l.p1.x,c.pos.y - l.p1.y };	//線分の始点から円の中心点までのベクトルA
-	POS B = { l.p2.x - l.p1.x,l.p2.y - l.p1.y };		//線分の始点から線分の終点までのベクトルB
-	POS C = { c.pos.x - l.p2.x,c.pos.y - l.p2.y };	//線分の終点から円の中心点までのベクトルC
+	Vec A = { c.pos.x - l.p1.x,c.pos.y - l.p1.y };	//線分の始点から円の中心点までのベクトルA
+	Vec B = { l.p2.x - l.p1.x,l.p2.y - l.p1.y };		//線分の始点から線分の終点までのベクトルB
+	Vec C = { c.pos.x - l.p2.x,c.pos.y - l.p2.y };	//線分の終点から円の中心点までのベクトルC
 
 	//円の中心が線分の中（端点の間）に入っている
 	if (MATH::Dot2D(A, B)*MATH::Dot2D(B, C) <= 0)
 	{
 		//線分のベクトル（ベクトルB）を単位ベクトルに変換
-		POS temp = MATH::Normalize(B);
+		Vec temp = MATH::Normalize(B);
 		//円の中心と線分の距離を外積を使って計算
 		float dist = MATH::Cross2D(A, temp);
 		//外積がマイナス値だったら符号を変える

@@ -32,10 +32,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Box foot;
 		Move move;
 	};
+
 	Obj me;
 	me.hit.SetBox(100, 0100, 100, 100, 1,Cyan);
 	me.foot.SetBox(me.hit.x, me.hit.y + 100, me.hit.w, 1, 1, Green);
-	Box box(0, 500, 1280, 500,1, Red);
+	Box box(0, 500, 1280, 500,1, Gray);
 	Collision col;
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
