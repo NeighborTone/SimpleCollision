@@ -11,7 +11,7 @@ void POS::SetPos(float _x, float _y)
 	x = _x;
 	y = _y;
 }
-void Color::SetRBG(int r, int g, int b)
+void Color::SetRGB(int r, int g, int b)
 {
 	this->r = r;
 	this->g = g;
@@ -27,18 +27,29 @@ void Color::SetColor(int _c)
 {
 	switch (_c)
 	{
-	case 0:  color = GetColor(255, 255, 255); break;	//0は白
-	case 1:  color = GetColor(255, 0, 0);	  break;	//1は赤
-	case 2:  color = GetColor(0, 255, 0);	  break;	//2は緑
-	case 3:  color = GetColor(0, 0, 255);	  break;	//3は青
-	case 4:  color = GetColor(255, 0, 255);	  break;	//4は紅紫色
-	case 5:  color = GetColor(0, 255, 255);	  break;	//5は水色
-	case 6:  color = GetColor(255, 255, 0);   break;	//6は黄色
-	case 7:  color = GetColor(255, 145, 185); break;	//7は桃色
-	case 8:  color = GetColor(100, 50, 255);  break;	//8は青紫
-	case 9:  color = GetColor(50, 255, 100);  break;	//9は翠色
-	case 10: color = GetColor(128, 128, 128); break;	//10は灰色
-	case 11: 
+	case White:
+		color = GetColor(255, 255, 255); break;	//0は白
+	case Red:
+		color = GetColor(255, 0, 0);	    break;	//1は赤
+	case Green:
+		color = GetColor(0, 255, 0);	    break;	//2は緑
+	case Blue:
+		color = GetColor(0, 0, 255);	    break;	//3は青
+	case Magenta:
+		color = GetColor(255, 0, 255);    break;	//4は紅紫色
+	case Cyan:
+		color = GetColor(0, 255, 255);    break;	//5は水色
+	case Yellow:
+		color = GetColor(255, 255, 0);    break;	//6は黄色
+	case Pink:
+		color = GetColor(255, 145, 185); break;	//7は桃色
+	case Violet:
+		color = GetColor(100, 50, 255);  break;		//8は青紫
+	case Emerald:
+		color = GetColor(50, 255, 100);  break;		//9は翠色
+	case Gray:
+		color = GetColor(128, 128, 128); break;	//10は灰色
+	case Rainbow: 
 		if (r <= 50 || r >= 200) rDelta = -rDelta;
 		if (b <= 50 || b >= 200) bDelta = -bDelta;
 		if (g <= 50 || g >= 200) gDelta = -gDelta;
@@ -206,7 +217,7 @@ Triangle::Triangle(POS _p1, POS _p2, POS _p3, int _c)
 void Triangle::My_DrawTriangle(bool _f)
 {
 	DrawTriangleAA(p1.x, p1.y,
-				   p2.x, p2.y,
-				   p3.x, p3.y,
+						  p2.x, p2.y,
+						  p3.x, p3.y,
 				   this->color.GetMyColor(), _f);
 }

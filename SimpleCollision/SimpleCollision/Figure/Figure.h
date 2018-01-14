@@ -38,7 +38,7 @@ private:
 public:
 	Color() { };
 	//レインボー用===================================
-	void SetRBG(int r = 200, int g = 150, int b = 100);	//RGB値を指定
+	void SetRGB(int r = 200, int g = 150, int b = 100);	//RGB値を指定
 	void SetDelta(int r = 1, int g = 1, int b = 1);			//色の変化量
 	//===========================================
 	int  GetMyColor() const { return color; };					//カラーコードを返す

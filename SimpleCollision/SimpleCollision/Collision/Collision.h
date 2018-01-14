@@ -10,7 +10,8 @@ namespace MATH
 	POS    Normalize(POS v);															//ベクトルの正規化
 	float Radian(const float degree);												//度数角度をラジアンに変換
 	float Gravity(const float bym);													//重力
-	bool  CirecleAndLineCollision(const Circle&, const Line&);			//円と線
+	bool  BoxAndLineCollision(const Box& b, const Line& l);					//矩形と線分
+	bool  CirecleAndLineCollision(const Circle&, const Line&);			//円と線分
 	bool  LineCollision(const Line&, const Line&);								//線分と線分
 	bool  CircleAndSlopeCollision(const Circle&, const Line&);			//円と線分(坂道)
 	bool  BoxAndSlopeCollision(const Box&, const Line&);					//矩形と線分(坂道)
@@ -18,5 +19,5 @@ namespace MATH
 	bool  CircleCollision(const Circle&, const Circle&);						//円と円
 	bool  CircleAndBoxCollision(const Circle&, const Box&);				//円と矩形
 	bool  CircleAndTriangleCollision(const Circle&, const Triangle&);	//円と三角形+++未実装
-	bool BoxAndLineCollision(const Box& b, const Line& l);
+
 }
