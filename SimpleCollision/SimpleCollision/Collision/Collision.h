@@ -11,14 +11,26 @@ namespace MATH
 	POS    Sub_vector(const POS& v1, const POS& v2);							//ƒxƒNƒgƒ‹ˆø‚«Z(v1 - v2)
 	float Radian(const float degree);												//“x”Šp“x‚ğƒ‰ƒWƒAƒ“‚É•ÏŠ·
 	float Gravity(const float bym);													//d—Í
-	bool  BoxAndLineCollision(const Box& b, const Line& l);					//‹éŒ`‚Æü•ª
-	bool  CirecleAndLineCollision(const Circle&, const Line&);			//‰~‚Æü•ª
-	bool  LineCollision(const Line&, const Line&);								//ü•ª‚Æü•ª
-	bool  CircleAndSlopeCollision(const Circle&, const Line&);			//‰~‚Æü•ª(â“¹)
-	bool  BoxAndSlopeCollision(const Box&, const Line&);					//‹éŒ`‚Æü•ª(â“¹)
-	bool  BoxCollision(const Box&, const Box&);									//‹éŒ`“¯m
-	bool  CircleCollision(const Circle&, const Circle&);						//‰~‚Æ‰~
-	bool  CircleAndBoxCollision(const Circle&, const Box&);				//‰~‚Æ‹éŒ`
-	bool  CircleAndTriangleCollision(const Circle&, const Triangle&);	//‰~‚ÆOŠpŒ`(ŠÈˆÕ)
-
 }
+
+class Collision
+{
+private:
+	typedef Box B;
+	typedef Circle C;
+	typedef Line L;
+	typedef Triangle T;
+public:
+	bool  BoxAndLine(const B& box, const L& line);					//‹éŒ`‚Æü•ª
+	bool  BoxAndSlope(const B& box, const L& line);				//‹éŒ`‚Æü•ª(â“¹)
+	bool  Box(const B& box, const B& box2);							//‹éŒ`“¯m
+	bool  Line(const L& line, const L& line2);						//ü•ª‚Æü•ª
+	bool  CirecleAndLine(const C& circle, const L& line);		//‰~‚Æü•ª
+	bool  CircleAndSlope(const C& circle, const L& line);		//‰~‚Æü•ª(â“¹)
+	bool  Circle(const C& circle, const C& circle2);				//‰~‚Æ‰~
+	bool  CircleAndBox(const C& circle, const B& box);			//‰~‚Æ‹éŒ`
+	bool  CircleAndTriangle(const C& circle, const T& tri);		//‰~‚ÆOŠpŒ`
+	bool  TriangleAndLine(const T& tri, const L& line);			//OŠpŒ`‚Æü•ª
+};
+	
+

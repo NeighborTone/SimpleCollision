@@ -8,7 +8,6 @@
 #include <math.h>
 #include <array>
 
-using namespace MATH;
 //=====================================
 //===ìÆçÏämîFóp=========================
 //=====================================
@@ -32,8 +31,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Triangle t;
 		Move move;
 	};
-	Circle c(100, 400, 10, Pink);
+	Line line(100, 400, 400, 200, Green);
 	Obj me;
+	Collision col;
+
 	me.t.SetTriangle(100, 0, 0, 100, 200, 100, Cyan);
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
@@ -41,8 +42,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		me.move.InputArrow8(me.t.p2, 5);
 		me.move.InputArrow8(me.t.p3, 5);
 		me.t.My_DrawTriangle();
-		if(!MATH::CircleAndTriangleCollision(c,me.t))
-		c.My_DrawCircle();
+		if (!col.TriangleAndLine(me.t, line))
+		{
+			line.My_DrawLine();
+		}
+
 	}
 
 	DxLib_End();

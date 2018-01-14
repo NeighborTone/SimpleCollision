@@ -32,7 +32,7 @@ void Sound::SetSE(const char *FileName)
 	SE.push_back(LoadSoundMem(FileName));
 }
 
-void Sound::SinglePlayBGM_Back(int gain)
+void Sound::PlayBGM_Back(int gain)
 {
 	if (BGM.empty())
 		return;
@@ -45,7 +45,7 @@ void Sound::SinglePlayBGM_Back(int gain)
 	
 }
 
-void Sound::SinglePlayBGM_Loop(int gain)
+void Sound::PlayBGM_Loop(int gain)
 {
 	if (BGM.empty())
 		return;
