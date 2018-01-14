@@ -18,5 +18,5 @@ namespace MATH
 	bool  CircleCollision(const Circle&, const Circle&);						//‰~‚Æ‰~
 	bool  CircleAndBoxCollision(const Circle&, const Box&);				//‰~‚Æ‹éŒ`
 	bool  CircleAndTriangleCollision(const Circle&, const Triangle&);	//‰~‚ÆŽOŠpŒ`+++–¢ŽÀ‘•
-
+	bool BoxAndLineCollision(const Box& b, const Line& l);
 }

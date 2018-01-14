@@ -176,7 +176,7 @@ void Move::InputArrowLR(float &x, float speed)
 	}
 }
 
-void InputArrowLR(POS& p, float speed)
+void Move::InputArrowLR(POS& p, float speed)
 {
 	Updata_Key();
 	if (Key(KEY_INPUT_LEFT) >= 1)
@@ -187,6 +187,32 @@ void InputArrowLR(POS& p, float speed)
 	{
 		p.x += speed;
 	}
+}
+
+void Move::Jump(float& y,float pow, bool hit,float fall)
+{
+	if (!j_flag)	//1“x‚¾‚¯ŒÄ‚Î‚ê‚é
+	{
+		jumpPow = pow;
+		fallspeed = fall;
+		j_flag = true;
+	}
+	if (hit)//‘«Œ³”»’è
+	{
+		fallspeed = 0.0f;
+	}
+	else
+	{
+		fallspeed += MATH::Gravity(32) * 3;
+	}
+	if (Key(KEY_INPUT_Z) == 1)
+	{
+		if (hit)//‘«Œ³”»’è
+		{
+			fallspeed = jumpPow;
+		}
+	}
+	y += fallspeed;
 }
 
 void Move::SetRota(float d, float s, float ang)

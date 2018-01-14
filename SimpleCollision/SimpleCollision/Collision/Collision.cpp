@@ -163,4 +163,41 @@ namespace MATH
 		return false;
 	}
 
+	bool BoxAndLineCollision(const Box& b, const Line& l)
+	{
+		POS A = { b.x - l.p1.x, b.y - l.p1.y };				//線分の始点から矩形の左上点までのベクトルA
+		POS B = { b.x - l.p2.x, b.y - l.p2.y };				//線分の終点から矩形の左上点までのベクトルB
+		POS C = { l.p2.x - l.p1.x,l.p2.y - l.p1.y };		//線分の始点から線分の終点までのベクトルC
+		POS D = { b.w - l.p1.x, b.h - l.p1.y };				//線分の始点から矩形の右下点までのベクトルD
+		POS E = { b.w - l.p2.x, b.h - l.p2.y };				//線分の終点から矩形の右下点までのベクトルE
+
+		//矩形の左上から右下が線分の間に入っている
+		if (Dot2D(A, C) * Dot2D(B, C) <= 0 &&
+		     Dot2D(D, C) * Dot2D(E, C) <= 0)
+		{
+			//ベクトルCを単位ベクトルに
+			POS temp = Normalize(C);
+			//外積で距離を計算
+			float dist_L = Cross2D(A, temp);
+			float dist_R = Cross2D(D, temp);
+			//符号変換
+			if (dist_L < 0) { dist_L *= -1; }
+			if (dist_R < 0) { dist_R *= -1; }
+			//矩形の高さとの比較
+			if(dist_L <= b.h || dist_R <= b.h)
+			return true;
+
+		}
+		else
+		{
+			//左端の計算
+			if (Length(A) <= b.h || Length(D) <= b.h)
+			{
+				return true;
+			}
+		}
+
+		
+		return false;
+	}
 }

@@ -31,8 +31,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Box hit;
 		Box foot;
 		Move move;
-		float jump;
-		float fall;
 	};
 	Sound sound;
 	sound.SetSE("./resource/Sound/slashing01.ogg");
@@ -40,46 +38,25 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Obj me;
 	me.hit.color.SetRBG();
 	me.hit.color.SetDelta();
-	me.jump = -10;
-	me.fall = 0;
 	me.hit.SetBox(50, 50, 100, 100, 1, Rainbow);
 	Circle ball(300,0,30,Blue);
 	Easing e;
 	Box box(0,500,1280,120,1,Pink);
 	Line line(300, 340, 700, 340, Cyan);
 	Line line2(300, 240, 700, 240, Cyan);
+	Line line3(0, 500, 1280, 500, Pink);
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
 		me.foot.SetBox(me.hit.x, me.hit.y + me.hit.w, me.hit.w, Cyan);
-		me.move.InputArrowLR(me.hit.x,5);
-		if (MATH::BoxCollision(me.foot, box) == true)
-		{
-			me.fall = 0.0f;
-		}
-		else
-		{
-			me.fall += MATH::Gravity(32) * 3;	
-		}
-		if (Key(KEY_INPUT_Z) == 1) 
-		{
-			sound.PlaySE(1);
-			if (MATH::BoxCollision(me.foot, box) == true)
-			{
-				me.fall = me.jump;
-			
-			}
-		}
-		if (Key(KEY_INPUT_X) == 1)
-		{
-			sound.DeleteSE();
-		}
-		
+		me.move.InputArrow8(me.hit.x,me.hit.y,5);
+		//me.move.InputArrowLR(me.hit.x,5);
+		//me.move.Jump(me.hit.y, -10,MATH::BoxAndLineCollision(me.foot,line3));
+
 		sound.PrintID();
-		me.hit.y += me.fall;
 		me.hit.color.SetColor(11);
 		me.hit.My_DrawBox();
 		me.foot.My_DrawBox();
-		box.My_DrawBox();
+	//	box.My_DrawBox();
 
 		if (MATH::CircleAndBoxCollision(ball, me.hit) == false)
 		ball.pos.y = e.bounce.Out(e.Time(14), 0, 470, 14);
@@ -88,6 +65,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		if (MATH::CirecleAndLineCollision(ball, line2) == false)
 		line2.My_DrawLine();
 		ball.My_DrawCircle();
+		if(MATH::BoxAndLineCollision(me.hit,line3) == false)
+		line3.My_DrawLine();
 		DrawFormatString(0, 0, GetColor(255, 255, 255), "x:%.3f,y%.3f,w:%.3f,h:%.3f", me.hit.x, me.hit.y, me.hit.w, me.hit.h);
 		DrawFormatString(0, 15, GetColor(255, 255, 255), "x:%.3f,y%.3f,w:%.3f,h:%.3f", me.foot.x, me.foot.y, me.foot.w, me.foot.h);
 		DrawFormatString(100, 105, GetColor(255, 255, 255), "ball:%.3f", ball.pos.y);
