@@ -28,8 +28,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	struct Obj
 	{
-		Box hit;
-		Box foot;
+		int handle;
+		Circle body;
 		Move move;
 	};
 	struct Back
@@ -38,27 +38,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		POS pos;
 		Move move;
 	};
+	Obj me;
+	me.body.SetCircle(100, 100, 20, Cyan);
 	Back bg;
 	bg.handle = LoadGraph("./resource/Graph/back.png");
-	Obj me;
-	me.hit.SetBox(100, 0100, 100, 100, Cyan);
-	me.foot.SetBox(me.hit.x, me.hit.y + 100, me.hit.w, 1,  Green);
-	Box box(0, 500, 1280, 500, Gray);
-	Collision col;
-	Circle c;
-	c.SetCircle(600, 0, 30, Violet);
-	Easing ease;
+	me.handle = LoadGraph("./resource/Graph/^^.png");
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
-		me.foot.SetBox(me.hit.x, me.hit.y + 100, me.hit.w, 3, Green);
-		me.move.InputArrowLR(me.hit.x,5);
-		me.move.Jump(me.hit.y, -10, col.Box(me.foot, box));
+		Updata_Key();
+		me.move.InputArrowLR(me.body.pos.x,5);
+		me.move.InputFly(me.body.pos.y, -5);
 		bg.move.BackScroll(0,bg.pos, 720,5,bg.handle);
-		c.pos.y = ease.bounce.Out(ease.Time(14), 0, 470, 14);
-		c.My_DrawCircle();
-		me.hit.My_DrawBox();
-		me.foot.My_DrawBox();
-		box.My_DrawBox();
+		DrawRotaGraphF(me.body.pos.x, me.body.pos.y, 1.0, 0, me.handle, true);
+		
+		
 	}
 
 	DxLib_End();

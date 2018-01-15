@@ -7,8 +7,6 @@
 
 void Move::InputArrow8(float &x, float &y,float speed)
 {
-	
-	Updata_Key();
 	if (CheckHitKey(KEY_INPUT_UP)     ==  0 ||
 		 CheckHitKey(KEY_INPUT_DOWN)  ==  0 ||
 		 CheckHitKey(KEY_INPUT_LEFT)  ==  0 ||
@@ -87,7 +85,6 @@ void Move::InputArrow8(float &x, float &y,float speed)
 
 void Move::InputArrow8(POS &p, float speed)
 {
-	Updata_Key();
 	if (CheckHitKey(KEY_INPUT_UP)    == 0 ||
 		CheckHitKey(KEY_INPUT_DOWN)  == 0 ||
 		CheckHitKey(KEY_INPUT_LEFT)  == 0 ||
@@ -165,7 +162,6 @@ void Move::InputArrow8(POS &p, float speed)
 
 void Move::InputArrowLR(float &x, float speed)
 {
-	Updata_Key();
 	if (Key(KEY_INPUT_LEFT) >= 1)
 	{
 		x -= speed;
@@ -178,7 +174,6 @@ void Move::InputArrowLR(float &x, float speed)
 
 void Move::InputArrowLR(POS& p, float speed)
 {
-	Updata_Key();
 	if (Key(KEY_INPUT_LEFT) >= 1)
 	{
 		p.x -= speed;
@@ -188,8 +183,25 @@ void Move::InputArrowLR(POS& p, float speed)
 		p.x += speed;
 	}
 }
-
-void Move::Jump(float& y,float pow, bool hit,float fall)
+void Move::InputFly(float& y, float pow, float fall)
+{
+	if (!f_flag)	//1“x‚¾‚¯ŒÄ‚Î‚ê‚é
+	{
+		jumpPow = pow;
+		fallspeed = fall;
+		f_flag = true;
+	}
+	if (Key(KEY_INPUT_Z) >= 1)
+	{
+			fallspeed = jumpPow;
+	}
+	else
+	{
+		fallspeed += MATH::Gravity(32) * 2;
+	}
+	y += fallspeed;
+}
+void Move::InputJump(float& y,float pow, bool hit,float fall)
 {
 	if (!j_flag)	//1“x‚¾‚¯ŒÄ‚Î‚ê‚é
 	{
