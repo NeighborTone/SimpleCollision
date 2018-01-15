@@ -167,13 +167,13 @@ bool Collision::CircleAndTriangle(const C& c, const T& t)
 	Vec CA = MATH::Sub_Vector(t.p2,t.p1);
 	Vec AP = MATH::Sub_Vector(c.pos,t.p2);
 
-	float c1 = MATH::Cross2D(AB, BP);
-	float c2 = MATH::Cross2D(BC,CP);
-	float c3 = MATH::Cross2D(CA, AP);
+	float cross1 = MATH::Cross2D(AB, BP);
+	float cross2 = MATH::Cross2D(BC,CP);
+	float cross3 = MATH::Cross2D(CA, AP);
 	//外積ベクトルの向きがそろっていない場合、点は外にある
-	const bool check = (c1 >= 0 && c2 > 0 && c3 > 0) || (c1 < 0 && c2 < 0 && c3 < 0);
+	const bool crossDirCheck = (cross1 >= 0 && cross2 > 0 && cross3 > 0) || (cross1 < 0 && cross2 < 0 && cross3 < 0);
 
-	if (check)
+	if (crossDirCheck)
 	{
 		return true;
 	}

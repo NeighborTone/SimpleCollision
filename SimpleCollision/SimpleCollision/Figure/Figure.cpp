@@ -30,23 +30,23 @@ void Color::SetColor(int _c)
 	case White:
 		color = GetColor(255, 255, 255); break;	//0は白
 	case Red:
-		color = GetColor(255, 0, 0);	    break;	//1は赤
+		color = GetColor(255, 0, 0);	 break;	//1は赤
 	case Green:
-		color = GetColor(0, 255, 0);	    break;	//2は緑
+		color = GetColor(0, 255, 0);	 break;	//2は緑
 	case Blue:
-		color = GetColor(0, 0, 255);	    break;	//3は青
+		color = GetColor(0, 0, 255);	 break;	//3は青
 	case Magenta:
-		color = GetColor(255, 0, 255);    break;	//4は紅紫色
+		color = GetColor(255, 0, 255);   break;	//4は紅紫色
 	case Cyan:
-		color = GetColor(0, 255, 255);    break;	//5は水色
+		color = GetColor(0, 255, 255);   break;	//5は水色
 	case Yellow:
-		color = GetColor(255, 255, 0);    break;	//6は黄色
+		color = GetColor(255, 255, 0);   break;	//6は黄色
 	case Pink:
 		color = GetColor(255, 145, 185); break;	//7は桃色
 	case Violet:
-		color = GetColor(100, 50, 255);  break;		//8は青紫
+		color = GetColor(100, 50, 255);  break;	//8は青紫
 	case Emerald:
-		color = GetColor(50, 255, 100);  break;		//9は翠色
+		color = GetColor(50, 255, 100);  break;	//9は翠色
 	case Gray:
 		color = GetColor(128, 128, 128); break;	//10は灰色
 	case Rainbow: 
@@ -58,6 +58,8 @@ void Color::SetColor(int _c)
 		b += bDelta;
 		color = GetColor(r, g, b); 
 		break;	//11は虹色
+	default:
+		color = GetColor(255, 255, 255); break;
 	}
 }
 
