@@ -5,18 +5,26 @@
 #include "../Collision/Collision.h"
 #include "../MyDxSound/My_DxSound.h"
 #include "../Easing/easing.hpp"
-#include <math.h>
-#include <array>
+
 
 //=====================================
 //===動作確認用=========================
 //=====================================
-constexpr int
-SCREEN_WIDIH = 1280,
-SCREEN_HEIGHT = 720;
 
+int Processloop()
+{
+	if (ScreenFlip() != 0) return -1;
+	if (ProcessMessage() != 0) return -1;
+	if (ClearDrawScreen() != 0) return -1;
+	if (DxLib_IsInit() == FALSE) return -1;
+	return 0;
+}
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
+	constexpr int
+	SCREEN_WIDIH = 1280,
+	SCREEN_HEIGHT = 720;
+
 	//ログ消し
 	SetOutApplicationLogValidFlag(FALSE);
 	//ウインドウタイトルを変更
@@ -38,20 +46,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		POS pos;
 		Move move;
 	};
+	Mouse_t mouse;
 	Obj me;
 	me.body.SetCircle(100, 100, 20, Cyan);
 	Back bg;
 	bg.handle = LoadGraph("./resource/Graph/back.png");
 	me.handle = LoadGraph("./resource/Graph/^^.png");
-	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
+	while (Processloop() == 0)
 	{
 		Updata_Key();
-		me.move.InputArrowLR(me.body.pos.x,5);
-		me.move.InputFly(me.body.pos.y, -5);
+		mouse.GetHitMouseStateAll_2(&mouse);
+	//	me.move.InputArrowLR(me.body.pos.x,5);
+	//	me.move.InputFly(me.body.pos.y, -5);
 		bg.move.BackScroll(0,bg.pos, 720,5,bg.handle);
-		DrawRotaGraphF(me.body.pos.x, me.body.pos.y, 1.0, 0, me.handle, true);
-		
-		
+		if(mouse.Button[M_LEFT] >= 1)
+		DrawRotaGraphF(float(mouse.x), float(mouse.y), 1.0, 0, me.handle, true);
+
 	}
 
 	DxLib_End();
