@@ -84,38 +84,32 @@ public:
 //矩形を扱うクラス
 class Box
 {
-private:
-	int life;																	//このBoxには体力の概念があるぞ！！
 public:
-	Color color;																//色
-	float x, y, w, h;															//座標と大きさ
-	explicit Box();																//コンストラクタ
-	explicit Box(float x, float y, float w, float h, int l = 0, int = White);	//コンストラクタ
-	explicit Box(const Box& b);													//コピーコンストラクタ
-	void SetBox(float x, float y, float w, float h, int l = 0,int = White);		//初期化 
-	void SetLife(int _l) { life = _l;};											//体力をセット
-	void Addlife(unsigned int _l) {life += _l;};								//体力を増やす
-	void Damage(signed int damege) {life -= damege;};							//体力を減らす
-	int  GetLife() const {return life;};										//体力を確認する
-	void My_DrawBox(bool = true);												//描画、デフオルトで塗りつぶし
-	Box &operator * (const float& f) { w *= f; h *= f; return (*this); }		//サイズをf倍にする
+	Color color;																					//色
+	float x, y, w, h;																				//座標と大きさ
+	explicit Box();																				//コンストラクタ
+	explicit Box(float x, float y, float w, float h,  int = White);					//コンストラクタ
+	explicit Box(const Box& b);																//コピーコンストラクタ
+	void SetBox(float x, float y, float w, float h, int = White);					//初期化 
+	void My_DrawBox(bool = true);															//描画、デフオルトで塗りつぶし
+	Box &operator * (const float& f) { w *= f; h *= f; return (*this); }			//サイズをf倍にする
 	~Box() {};
 };
 //円を扱うクラス
 class Circle
 {
 public:
-	float     r;																//半径
-	Color color;																//色
-	POS     pos;																//座標
-	explicit Circle();															//コンストラクタ
-	explicit Circle(float x, float y, float r, int = White);					//コンストラクタ
-	explicit Circle(POS pos, float r, int = White);								//コンストラクタ
+	float     r;																			//半径
+	Color color;																		//色
+	POS     pos;																			//座標
+	explicit Circle();																//コンストラクタ
+	explicit Circle(float x, float y, float r, int = White);				//コンストラクタ
+	explicit Circle(POS pos, float r, int = White);							//コンストラクタ
 	explicit Circle(const Circle& c);											//コピーコンストラクタ
-	void SetCircle(float x,float y,float r,int = White);						//初期化
-	void SetCircle(POS pos, float r, int = White);								//初期化
+	void SetCircle(float x,float y,float r,int = White);					//初期化
+	void SetCircle(POS pos, float r, int = White);							//初期化
 	void My_DrawCircle(bool = true);											//描画、デフオルトで塗りつぶし
-	Circle &operator * (const float& f) { r *= f; return (*this); }				//サイズをf倍にする
+	Circle &operator * (const float& f) { r *= f; return (*this); }	//サイズをf倍にする
 	~Circle() {};
 };
 //三角形を扱うクラス(未完成)
@@ -124,8 +118,8 @@ class Triangle
 public:
 	Color color;	
 	POS		 p1,																//3つの頂点
-		     p2,
-		     p3;
+				 p2,
+				 p3;
 	explicit Triangle();
 	explicit Triangle(float p1x, float p1y, float p2x, float p2y, float p3x, float p3y, int = White);
 	explicit Triangle(POS p1, POS p2, POS p3, int = White);							

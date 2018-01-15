@@ -32,21 +32,33 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		Box foot;
 		Move move;
 	};
-
+	struct Back
+	{
+		int handle;
+		POS pos;
+		Move move;
+	};
+	Back bg;
+	bg.handle = LoadGraph("./resource/Graph/back.png");
 	Obj me;
-	me.hit.SetBox(100, 0100, 100, 100, 1,Cyan);
-	me.foot.SetBox(me.hit.x, me.hit.y + 100, me.hit.w, 1, 1, Green);
-	Box box(0, 500, 1280, 500,1, Gray);
+	me.hit.SetBox(100, 0100, 100, 100, Cyan);
+	me.foot.SetBox(me.hit.x, me.hit.y + 100, me.hit.w, 1,  Green);
+	Box box(0, 500, 1280, 500, Gray);
 	Collision col;
+	Circle c;
+	c.SetCircle(600, 0, 30, Violet);
+	Easing ease;
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
-		me.foot.SetBox(me.hit.x, me.hit.y + 100, me.hit.w, 3, 1, Green);
+		me.foot.SetBox(me.hit.x, me.hit.y + 100, me.hit.w, 3, Green);
 		me.move.InputArrowLR(me.hit.x,5);
 		me.move.Jump(me.hit.y, -10, col.Box(me.foot, box));
+		bg.move.BackScroll(0,bg.pos, 720,5,bg.handle);
+		c.pos.y = ease.bounce.Out(ease.Time(14), 0, 470, 14);
+		c.My_DrawCircle();
 		me.hit.My_DrawBox();
 		me.foot.My_DrawBox();
 		box.My_DrawBox();
-
 	}
 
 	DxLib_End();

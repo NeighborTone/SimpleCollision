@@ -228,3 +228,52 @@ void Move::Rotation(const POS p1, POS &p2)
 	p2.SetPos(p1.x + static_cast<float>(cos(angle) * dist), p1.y + static_cast<float>(sin(angle) * dist));
 }
 
+void Move::BackScroll(int dir,POS& start, float end, float speed,int handle)
+{
+	//縦方向スクロール
+	if (dir == portrait)
+	{
+		start.y += speed;
+		if (speed > 0)
+		{
+			if (start.y >= end)
+			{
+				start.y = 0;
+			}
+			DrawGraphF(start.x, start.y, handle, true);
+			DrawGraphF(start.x, start.y - end, handle, true);
+		}
+		if (speed < 0)
+		{
+			if (start.y <= -end)
+			{
+				start.y = 0;
+			}
+			DrawGraphF(start.x, start.y, handle, true);
+			DrawGraphF(start.x, start.y + end, handle, true);
+		}
+	}
+	//横方向スクロール
+	if (dir == sideways)
+	{
+		start.x += speed;
+		if (speed < 0)
+		{
+			if (start.x <= -end)
+			{
+				start.x = 0;
+			}
+			DrawGraphF(start.x, start.y, handle, true);
+			DrawGraphF(start.x + end, start.y, handle, true);
+		}
+		if (speed > 0)
+		{
+			if (start.x >= end)
+			{
+				start.x = 0;
+			}
+			DrawGraphF(start.x, start.y, handle, true);
+			DrawGraphF(start.x - end, start.y, handle, true);
+		}
+	}
+}

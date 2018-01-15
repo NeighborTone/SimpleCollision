@@ -116,17 +116,15 @@ Box::Box()
 	y = 0,
 	w = 0,
 	h = 0,
-	life = 0, 
 	color.SetColor((GetColor(255, 255, 255)));
 }
 
-Box::Box(float _x, float _y, float _w, float _h, int _l, int _c)
+Box::Box(float _x, float _y, float _w, float _h, int _c)
 {
 	x = _x;
 	y = _y;
 	w = _w;
 	h = _h;
-	life = _l;
 	color.SetColor(_c);
 }
 Box::Box(const Box& _b)
@@ -135,16 +133,14 @@ Box::Box(const Box& _b)
 	y = _b.y;
 	w = _b.w;
 	h = _b.h;
-	life = _b.life;
 	color = _b.color;
 }
-void Box::SetBox(float _x, float _y, float _w, float _h , int _l, int _c)
+void Box::SetBox(float _x, float _y, float _w, float _h , int _c)
 {
 	x = _x,
 	y = _y,
 	w = _w,
 	h = _h,
-	life = _l,
 	color.SetColor(_c);
 }
 void Box::My_DrawBox(bool _f)
