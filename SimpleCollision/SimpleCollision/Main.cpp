@@ -46,22 +46,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		POS pos;
 		Move move;
 	};
-	Mouse_t mouse;
 	Obj me;
-	me.body.SetCircle(100, 100, 20, Cyan);
+	me.body.SetCircle(100, 0, 20, Cyan);
 	Back bg;
+	Easing e;
 	bg.handle = LoadGraph("./resource/Graph/back.png");
 	me.handle = LoadGraph("./resource/Graph/^^.png");
 	while (Processloop() == 0)
 	{
 		Updata_Key();
-		mouse.GetHitMouseStateAll_2(&mouse);
-	//	me.move.InputArrowLR(me.body.pos.x,5);
-	//	me.move.InputFly(me.body.pos.y, -5);
+		me.body.pos.y = e.elastic.InOut(e.Time(15), 0, 470 - 0, 15);
 		bg.move.BackScroll(0,bg.pos, 720,5,bg.handle);
-		if(mouse.Button[M_LEFT] >= 1)
-		DrawRotaGraphF(float(mouse.x), float(mouse.y), 1.0, 0, me.handle, true);
-
+		me.body.My_DrawCircle();
 	}
 
 	DxLib_End();
