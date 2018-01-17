@@ -94,6 +94,21 @@ void Sound::PlaySE(int SE_ID, bool _flag ,int gain)
 		PlaySoundMem(SE[SE_ID], DX_PLAYTYPE_BACK);
 	}
 }
+void Sound::PlayOneShotSE(int SE_ID, int gain)
+{
+	if (SE.empty())
+		return;
+	ChangeVolumeSoundMem(255 * gain / 100, SE[SE_ID]);
+	if (seFlag == false)
+	{
+		PlaySoundMem(SE[SE_ID], DX_PLAYTYPE_BACK);
+		seFlag = true;
+	}
+}
+void Sound::SetOneShotSE()
+{
+	seFlag = true;
+}
 void Sound::PrintID()		//デバッグ用
 {
 	DrawFormatString(0, 100, GetColor(255, 255, 255), "%d", SE.size());
