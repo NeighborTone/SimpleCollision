@@ -125,6 +125,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Move\Move.cpp" />
     <ClCompile Include="MyDxSound\My_DxSound.cpp" />
+    <ClCompile Include="MyMath\MyMath.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision\Collision.h" />
@@ -133,6 +134,7 @@
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Move\Move.h" />
     <ClInclude Include="MyDxSound\My_DxSound.h" />
+    <ClInclude Include="MyMath\MyMath.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -19,6 +19,9 @@
     <Filter Include="Easing">
       <UniqueIdentifier>{7327e72f-6a23-4d5b-8733-508a4ff221a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MATH">
+      <UniqueIdentifier>{9906e134-2736-40e7-8739-0e3a963beab2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Collision\Collision.cpp">
@@ -37,6 +40,9 @@
       <Filter>MyDxSound</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MyMath\MyMath.cpp">
+      <Filter>MATH</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision\Collision.h">
@@ -56,6 +62,9 @@
     </ClInclude>
     <ClInclude Include="Easing\easing.hpp">
       <Filter>Easing</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMath\MyMath.h">
+      <Filter>MATH</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

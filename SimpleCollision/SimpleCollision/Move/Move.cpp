@@ -1,7 +1,6 @@
-#define _USE_MATH_DEFINES
 #include "Move.h"
 #include "DxLib.h"
-#include "../Collision/Collision.h"
+#include "../MyMath/MyMath.h"
 #include "../Input/Input.h"
 #include <math.h>
 
@@ -61,20 +60,20 @@ void Move::InputArrow8(float &x, float &y,float speed)
 		x += speed;
 		break;
 	case up_right:
-		x += static_cast<float>(cos(M_PI / 180.0f * 45)) * speed;
-		y -= static_cast<float>(sin(M_PI / 180.0f * 45)) * speed;
+		x += static_cast<float>(cos(MATH::m_pi / 180.0f * 45)) * speed;
+		y -= static_cast<float>(sin(MATH::m_pi / 180.0f * 45)) * speed;
 		break;
 	case up_left:
-		x -= static_cast<float>(cos(M_PI / 180.0f * 45)) * speed;
-		y -= static_cast<float>(sin(M_PI / 180.0f * 45)) * speed;
+		x -= static_cast<float>(cos(MATH::m_pi / 180.0f * 45)) * speed;
+		y -= static_cast<float>(sin(MATH::m_pi / 180.0f * 45)) * speed;
 		break;
 	case down_right:
-		x += static_cast<float>(cos(M_PI / 180.0f * 45)) * speed;
-		y += static_cast<float>(sin(M_PI / 180.0f * 45)) * speed;
+		x += static_cast<float>(cos(MATH::m_pi / 180.0f * 45)) * speed;
+		y += static_cast<float>(sin(MATH::m_pi / 180.0f * 45)) * speed;
 		break;
 	case down_left:
-		x -= static_cast<float>(cos(M_PI / 180.0f * 45)) * speed;
-		y += static_cast<float>(sin(M_PI / 180.0f * 45)) * speed;
+		x -= static_cast<float>(cos(MATH::m_pi / 180.0f * 45)) * speed;
+		y += static_cast<float>(sin(MATH::m_pi / 180.0f * 45)) * speed;
 		break;
 	default:
 		dir = non;
@@ -139,20 +138,20 @@ void Move::InputArrow8(POS &p, float speed)
 		p.x += speed;
 		break;
 	case up_right:
-		p.x += static_cast<float>(cos(M_PI / 180.0f * 45)) * speed;
-		p.y -= static_cast<float>(sin(M_PI / 180.0f * 45)) * speed;
+		p.x += static_cast<float>(cos(MATH::m_pi / 180.0f * 45)) * speed;
+		p.y -= static_cast<float>(sin(MATH::m_pi / 180.0f * 45)) * speed;
 		break;
 	case up_left:
-		p.x -= static_cast<float>(cos(M_PI / 180.0f * 45)) * speed;
-		p.y -= static_cast<float>(sin(M_PI / 180.0f * 45)) * speed;
+		p.x -= static_cast<float>(cos(MATH::m_pi / 180.0f * 45)) * speed;
+		p.y -= static_cast<float>(sin(MATH::m_pi / 180.0f * 45)) * speed;
 		break;
 	case down_right:
-		p.x += static_cast<float>(cos(M_PI / 180.0f * 45)) * speed;
-		p.y += static_cast<float>(sin(M_PI / 180.0f * 45)) * speed;
+		p.x += static_cast<float>(cos(MATH::m_pi / 180.0f * 45)) * speed;
+		p.y += static_cast<float>(sin(MATH::m_pi / 180.0f * 45)) * speed;
 		break;
 	case down_left:
-		p.x -= static_cast<float>(cos(M_PI / 180.0f * 45)) * speed;
-		p.y += static_cast<float>(sin(M_PI / 180.0f * 45)) * speed;
+		p.x -= static_cast<float>(cos(MATH::m_pi / 180.0f * 45)) * speed;
+		p.y += static_cast<float>(sin(MATH::m_pi / 180.0f * 45)) * speed;
 		break;
 	default:
 		dir = non;
@@ -236,7 +235,7 @@ void Move::SetRota(float d, float s, float ang)
 }
 void Move::Rotation(const POS p1, POS &p2)
 {
-	angle += float(M_PI) / 180.0f * speed;
+	angle += float(MATH::m_pi) / 180.0f * speed;
 	p2.SetPos(p1.x + static_cast<float>(cos(angle) * dist), p1.y + static_cast<float>(sin(angle) * dist));
 }
 
