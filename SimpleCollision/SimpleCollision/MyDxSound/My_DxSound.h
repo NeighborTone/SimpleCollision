@@ -20,7 +20,7 @@ public:
 	void PlayBGM_Back(int gain = 100);										//BGMをループなしで再生。引数に音量を指定できる(0~100)デフォルトは100%
 	void MultiPlayBGM_Loop();													//複数のBGMを同時ループ再生する。主にインタラクティブなBGMに使う
 	void ChangeBGMVolume(int BGM_ID,int gain);							//指定したBGMの音量を変更する
-	void PlaySE(int SE_ID, bool flag = false, int gain = 100);		//第一引数に格納されたSEのIDを指定し再生、第二引数に重複して効果音を鳴らすかどうかの指定、第三引数に音量を指定できる(0~100)デフォルトは100%
+	void PlaySE(int SE_ID,  int gain = 100, bool flag = false);		//第一引数に格納されたSEのIDを指定し再生、第二引数に重複して効果音を鳴らすかどうかの指定、第三引数に音量を指定できる(0~100)デフォルトは100%
 	void PlayOneShotSE(int SE_ID, int gain = 100);						//一度だけSEを鳴らす
 	void SetOneShotSE();															//ワンショットSEを再セット
 	void DeleteBGM();																//格納したBGMを解放し、フラグを再セットする

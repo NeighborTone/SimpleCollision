@@ -77,7 +77,7 @@ void Sound::MultiPlayBGM_Loop()
 	
 }
 
-void Sound::PlaySE(int SE_ID, bool _flag ,int gain)
+void Sound::PlaySE(int SE_ID, int gain, bool _flag)
 {
 	if (SE.empty())
 		return;
