@@ -55,7 +55,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	while (Processloop() == 0)
 	{
 		Updata_Key();
-		me.body.pos.y = e.elastic.InOut(e.Time(15), 0, 470 - 0, 15);
+		me.move.InputArrow8(me.body.pos, 5);
+		if (me.move.dir == me.move.RIGHT)
+			me.body.color.SetColor(Pink);
+		if (me.move.dir == me.move.LEFT)
+			me.body.color.SetColor(Cyan);
+		if (me.move.dir == me.move.UP)
+			me.body.color.SetColor(Violet);
+		if (me.move.dir == me.move.DOWN)
+			me.body.color.SetColor(Gray);
 		bg.move.BackScroll(0,bg.pos, 720,5,bg.handle);
 		me.body.My_DrawCircle();
 	}
