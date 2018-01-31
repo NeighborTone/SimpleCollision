@@ -43,3 +43,41 @@ int Mouse_t::GetHitMouseStateAll_2(Mouse_t *Nezumi)
 	Nezumi->WheelRotVol = GetMouseWheelRotVol();				//ホイール回転量取得
 	return 0;
 }
+Pad::Pad()
+{
+	inputFlag = false;
+	_idArray[ePad::down] = 0;
+	_idArray[ePad::left] = 1;
+	_idArray[ePad::right] = 2;
+	_idArray[ePad::up] = 3;
+	_idArray[ePad::needle] = 7;
+	_idArray[ePad::shot] = 5;
+	_idArray[ePad::jump] = 4;
+	_idArray[ePad::brake] = 6;
+}
+
+void Pad::Update()
+{
+	padInput = GetJoypadInputState(DX_INPUT_PAD1);	//パッドの入力状態
+	for (int i = 0; i < 16; ++i)
+	{
+		if (padInput & (1 << i))
+		{
+			inputFlag = true;
+			++_pad[i];
+		}
+		else
+		{
+			inputFlag = false;
+			_pad[i] = 0;
+		}
+	}
+}
+int Pad::GetPad(ePad eID) const
+{
+	return _pad[_idArray[eID]];
+}
+bool Pad::PadState()
+{
+	return inputFlag;
+}

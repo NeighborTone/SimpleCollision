@@ -4,6 +4,89 @@
 #include "../Input/Input.h"
 #include <math.h>
 
+void Move::PadInputArrow8(POS& p, float speed)
+{
+	pad.Update();
+	if (!pad.PadState())
+	{
+		inputDir = non;
+	}
+	if (pad.GetPad(ePad::up) >= 1)
+	{
+		dir = UP;
+		inputDir = up;
+	}
+	if (pad.GetPad(ePad::down) >= 1)
+	{
+		dir = DOWN;
+		inputDir = down;
+	}
+	if (pad.GetPad(ePad::left) >= 1)
+	{
+		dir = LEFT;
+		inputDir = left;
+	}
+	if (pad.GetPad(ePad::right) >= 1)
+	{
+		dir = RIGHT;
+		inputDir = right;
+	}
+	if (pad.GetPad(ePad::up) >= 1 && pad.GetPad(ePad::right) >= 1)
+	{
+		dir = RIGHT;
+		inputDir = up_right;
+	}
+	if (pad.GetPad(ePad::up) >= 1 && pad.GetPad(ePad::left) >= 1)
+	{
+		dir = LEFT;
+		inputDir = up_left;
+	}
+	if (pad.GetPad(ePad::down) >= 1 && pad.GetPad(ePad::right) >= 1)
+	{
+		dir = RIGHT;
+		inputDir = down_right;
+	}
+	if (pad.GetPad(ePad::down) >= 1 && pad.GetPad(ePad::left) >= 1)
+	{
+		dir = LEFT;
+		inputDir = down_left;
+	}
+	switch (inputDir)
+	{
+	case up:
+		p.y -= speed;
+		break;
+	case down:
+		p.y += speed;
+		break;
+	case left:
+		p.x -= speed;
+		break;
+	case right:
+		p.x += speed;
+		break;
+	case up_right:
+		p.x += static_cast<float>(cos(MATH::m_pi / 180.0f * 45)) * speed;
+		p.y -= static_cast<float>(sin(MATH::m_pi / 180.0f * 45)) * speed;
+		break;
+	case up_left:
+		p.x -= static_cast<float>(cos(MATH::m_pi / 180.0f * 45)) * speed;
+		p.y -= static_cast<float>(sin(MATH::m_pi / 180.0f * 45)) * speed;
+		break;
+	case down_right:
+		p.x += static_cast<float>(cos(MATH::m_pi / 180.0f * 45)) * speed;
+		p.y += static_cast<float>(sin(MATH::m_pi / 180.0f * 45)) * speed;
+		break;
+	case down_left:
+		p.x -= static_cast<float>(cos(MATH::m_pi / 180.0f * 45)) * speed;
+		p.y += static_cast<float>(sin(MATH::m_pi / 180.0f * 45)) * speed;
+		break;
+	default:
+		inputDir = non;
+		break;
+	}
+
+}
 void Move::InputArrow8(float &x, float &y,float speed)
 {
 	if (CheckHitKey(KEY_INPUT_UP)     ==  0 ||

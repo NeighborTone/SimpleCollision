@@ -51,7 +51,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Collision coll;
 	r.SetRect(0,50,50,0,100,50,50,100,Cyan);
 	Obj me;
-	me.body.SetCircle(100, 200, 20, Cyan);
+	me.body.SetCircle(100, 200, 20, Pink);
 	Back bg;
 	Easing e;
 	bg.handle = LoadGraph("./resource/Graph/back.png");
@@ -59,10 +59,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	while (Processloop() == 0)
 	{
 		Updata_Key();
-		m.InputArrow8(r.p1, 5);
-		m.InputArrow8(r.p2, 5);
-		m.InputArrow8(r.p3, 5);
-		m.InputArrow8(r.p4, 5);
+		//m.InputArrow8(r.p1, 5);
+		//m.InputArrow8(r.p2, 5);
+		//m.InputArrow8(r.p3, 5);
+		//m.InputArrow8(r.p4, 5);
+
+		m.PadInputArrow8(r.p1, 10);
+		m.PadInputArrow8(r.p2, 10);
+		m.PadInputArrow8(r.p3, 10);
+		m.PadInputArrow8(r.p4, 10);
+
 		r.My_DrawRect();
 		bg.move.BackScroll(0,bg.pos, 720,5,bg.handle);
 		if(coll.CircleAndRect(me.body,r)==false)
