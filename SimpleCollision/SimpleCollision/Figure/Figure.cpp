@@ -148,6 +148,53 @@ void Box::My_DrawBox(bool _f)
 	DrawBoxAA(x, y, x + w, y + h, this->color.GetMyColor(), _f);
 }
 //=====================================================================================
+//‰ñ“]‹éŒ`==============================================================================
+Rect::Rect()
+{
+	p1 = POS(0, 0);
+	p2 = POS(0, 0);
+	p3 = POS(0, 0);
+	p4 = POS(0, 0);
+	color.SetColor((GetColor(255, 255, 255)));
+}
+
+Rect::Rect(POS p1, POS p2, POS p3, POS p4, int _c)
+{
+	this->p1 = p1;
+	this->p2 = p2;
+	this->p3 = p3;
+	this->p4 = p4;
+	color.SetColor(_c);
+}
+Rect::Rect(const Rect& r)
+{
+	this->p1 = r.p1;
+	this->p2 = r.p2;
+	this->p3 = r.p3;
+	this->p4 = r.p4;
+	color = r.color;
+}
+void Rect::SetRect(POS p1, POS p2, POS p3, POS p4, int _c)
+{
+	this->p1 = p1;
+	this->p2 = p2;
+	this->p3 = p3;
+	this->p4 = p4;
+	color.SetColor(_c);
+}
+void Rect::SetRect(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, int _c)
+{
+	p1.SetPos(x1, y1);
+	p2.SetPos(x2, y2);
+	p3.SetPos(x3, y3);
+	p4.SetPos(x4, y4);
+	color.SetColor(_c);
+}
+void Rect::My_DrawRect(bool _f)
+{
+	DrawQuadrangleAA(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, p4.x, p4.y, this->color.GetMyColor(), _f);
+}
+//=====================================================================================
 //‰~===================================================================================
 Circle::Circle()
 {

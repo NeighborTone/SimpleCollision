@@ -46,8 +46,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		POS pos;
 		Move move;
 	};
+	Rect r;
+	Move m;
+	Collision coll;
+	r.SetRect(0,50,50,0,100,50,50,100,Cyan);
 	Obj me;
-	me.body.SetCircle(100, 0, 20, Cyan);
+	me.body.SetCircle(100, 200, 20, Cyan);
 	Back bg;
 	Easing e;
 	bg.handle = LoadGraph("./resource/Graph/back.png");
@@ -55,17 +59,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	while (Processloop() == 0)
 	{
 		Updata_Key();
-		me.move.InputArrow8(me.body.pos, 5);
-		if (me.move.dir == me.move.RIGHT)
-			me.body.color.SetColor(Pink);
-		if (me.move.dir == me.move.LEFT)
-			me.body.color.SetColor(Cyan);
-		if (me.move.dir == me.move.UP)
-			me.body.color.SetColor(Violet);
-		if (me.move.dir == me.move.DOWN)
-			me.body.color.SetColor(Gray);
+		m.InputArrow8(r.p1, 5);
+		m.InputArrow8(r.p2, 5);
+		m.InputArrow8(r.p3, 5);
+		m.InputArrow8(r.p4, 5);
+		r.My_DrawRect();
 		bg.move.BackScroll(0,bg.pos, 720,5,bg.handle);
+		if(coll.CircleAndRect(me.body,r)==false)
 		me.body.My_DrawCircle();
+		
 	}
 
 	DxLib_End();

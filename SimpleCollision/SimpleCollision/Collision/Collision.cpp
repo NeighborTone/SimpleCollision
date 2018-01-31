@@ -139,15 +139,15 @@ bool Collision::CircleAndTriangle(const Circle& c, const Triangle& t)
 
 bool Collision::CirecleAndLine(const Circle& c, const Line& l)
 {
-	Vec A = { c.pos.x - l.p1.x,c.pos.y - l.p1.y };	//線分の始点から円の中心点までのベクトルA
-	Vec B = { l.p2.x - l.p1.x,l.p2.y - l.p1.y };		//線分の始点から線分の終点までのベクトルB
-	Vec C = { c.pos.x - l.p2.x,c.pos.y - l.p2.y };	//線分の終点から円の中心点までのベクトルC
+	const Vec A = { c.pos.x - l.p1.x,c.pos.y - l.p1.y };	//線分の始点から円の中心点までのベクトルA
+	const Vec B = { l.p2.x - l.p1.x,l.p2.y - l.p1.y };		//線分の始点から線分の終点までのベクトルB
+	const Vec C = { c.pos.x - l.p2.x,c.pos.y - l.p2.y };	//線分の終点から円の中心点までのベクトルC
 
 	//円の中心が線分の中（端点の間）に入っている
 	if (MATH::Dot2D(A, B)*MATH::Dot2D(B, C) <= 0)
 	{
 		//線分のベクトル（ベクトルB）を単位ベクトルに変換
-		Vec temp = MATH::Normalize(B);
+		const Vec temp = MATH::Normalize(B);
 		//円の中心と線分の距離を外積を使って計算
 		float dist = MATH::Cross2D(A, temp);
 		//外積がマイナス値だったら符号を変える
@@ -169,13 +169,51 @@ bool Collision::CirecleAndLine(const Circle& c, const Line& l)
 	return false;
 }
 
+bool  Collision::CircleAndRect(const Circle& c, const Rect& r)
+{
+	//四角形を線分で判定
+	const Line A(r.p1, r.p2);
+	const Line B(r.p2, r.p3);
+	const Line C(r.p3, r.p4);
+	const Line D(r.p4, r.p1);
+
+	if (CirecleAndLine(c, A))
+	{
+		return true;
+	}
+	if (CirecleAndLine(c, B))
+	{
+		return true;
+	}
+	if (CirecleAndLine(c, C))
+	{
+		return true;
+	}
+
+	if (CirecleAndLine(c, D))
+	{
+		return true;
+	}
+	//内側にあるか外積で判定
+	const Triangle t1(r.p1,r.p2,r.p3);
+	const Triangle t2(r.p3,r.p4,r.p1);
+	if (CircleAndTriangle(c, t1))
+	{
+		return true;
+	}
+	if (CircleAndTriangle(c, t2))
+	{
+		return true;
+	}
+	return false;
+}
 bool Collision::BoxAndLine(const Box& b, const Line& l)
 {
 	//四角形を線分で判定
-	Line L_U(b.x, b.y, b.x, b.y + b.h);						//左上~左下
-	Line R_U(b.x + b.w, b.y, b.x + b.w, b.y + b.h);		//右上~右下
-	Line L_D(b.x, b.y, b.x + b.w, b.y);						//左上~右上
-	Line R_D(b.x, b.y + b.h, b.x + b.w, b.y + b.h);		//左下~右下
+	const Line L_U(b.x, b.y, b.x, b.y + b.h);					//左上~左下
+	const Line R_U(b.x + b.w, b.y, b.x + b.w, b.y + b.h);		//右上~右下
+	const Line L_D(b.x, b.y, b.x + b.w, b.y);					//左上~右上
+	const Line R_D(b.x, b.y + b.h, b.x + b.w, b.y + b.h);		//左下~右下
 	
 	if (LineAndLine(L_U, l))
 	{

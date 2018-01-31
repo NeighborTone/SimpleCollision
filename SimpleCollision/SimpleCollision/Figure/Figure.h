@@ -95,6 +95,22 @@ public:
 	Box &operator * (const float& f) { w *= f; h *= f; return (*this); }			//サイズをf倍にする
 	~Box() {};
 };
+
+//回転矩形を扱うクラス
+class Rect
+{
+public:
+	Color color;
+	POS p1, p2, p3, p4;
+	float w, h;
+	explicit Rect();
+	explicit Rect(POS, POS, POS, POS, int);
+	explicit Rect(const Rect&);
+	void SetRect(POS, POS, POS, POS, int);
+	void SetRect(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, int = White);
+	void My_DrawRect(bool = true);
+
+};
 //円を扱うクラス
 class Circle
 {
