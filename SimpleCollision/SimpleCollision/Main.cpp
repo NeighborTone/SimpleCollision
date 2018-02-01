@@ -5,7 +5,7 @@
 #include "../Collision/Collision.h"
 #include "../MyDxSound/My_DxSound.h"
 #include "../Easing/easing.hpp"
-
+#include "../Joint/Joint.h"
 
 //=====================================
 //===動作確認用=========================
@@ -19,6 +19,7 @@ int Processloop()
 	if (DxLib_IsInit() == FALSE) return -1;
 	return 0;
 }
+
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	constexpr int
@@ -34,48 +35,29 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//ウィンドウモード変更と初期化と裏画面設定
 	ChangeWindowMode(TRUE), DxLib_Init(), SetDrawScreen(DX_SCREEN_BACK);
 
-	struct Obj
+
+	Joint::Node node[8];
+
+	for (int i = 0; i < 8; ++i)
 	{
-		int handle;
-		Circle body;
-		Move move;
-	};
-	struct Back
-	{
-		int handle;
-		POS pos;
-		Move move;
-	};
-	Rect r;
+		node[i].c.SetCircle(i * 20, i * 20, 10, Cyan);
+
+	}
+	Circle me(100,100,10,Red);
 	Move m;
-	Collision coll;
-	r.SetRect(0,50,50,0,100,50,50,100,Cyan);
-	Obj me;
-	me.body.SetCircle(100, 200, 20, Pink);
-	Back bg;
-	Easing e;
-	bg.handle = LoadGraph("./resource/Graph/back.png");
-	me.handle = LoadGraph("./resource/Graph/^^.png");
 	while (Processloop() == 0)
 	{
 		Updata_Key();
-		//m.InputArrow8(r.p1, 5);
-		//m.InputArrow8(r.p2, 5);
-		//m.InputArrow8(r.p3, 5);
-		//m.InputArrow8(r.p4, 5);
-
-		m.PadInputArrow8(r.p1, 10);
-		m.PadInputArrow8(r.p2, 10);
-		m.PadInputArrow8(r.p3, 10);
-		m.PadInputArrow8(r.p4, 10);
-
-		r.My_DrawRect();
-		bg.move.BackScroll(0,bg.pos, 720,5,bg.handle);
-		if(coll.CircleAndRect(me.body,r)==false)
-		me.body.My_DrawCircle();
-		
+		m.InputArrow8(me.pos, 5);
+		for (int i = 0; i < 8; ++i)
+		Joint::MoveJoints(node, 8, 30, 180, 10,me.pos);
+		for (int i = 0; i < 8; ++i)
+			node[i].c.My_DrawCircle();
+		DrawFormatString(0, 0, GetColor(255, 255, 255), "%.0f", node[7].c.pos.x);
+		me.My_DrawCircle();
 	}
 
 	DxLib_End();
 	return 0;
 }
+

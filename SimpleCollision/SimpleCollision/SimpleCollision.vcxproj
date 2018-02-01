@@ -122,6 +122,7 @@
     <ClCompile Include="Collision\Collision.cpp" />
     <ClCompile Include="Figure\Figure.cpp" />
     <ClCompile Include="Input\Input.cpp" />
+    <ClCompile Include="Joint\Joint.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Move\Move.cpp" />
     <ClCompile Include="MyDxSound\My_DxSound.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="Easing\easing.hpp" />
     <ClInclude Include="Figure\Figure.h" />
     <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="Joint\Joint.h" />
     <ClInclude Include="Move\Move.h" />
     <ClInclude Include="MyDxSound\My_DxSound.h" />
     <ClInclude Include="MyMath\MyMath.h" />

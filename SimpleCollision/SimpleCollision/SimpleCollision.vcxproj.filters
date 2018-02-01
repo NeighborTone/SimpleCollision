@@ -22,6 +22,9 @@
     <Filter Include="MATH">
       <UniqueIdentifier>{9906e134-2736-40e7-8739-0e3a963beab2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Joint">
+      <UniqueIdentifier>{eb4c554d-4073-47cd-9aed-b6bc8d78db90}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Collision\Collision.cpp">
@@ -42,6 +45,9 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MyMath\MyMath.cpp">
       <Filter>MATH</Filter>
+    </ClCompile>
+    <ClCompile Include="Joint\Joint.cpp">
+      <Filter>Joint</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +71,9 @@
     </ClInclude>
     <ClInclude Include="MyMath\MyMath.h">
       <Filter>MATH</Filter>
+    </ClInclude>
+    <ClInclude Include="Joint\Joint.h">
+      <Filter>Joint</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
