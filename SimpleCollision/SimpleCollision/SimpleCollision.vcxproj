@@ -120,6 +120,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Collision\Collision.cpp" />
+    <ClCompile Include="DrawManager\Graphics.cpp" />
     <ClCompile Include="Figure\Figure.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Joint\Joint.cpp" />
@@ -130,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision\Collision.h" />
+    <ClInclude Include="DrawManager\Graphics.h" />
     <ClInclude Include="Easing\easing.hpp" />
     <ClInclude Include="Figure\Figure.h" />
     <ClInclude Include="Input\Input.h" />

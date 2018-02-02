@@ -25,6 +25,9 @@
     <Filter Include="Joint">
       <UniqueIdentifier>{eb4c554d-4073-47cd-9aed-b6bc8d78db90}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DrawManager">
+      <UniqueIdentifier>{217623e4-136d-40a1-a647-63a6263fb470}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Collision\Collision.cpp">
@@ -48,6 +51,9 @@
     </ClCompile>
     <ClCompile Include="Joint\Joint.cpp">
       <Filter>Joint</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawManager\Graphics.cpp">
+      <Filter>DrawManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,6 +80,9 @@
     </ClInclude>
     <ClInclude Include="Joint\Joint.h">
       <Filter>Joint</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawManager\Graphics.h">
+      <Filter>DrawManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@
 #include "../MyDxSound/My_DxSound.h"
 #include "../Easing/easing.hpp"
 #include "../Joint/Joint.h"
+#include "../DrawManager/Graphics.h"
 
 //=====================================
 //===ìÆçÏämîFóp=========================
@@ -36,27 +37,23 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	ChangeWindowMode(TRUE), DxLib_Init(), SetDrawScreen(DX_SCREEN_BACK);
 
 
-	Joint::Node node[8];
-
-	for (int i = 0; i < 8; ++i)
+	struct Me
 	{
-		node[i].c.SetCircle(i * 20, i * 20, 10, Cyan);
-
-	}
-	Circle me(100,100,10,Red);
-	Move m;
+		Circle c;
+		Move move;
+		Painter render;
+	}me;
+	Painter raster;
+	raster.SetGraphic("resource/Graph/back.png");
+	me.c.SetCircle(0, 0, 32, Cyan);
+	me.render.SetGraphic("resource/Graph/^^.png");
 	while (Processloop() == 0)
 	{
 		Updata_Key();
-		m.InputArrow8(me.pos, 5);
-		for (int i = 0; i < 8; ++i)
-		Joint::MoveJoints(node, 8, 30, 180, 10,me.pos);
-		for (int i = 0; i < 8; ++i)
-			node[i].c.My_DrawCircle();
-		DrawFormatString(0, 0, GetColor(255, 255, 255), "%.0f", node[7].c.pos.x);
-		me.My_DrawCircle();
+		me.move.InputArrow8(me.c.pos, 5);
+		me.render.RenderRotaGraphic(me.c.pos);
+		raster.Raster_Scrool(1280/2,720/2,1000,300,10);
 	}
-
 	DxLib_End();
 	return 0;
 }
