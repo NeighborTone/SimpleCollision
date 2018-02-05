@@ -1,40 +1,36 @@
 #include "Joint.h"
-
-
-void Tentacle::SetTentacle(int num_part, float speed, float limit, int num_loop)
+#include "DxLib.h"
+void Tentacle::MoveTentacle(float x[], float y[], float tx, float ty, 
+	int num_part, float v, float limit, int num_loop)
 {
-
-}
-void Tentacle::MoveTentacle(float x[], float y[],POS& target)
-{
-	//先端と根本の座標
 	float hx = x[0], hy = y[0];
 	float rx = x[num_part - 1], ry = y[num_part - 1];
 
-	//目標に向かって先端を動かす
-	hx += (target.x >= hx + speed ? speed : (target.x <= hx - speed ? -speed : 0));
-	hy += (target.y >= hy + speed ? speed : (target.y <= hy - speed ? -speed : 0));
+	// 目標の方向に先端を動かす
+	hx += (tx >= hx + v ? v : (tx <= hx - v ? -v : 0));
+	hy += (ty >= hy + v ? v : (ty <= hy - v ? -v : 0));
 
-	//先端の移動範囲を制限する
-	//限界値を超えたら移動可能範囲内に戻す
+	// 先端の移動範囲を制限する：
+	// 先端と根元との距離が限界値を超えていたら，
+	// 移動可能範囲内に戻す。
 	float dx = hx - rx, dy = hy - ry;
-	float d = sqrt(dx*dx + dy*dy);
-	if (d > limit)
-	{
+	float d = static_cast<float>(sqrt(dx*dx + dy*dy));
+	if (d>limit) {
 		hx = dx*limit / d + rx;
 		hy = dy*limit / d + ry;
 	}
 
-	//中間部の座標計算
-	//隣接部分との平均計算。先端から根本
-	//必要に応じて複数回繰り返す
-	x[0] = hx;y[0] = hy;
-	for (int i = 0;i < num_loop; ++i)
-	{
-		for (int j = 1;j < num_part - 1; ++j)
-		{
-			x[j] = (x[j - 1] + x[j + 1]) / 2;
-			y[j] = (y[j - 1] + y[j + 1]) / 2;
+	// 中間部分の座標を計算する：
+	// 隣接部分の座標の平均をとる。
+	// 計算は先端から根元に向かって行う。
+	// 必要に応じて計算を複数回繰り返す。
+	x[0] = hx; y[0] = hy;
+	for (int l = 0; l<num_loop; l++) {
+		for (int i = 1; i<num_part - 1; i++) {
+			x[i] = (x[i - 1] + x[i + 1]) / 2;
+			y[i] = (y[i - 1] + y[i + 1]) / 2;
 		}
 	}
+
 }
+

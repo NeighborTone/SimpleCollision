@@ -14,6 +14,10 @@ void Painter::RenderRotaGraphic(POS& p, float angle, bool f)
 {
 	DrawRotaGraphF(p.x, p.y, 1, angle, handle, f);
 }
+void Painter::RenderRotaGraphic(float& x, float& y, float angle, bool f)
+{
+	DrawGraphF(x, y, handle, f);
+}
 void Painter::Raster_Scrool(const float &X, const float &Y, float Cycle, float Shake,float speed)
 {
 	const float PI = 3.14159265358979323846f;
