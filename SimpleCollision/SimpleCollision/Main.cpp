@@ -40,16 +40,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	ChangeWindowMode(TRUE), DxLib_Init(), SetDrawScreen(DX_SCREEN_BACK);
 
 
-	const int MAX = 10;
+	const int MAX = 12;
 	float x[MAX] = {0};
 	float y[MAX] = {0};
-	y[MAX - 1] = 200;
+	float rad[MAX];
+	for(int i =0;i<MAX;++i)
+		 rad[i] = MATH::Radian(10);
+	x[MAX - 1] = 8;
+	y[MAX - 1] = 300;
 	Painter render;
-	render.SetGraphic("resource/Graph/^^.png");
+	render.SetGraphic("resource/Graph/m.png");
 	Tentacle tent;
 	Move m;
 	Circle me;
-	me.SetCircle(100, 100, 20, Violet);
+	me.SetCircle(100, 600, 20, Violet);
 	while (Processloop() == 0)
 	{
 		Updata_Key();
@@ -58,7 +62,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		me.My_DrawCircle();
 		for (int i = 0; i < MAX;++i)
 		{
-			tent.MoveTentacle(x,y, me.pos.x,me.pos.y, MAX, 0.17f, 400, 500);
+		//	tent.MoveTentacle(x,y, me.pos.x,me.pos.y, MAX, 0.17f, 400, 500);
+			tent.MoveJoint(MAX, x, y, rad, 0.001f, MATH::Radian(45), 10, me.pos);
 			render.RenderRotaGraphic(x[i], y[i]);
 		
 		}
