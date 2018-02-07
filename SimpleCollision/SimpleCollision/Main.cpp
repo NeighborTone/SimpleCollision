@@ -63,12 +63,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		for (int i = 0; i < MAX;++i)
 		{
 		//	tent.MoveTentacle(x,y, me.pos.x,me.pos.y, MAX, 0.17f, 400, 500);
-			tent.MoveJoint(MAX, x, y, rad, 0.001f, MATH::Radian(45), 10, me.pos);
+			tent.MoveJoint(MAX, x, y, rad, MATH::Radian(0.05f), MATH::Radian(45), 10, me.pos);
+			SetDrawMode(DX_DRAWMODE_BILINEAR);
 			render.RenderRotaGraphic(x[i], y[i]);
-		
+			SetDrawMode(DX_DRAWMODE_NEAREST);
 		}
 	
-		DrawFormatString(0, 0, GetColor(255, 255, 255), "%.0f", x[0]);
 	}
 	DxLib_End();
 	return 0;
